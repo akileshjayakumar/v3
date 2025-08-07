@@ -1,12 +1,24 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, ExternalLink, Globe } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Globe,
+  Menu,
+} from "lucide-react";
 import Image from "next/image";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 import { FaXTwitter } from "react-icons/fa6";
+import React from "react";
 
 export default function Portfolio() {
+  const isMobile = useIsMobile(); // Detect if user is on mobile
+  const [menuOpen, setMenuOpen] = React.useState(false); // State for mobile menu
   const projects = [
     {
       id: "deeppurple",
@@ -43,13 +55,13 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto px-6 py-8">
+    <div className="min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Profile Section */}
         <div className="mb-12">
           <div className="flex items-start justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="w-20 h-20 rounded-full overflow-hidden bg-gray-200">
+            <div className="flex items-center space-x-4 sm:space-x-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden bg-gray-200">
                 <Image
                   src="/photo.jpg"
                   alt="Akilesh Jayakumar"
@@ -61,7 +73,8 @@ export default function Portfolio() {
               <div></div>
             </div>
             {/* Navigation */}
-            <nav className="flex space-x-8">
+            {/* On desktop, show nav links. On mobile, show hamburger icon. */}
+            <nav className="hidden sm:flex space-x-8">
               {navItems.map((item) => (
                 <a
                   key={item.label}
@@ -72,17 +85,41 @@ export default function Portfolio() {
                 </a>
               ))}
             </nav>
+            {/* Hamburger for mobile */}
+            <div className="sm:hidden">
+              <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="ghost" size="icon" aria-label="Open menu">
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="p-0 bg-white max-w-xs w-full rounded-lg">
+                  <nav className="flex flex-col py-6 px-6 space-y-4">
+                    {navItems.map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        className="text-lg font-medium text-gray-700 hover:text-gray-900"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </nav>
+                </DialogContent>
+              </Dialog>
+            </div>
           </div>
           <div className="mt-6">
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
               Akilesh Jayakumar
             </h1>
-            <p className="text-gray-700 leading-relaxed mt-2 mb-6">
+            <p className="text-gray-700 leading-relaxed mt-2 mb-6 text-base sm:text-lg">
               exploring genai, llms & agents
             </p>
           </div>
           {/* Social Links */}
-          <div className="flex items-center space-x-4 mt-2">
+          <div className="flex items-center space-x-3 sm:space-x-4 mt-2">
             <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
               <a
                 href="https://x.com/sentrytoast"
@@ -117,25 +154,28 @@ export default function Portfolio() {
         </div>
 
         {/* Experience Section */}
-        <section id="experience">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Experience</h2>
-          <div className="space-y-6">
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+        <section id="experience" className="mt-16 sm:mt-20">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
+            Experience
+          </h2>
+          <div className="space-y-4 sm:space-y-6">
+            {/* Each experience card */}
+            <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                   <span className="text-gray-600 font-bold">IRAS</span>
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                         Software Engineer Intern
                       </h3>
-                      <p className="text-gray-600">
+                      <p className="text-gray-600 text-sm sm:text-base">
                         Inland Revenue Authority of Singapore (IRAS)
                       </p>
                     </div>
-                    <span className="text-sm text-gray-500 mt-1 sm:mt-0">
+                    <span className="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-0">
                       Jul 2025 – Present
                     </span>
                   </div>
@@ -143,7 +183,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                   <span className="text-gray-600 font-bold">DOS</span>
@@ -166,7 +206,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                   <span className="text-gray-600 font-bold">HTX</span>
@@ -189,7 +229,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                   <span className="text-gray-600 font-bold">CPF</span>
@@ -215,103 +255,79 @@ export default function Portfolio() {
         </section>
 
         {/* Projects Section */}
-        <br />
-        <br />
-        <br />
-        <section id="projects">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Projects</h2>
-          <div className="space-y-4">
+        <section id="projects" className="mt-16 sm:mt-20">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
+            Projects
+          </h2>
+          <div className="space-y-3 sm:space-y-4">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="bg-white border border-gray-200 rounded-lg p-6"
+                className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto flex flex-col gap-6"
               >
-                <div className="flex items-start space-x-4">
+                <div className="flex items-start gap-6">
                   <div
-                    className={`w-12 h-12 rounded-lg ${project.iconBg} flex items-center justify-center flex-shrink-0`}
+                    className={`flex-shrink-0 w-14 h-14 rounded-xl ${project.iconBg} flex items-center justify-center text-3xl`}
                   >
-                    <span className="text-2xl">{project.icon}</span>
+                    {project.icon}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
                       {project.title}
                     </h3>
                     {project.description &&
                     Array.isArray(project.description) ? (
-                      <ul className="text-gray-700 mb-2 list-disc list-inside">
+                      <ul className="list-disc list-inside text-gray-700 text-base space-y-1 mb-2">
                         {project.description.map((point, idx) => (
                           <li key={idx}>{point}</li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-gray-700 mb-2">
+                      <p className="text-gray-700 mb-2 text-base">
                         {project.description}
                       </p>
                     )}
-                    <p className="text-sm text-gray-500 italic mb-3">
+                    <div className="italic text-gray-500 text-sm mb-2">
                       {project.status}
-                    </p>
-                    {project.tech && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tech.map((tech, idx) => (
-                          <span
-                            key={idx}
-                            className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="flex items-center space-x-3">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="h-8"
-                        asChild
-                      >
-                        <a
-                          href={project.links.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <ExternalLink className="mr-2 h-3 w-3" />
-                          Demo
-                        </a>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="h-8"
-                        asChild
-                      >
-                        <a
-                          href={project.links.marketing}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Globe className="mr-2 h-3 w-3" />
-                          Website
-                        </a>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="h-8"
-                        asChild
-                      >
-                        <a
-                          href={project.links.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Github className="mr-2 h-3 w-3" />
-                          Source Code
-                        </a>
-                      </Button>
                     </div>
                   </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {project.tech &&
+                    project.tech.map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                </div>
+                <div className="flex gap-6 pt-2 border-t border-gray-100">
+                  <a
+                    href={project.links.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-800 hover:text-blue-600 font-medium text-base"
+                  >
+                    <ExternalLink className="w-4 h-4" /> Demo
+                  </a>
+                  <a
+                    href={project.links.marketing}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-800 hover:text-blue-600 font-medium text-base"
+                  >
+                    <Globe className="w-4 h-4" /> Website
+                  </a>
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-800 hover:text-blue-600 font-medium text-base"
+                  >
+                    <Github className="w-4 h-4" /> Source Code
+                  </a>
                 </div>
               </div>
             ))}
@@ -319,16 +335,20 @@ export default function Portfolio() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="mt-16">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Contact</h2>
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <div className="grid gap-4 md:grid-cols-2">
+        <section id="contact" className="mt-16 sm:mt-20">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
+            Contact
+          </h2>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto shadow-sm">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2">
               <a
                 href="mailto:jayakuma006@mymail.sim.edu.sg"
                 className="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
                 <Mail className="h-5 w-5 text-gray-600" />
-                <span className="text-gray-700">jayakuma006@mymail.sim.edu.sg</span>
+                <span className="text-gray-700">
+                  jayakuma006@mymail.sim.edu.sg
+                </span>
               </a>
               <a
                 href="https://akileshjayakumar.com"
@@ -360,24 +380,24 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-      </div>
-      {/* Footer */}
-      <footer className="w-full py-8 flex flex-col items-center justify-center bg-transparent mt-12">
-        <a
-          href="https://github.com/akileshjayakumar?tab=repositories"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-2 rounded-md font-medium text-white bg-blue-500 hover:bg-blue-600 transition-colors mb-4"
-        >
-          <Github className="h-6 w-6 mr-2 inline-block" />{" "}
-          <span className="text-lg font-medium">
-            more projects on my github!
+        {/* Footer */}
+        <footer className="w-full py-6 sm:py-8 flex flex-col items-center justify-center bg-transparent mt-8 sm:mt-12">
+          <a
+            href="https://github.com/akileshjayakumar?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-md font-medium text-white bg-blue-500 hover:bg-blue-600 transition-colors mb-4"
+          >
+            <Github className="h-6 w-6 mr-2 inline-block" />
+            <span className="text-base sm:text-lg font-medium">
+              more projects on my github!
+            </span>
+          </a>
+          <span className="text-base sm:text-xl text-gray-400">
+            &copy; 2025 akilesh jayakumar
           </span>
-        </a>
-        <span className="text-xl text-gray-400">
-          &copy; 2025 akilesh jayakumar
-        </span>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 }

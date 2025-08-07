@@ -324,11 +324,11 @@ export default function Portfolio() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <div className="grid gap-4 md:grid-cols-2">
               <a
-                href="mailto:akilesh.work@icloud.com"
+                href="mailto:jayakuma006@mymail.sim.edu.sg"
                 className="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
                 <Mail className="h-5 w-5 text-gray-600" />
-                <span className="text-gray-700">email</span>
+                <span className="text-gray-700">jayakuma006@mymail.sim.edu.sg</span>
               </a>
               <a
                 href="https://akileshjayakumar.com"

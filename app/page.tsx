@@ -1,24 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  ExternalLink,
-  Globe,
-  Menu,
-} from "lucide-react";
+import { Linkedin, Mail, ExternalLink, Globe, Menu } from "lucide-react";
+import { FaGithub } from "react-icons/fa6";
 import Image from "next/image";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 import { FaXTwitter } from "react-icons/fa6";
 import React from "react";
 
 export default function Portfolio() {
-  const isMobile = useIsMobile(); // Detect if user is on mobile
-  const [menuOpen, setMenuOpen] = React.useState(false); // State for mobile menu
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const projects = [
     {
       id: "deeppurple",
@@ -44,6 +36,27 @@ export default function Portfolio() {
         demo: "https://main.d3dfvkthq7122n.amplifyapp.com/login",
         marketing: "https://deeppurple-fyp-25-s2-05-website.vercel.app/",
         github: "https://github.com/akileshjayakumar/deeppurple-fyp-25-s2-05",
+        marketingLabel: "Marketing Website",
+      },
+    },
+    {
+      id: "prompttacular",
+      title: "PromptTacular",
+      icon: "🔄",
+      iconBg: "bg-pink-100",
+      description: [
+        "A high-precision assistant that rewrites and generates prompts and prompt templates.",
+        "Runs inside Perplexity Spaces with support for clarity, structure, and tone improvements.",
+        "Generates prompts from descriptions and produces prompt templates for devs using LangChain and LlamaIndex.",
+      ],
+      status: "Side Project 2025",
+      tech: ["Perplexity Spaces"],
+      links: {
+        demo: "https://www.perplexity.ai/spaces/prompttacular-kWSdzdeGRMyTLgnG5NmzFg",
+        marketing:
+          "https://www.linkedin.com/feed/update/urn:li:activity:7320364815191879680/",
+        github: "https://github.com/akileshjayakumar/perplexity-spaces-prompts",
+        marketingLabel: "LinkedIn Post",
       },
     },
   ];
@@ -79,7 +92,7 @@ export default function Portfolio() {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-sm font-medium transition-colors text-gray-500 hover:text-gray-900"
+                  className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
                 >
                   {item.label}
                 </a>
@@ -99,7 +112,7 @@ export default function Portfolio() {
                       <a
                         key={item.label}
                         href={item.href}
-                        className="text-lg font-medium text-gray-700 hover:text-gray-900"
+                        className="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors"
                         onClick={() => setMenuOpen(false)}
                       >
                         {item.label}
@@ -119,35 +132,53 @@ export default function Portfolio() {
             </p>
           </div>
           {/* Social Links */}
-          <div className="flex items-center space-x-3 sm:space-x-4 mt-2">
-            <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
+          <div className="flex items-center space-x-4 sm:space-x-5 mt-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 sm:h-11 sm:w-11 hover:translate-y-0 active:scale-100"
+              asChild
+            >
               <a
                 href="https://x.com/sentrytoast"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
+                className="icon-link"
               >
-                <FaXTwitter className="h-4 w-4" />
+                <FaXTwitter className="h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-200 hover:text-gray-900" />
               </a>
             </Button>
-            <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 sm:h-11 sm:w-11 hover:translate-y-0 active:scale-100"
+              asChild
+            >
               <a
                 href="https://github.com/akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
+                className="icon-link"
               >
-                <Github className="h-4 w-4" />
+                <FaGithub className="h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-200 hover:text-gray-900" />
               </a>
             </Button>
-            <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 sm:h-11 sm:w-11 hover:translate-y-0 active:scale-100"
+              asChild
+            >
               <a
                 href="https://linkedin.com/in/akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
+                className="icon-link"
               >
-                <Linkedin className="h-4 w-4" />
+                <Linkedin className="h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-200 hover:text-gray-900" />
               </a>
             </Button>
           </div>
@@ -277,13 +308,19 @@ export default function Portfolio() {
                     </h3>
                     {project.description &&
                     Array.isArray(project.description) ? (
-                      <ul className="list-disc list-inside text-gray-700 text-base space-y-1 mb-2">
+                      <ul className="text-gray-700 text-base space-y-2 mb-3">
                         {project.description.map((point, idx) => (
-                          <li key={idx}>{point}</li>
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 leading-relaxed"
+                          >
+                            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-400 flex-shrink-0" />
+                            <span>{point}</span>
+                          </li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-gray-700 mb-2 text-base">
+                      <p className="text-gray-700 mb-2 text-base leading-relaxed">
                         {project.description}
                       </p>
                     )}
@@ -308,25 +345,28 @@ export default function Portfolio() {
                     href={project.links.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-gray-800 hover:text-blue-600 font-medium text-base"
+                    className="group flex items-center gap-2 text-gray-800 hover:text-gray-900 font-medium text-base"
                   >
-                    <ExternalLink className="w-4 h-4" /> Demo
+                    <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                    Demo
                   </a>
                   <a
                     href={project.links.marketing}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-gray-800 hover:text-blue-600 font-medium text-base"
+                    className="group flex items-center gap-2 text-gray-800 hover:text-gray-900 font-medium text-base"
                   >
-                    <Globe className="w-4 h-4" /> Website
+                    <Globe className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                    {project.links.marketingLabel ?? "Website"}
                   </a>
                   <a
                     href={project.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-gray-800 hover:text-blue-600 font-medium text-base"
+                    className="group flex items-center gap-2 text-gray-800 hover:text-gray-900 font-medium text-base"
                   >
-                    <Github className="w-4 h-4" /> Source Code
+                    <FaGithub className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                    Source Code
                   </a>
                 </div>
               </div>
@@ -343,9 +383,9 @@ export default function Portfolio() {
             <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2">
               <a
                 href="mailto:jayakuma006@mymail.sim.edu.sg"
-                className="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <Mail className="h-5 w-5 text-gray-600" />
+                <Mail className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
                 <span className="text-gray-700">
                   jayakuma006@mymail.sim.edu.sg
                 </span>
@@ -354,27 +394,27 @@ export default function Portfolio() {
                 href="https://akileshjayakumar.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <Globe className="h-5 w-5 text-gray-600" />
+                <Globe className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
                 <span className="text-gray-700">website</span>
               </a>
               <a
                 href="https://linkedin.com/in/akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <Linkedin className="h-5 w-5 text-gray-600" />
+                <Linkedin className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
                 <span className="text-gray-700">linkedin</span>
               </a>
               <a
                 href="https://github.com/akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <Github className="h-5 w-5 text-gray-600" />
+                <FaGithub className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
                 <span className="text-gray-700">github</span>
               </a>
             </div>
@@ -388,7 +428,7 @@ export default function Portfolio() {
             rel="noopener noreferrer"
             className="px-4 py-2 rounded-md font-medium text-white bg-blue-500 hover:bg-blue-600 transition-colors mb-4"
           >
-            <Github className="h-6 w-6 mr-2 inline-block" />
+            <FaGithub className="h-6 w-6 mr-2 inline-block" />
             <span className="text-base sm:text-lg font-medium">
               more projects on my github!
             </span>

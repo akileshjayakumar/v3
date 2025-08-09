@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Mail, ExternalLink, Globe, Menu, FileText } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { FaMedium } from "react-icons/fa";
 import Image from "next/image";
 import {
   Dialog,
@@ -484,13 +485,13 @@ export default function Portfolio() {
                 </span>
               </a>
               <a
-                href="https://akileshjayakumar.com"
+                href="https://medium.com/@akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <Globe className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span className="text-gray-700">website</span>
+                <FaMedium className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <span className="text-gray-700">medium</span>
               </a>
               <a
                 href="https://linkedin.com/in/akileshjayakumar"

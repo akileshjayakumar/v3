@@ -67,9 +67,10 @@ export default function Portfolio() {
   ];
 
   const navItems = [
-    { label: "Experience", href: "#experience" },
-    { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
+    { label: "experience", href: "#experience" },
+    { label: "projects", href: "#projects" },
+    { label: "contact", href: "#contact" },
+    { label: "resume", href: "/cv" },
   ];
 
   return (
@@ -97,6 +98,20 @@ export default function Portfolio() {
                   key={item.label}
                   href={item.href}
                   className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
+                  onClick={(e) => {
+                    if (!item.href.startsWith("#")) return; // let normal navigation happen for /cv
+                    e.preventDefault();
+                    const target = document.querySelector(item.href);
+                    if (target) {
+                      target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                      try {
+                        history.replaceState(null, "", item.href);
+                      } catch {}
+                    }
+                  }}
                 >
                   {item.label}
                 </a>
@@ -119,17 +134,22 @@ export default function Portfolio() {
                           className="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors"
                           onClick={(e) => {
                             e.preventDefault();
-                            const target = document.querySelector(item.href);
-                            if (target) {
-                              target.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start",
-                              });
-                              try {
-                                history.replaceState(null, "", item.href);
-                              } catch {}
+                            if (item.href.startsWith("#")) {
+                              const target = document.querySelector(item.href);
+                              if (target) {
+                                target.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "start",
+                                });
+                                try {
+                                  history.replaceState(null, "", item.href);
+                                } catch {}
+                              }
+                              setMenuOpen(false);
+                            } else {
+                              setMenuOpen(false);
+                              window.location.href = item.href;
                             }
-                            setMenuOpen(false);
                           }}
                         >
                           {item.label}
@@ -501,9 +521,7 @@ export default function Portfolio() {
                 <span className="text-gray-700">x</span>
               </a>
               <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/cv"
                 className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
                 <FileText className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />

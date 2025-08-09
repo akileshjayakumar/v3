@@ -51,8 +51,7 @@ export default function Portfolio() {
       iconBg: "bg-pink-100",
       description: [
         "A high-precision assistant that rewrites and generates prompts and prompt templates.",
-        "Runs inside Perplexity Spaces with support for clarity, structure, and tone improvements.",
-        "Generates prompts from descriptions and produces prompt templates for devs using LangChain and LlamaIndex.",
+        "Runs inside Perplexity Spaces and generates prompts from descriptions and produces prompt templates for devs using LangChain and LlamaIndex.",
       ],
       status: "Side Project 2025",
       tech: ["Perplexity Spaces"],

@@ -156,6 +156,15 @@ export default function RealtimeCursors(): null {
   const CURSOR_HALF = CURSOR_SIZE / 2;
 
   useEffect(() => {
+    // Disable on mobile/touch devices and small viewports
+    const isTouchOrCoarsePointer =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(hover: none)").matches;
+    const isSmallViewport = window.matchMedia("(max-width: 767px)").matches;
+    if (isTouchOrCoarsePointer || isSmallViewport) {
+      return;
+    }
+
     // Setup DOM layer and styles
     const layer = document.createElement("div");
     layer.style.position = "fixed";

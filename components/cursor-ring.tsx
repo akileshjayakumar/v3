@@ -31,14 +31,17 @@ export default function CursorRing(): null {
     ring.style.left = "0";
     ring.style.top = "0";
     ring.style.zIndex = "2147483645";
-    ring.style.width = "20px";
-    ring.style.height = "20px";
-    ring.style.border = "3px solid rgba(0,0,0,0.85)";
+    const baseSizePx = 24; // slightly larger base size
+    const baseHalfPx = baseSizePx / 2;
+    ring.style.width = `${baseSizePx}px`;
+    ring.style.height = `${baseSizePx}px`;
+    ring.style.border = "4px solid rgba(0,0,0,0.9)"; // thicker, darker border
     ring.style.borderRadius = "9999px";
     ring.style.boxShadow = "0 0 0 2px rgba(255,255,255,0.9) inset";
     ring.style.pointerEvents = "none";
     ring.style.transform = "translate3d(-100px, -100px, 0)";
     ring.style.transition = "border-color 120ms ease";
+    ring.style.transformOrigin = "center center";
     document.body.appendChild(ring);
     ringRef.current = ring;
 
@@ -54,10 +57,10 @@ export default function CursorRing(): null {
       targetRef.current.x = e.clientX;
       targetRef.current.y = e.clientY;
       const el = document.elementFromPoint(e.clientX, e.clientY);
-      targetRef.current.s = isInteractive(el) ? 1.6 : 1;
+      targetRef.current.s = isInteractive(el) ? 1.9 : 1; // larger growth on interactive
       ring.style.borderColor = isInteractive(el)
-        ? "rgba(0,0,0,0.9)"
-        : "rgba(0,0,0,0.85)";
+        ? "rgba(0,0,0,1)"
+        : "rgba(0,0,0,0.9)";
     };
     window.addEventListener("pointermove", onPointerMove, { passive: true });
 
@@ -76,9 +79,9 @@ export default function CursorRing(): null {
       stateRef.current.y += (targetRef.current.y - stateRef.current.y) * t;
       stateRef.current.s += (targetRef.current.s - stateRef.current.s) * t;
       const s = stateRef.current.s;
-      ring.style.transform = `translate3d(${stateRef.current.x - 10}px, ${
-        stateRef.current.y - 10
-      }px, 0) scale(${s})`;
+      ring.style.transform = `translate3d(${
+        stateRef.current.x - baseHalfPx
+      }px, ${stateRef.current.y - baseHalfPx}px, 0) scale(${s})`;
       // auto-hide when idle
       const idle = performance.now() - lastTs > 3000;
       ring.style.display = idle ? "none" : "block";

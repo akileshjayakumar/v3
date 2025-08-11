@@ -77,10 +77,38 @@ body[data-cursor-mode="css"] {
   cursor: url("/placeholder.svg") 2 2, auto;
 }
 
-/* Default: use JS follower ring globally; hide OS cursor for clarity */
-body[data-cursor-mode="ring"],
-body[data-cursor-mode="canvas"] {
-  cursor: none;
+@media (prefers-reduced-motion: no-preference) {
+  /* Default: use JS follower ring globally; hide OS cursor for clarity */
+  body[data-cursor-mode="ring"],
+  body[data-cursor-mode="canvas"] {
+    cursor: none;
+  }
+
+  /* Extra safety: hide default cursor on common interactive elements when ring/canvas is active */
+  body[data-cursor-mode="ring"] a,
+  body[data-cursor-mode="ring"] button,
+  body[data-cursor-mode="ring"] [role="button"],
+  body[data-cursor-mode="ring"] input,
+  body[data-cursor-mode="ring"] textarea,
+  body[data-cursor-mode="ring"] select,
+  body[data-cursor-mode="ring"] summary,
+  body[data-cursor-mode="ring"] label,
+  body[data-cursor-mode="ring"] .cursor-pointer,
+  body[data-cursor-mode="ring"] svg[role="button"],
+  body[data-cursor-mode="ring"] [data-cursor-interactive="true"],
+  body[data-cursor-mode="canvas"] a,
+  body[data-cursor-mode="canvas"] button,
+  body[data-cursor-mode="canvas"] [role="button"],
+  body[data-cursor-mode="canvas"] input,
+  body[data-cursor-mode="canvas"] textarea,
+  body[data-cursor-mode="canvas"] select,
+  body[data-cursor-mode="canvas"] summary,
+  body[data-cursor-mode="canvas"] label,
+  body[data-cursor-mode="canvas"] .cursor-pointer,
+  body[data-cursor-mode="canvas"] svg[role="button"],
+  body[data-cursor-mode="canvas"] [data-cursor-interactive="true"] {
+    cursor: none !important;
+  }
 }
 
 /* Helper class to fully hide the cursor when a JS follower is active */

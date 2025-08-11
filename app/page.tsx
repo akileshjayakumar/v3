@@ -552,22 +552,13 @@ export default function Portfolio() {
                 </span>
               </a>
               <a
-                href="https://medium.com/@akileshjayakumar"
+                href="https://x.com/sentrytoast"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <FaMedium className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span className="text-gray-700">medium</span>
-              </a>
-              <a
-                href="https://linkedin.com/in/akileshjayakumar"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
-              >
-                <FaLinkedin className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span className="text-gray-700">linkedin</span>
+                <FaXTwitter className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <span className="text-gray-700">x/twitter</span>
               </a>
               <a
                 href="https://github.com/akileshjayakumar"
@@ -579,13 +570,22 @@ export default function Portfolio() {
                 <span className="text-gray-700">github</span>
               </a>
               <a
-                href="https://x.com/sentrytoast"
+                href="https://linkedin.com/in/akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <FaXTwitter className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span className="text-gray-700">x</span>
+                <FaLinkedin className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <span className="text-gray-700">linkedin</span>
+              </a>
+              <a
+                href="https://medium.com/@akileshjayakumar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
+              >
+                <FaMedium className="h-5 w-5 text-gray-600 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <span className="text-gray-700">medium</span>
               </a>
               <a
                 href="/cv"

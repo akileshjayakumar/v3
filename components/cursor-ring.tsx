@@ -19,7 +19,17 @@ export default function CursorRing(): null {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (mode !== "ring" || reduceMotion) return;
+    // Disable on mobile/tablet (touch/coarse pointers or mobile UA)
+    const isTouchOrCoarse =
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(hover: none)").matches;
+    const isMobileUa = /Mobi|Android|iPad|iPhone|iPod/i.test(
+      navigator.userAgent
+    );
+    if (mode !== "ring" || reduceMotion || isTouchOrCoarse || isMobileUa) {
+      return;
+    }
 
     // Hide native cursor and create ring element
     prevCursorRef.current = document.body.style.cursor;

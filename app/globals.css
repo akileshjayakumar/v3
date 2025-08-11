@@ -77,7 +77,8 @@ body[data-cursor-mode="css"] {
   cursor: url("/placeholder.svg") 2 2, auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+/* Apply ring/canvas cursor hiding only on devices that actually have a fine pointer and hover (desktop) */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
   /* Default: use JS follower ring globally; hide OS cursor for clarity */
   body[data-cursor-mode="ring"],
   body[data-cursor-mode="canvas"] {

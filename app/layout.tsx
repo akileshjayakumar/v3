@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import RealtimeCursors from "@/components/realtime-cursors";
-import CursorRing from "@/components/cursor-ring";
-import CursorCanvas from "@/components/cursor-canvas";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +21,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={inter.className} data-cursor-mode="ring">
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           forcedTheme="light"
@@ -32,9 +30,6 @@ export default function RootLayout({
           {children}
           {/* Realtime shared cursors layer */}
           <RealtimeCursors />
-          {/* Optional local cursor followers (activate by setting body.dataset.cursorMode) */}
-          <CursorRing />
-          <CursorCanvas />
         </ThemeProvider>
       </body>
     </html>

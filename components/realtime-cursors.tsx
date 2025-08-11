@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import * as Ably from "ably";
 
 type CursorEvent = {
-  t: "cursor";
+  t: "cursor" | "click";
   id: string;
   x: number; // 0..1
   y: number; // 0..1
@@ -85,6 +85,7 @@ export default function RealtimeCursors(): null {
   const viewportRef = useRef({ w: 0, h: 0 });
   const bcRef = useRef<BroadcastChannel | null>(null);
   const rafRef = useRef(0);
+  const prevCursorCssRef = useRef<string | null>(null);
 
   useEffect(() => {
     // Setup DOM layer and styles
@@ -100,7 +101,12 @@ export default function RealtimeCursors(): null {
     layerRef.current = layer;
 
     const style = document.createElement("style");
-    style.textContent = `.rtc{position:absolute;display:flex;align-items:center;gap:.4rem;transform:translate3d(0,0,0);will-change:transform}.rtc-badge{font:500 12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;padding:.28rem .5rem;border-radius:.4rem;box-shadow:0 1px 2px rgba(0,0,0,.25)}`;
+    style.textContent = `
+      .rtc{position:absolute;display:flex;align-items:center;gap:.4rem;transform:translate3d(0,0,0);will-change:transform}
+      .rtc-badge{font:500 12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;padding:.28rem .5rem;border-radius:.4rem;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+      .rtc-click{position:absolute;pointer-events:none;border-radius:9999px;box-shadow:0 0 0 2px rgba(255,255,255,.9) inset}
+      @keyframes rtc-ripple{from{opacity:.9;transform:scale(.2)}to{opacity:0;transform:scale(2.4)}}
+    `;
     document.head.appendChild(style);
 
     viewportRef.current = { w: window.innerWidth, h: window.innerHeight };
@@ -109,6 +115,15 @@ export default function RealtimeCursors(): null {
     };
     window.addEventListener("resize", onResize, { passive: true });
 
+    // Optionally hide the system cursor only if the page requests it
+    const shouldHideSystemCursor =
+      document.body.classList.contains("cursor-none") ||
+      (document.body.dataset && document.body.dataset.cursorHide === "true");
+    if (shouldHideSystemCursor) {
+      prevCursorCssRef.current = document.body.style.cursor;
+      document.body.style.cursor = "none";
+    }
+
     // Channel key for both Ably and local fallbacks
     const room = `cursors:${location.pathname}`;
     const hasBC = typeof BroadcastChannel !== "undefined";
@@ -116,22 +131,47 @@ export default function RealtimeCursors(): null {
     bcRef.current = bc;
 
     // Try Ably if ABLY_API_KEY is configured on server
-    let ablyRealtime: Ably.Realtime | null = null;
-    let ablyChannel: Ably.RealtimeChannelCallbacks | null = null;
+    let ablyRealtime: any = null; // Use 'any' to avoid TypeScript errors if types are missing
+    let ablyChannel: any = null;  // Use 'any' for the same reason
     async function initAbly() {
       try {
-        const res = await fetch("/api/realtime-token", { method: "POST" });
-        if (!res.ok) return; // not configured => skip
-        const token = await res.json();
+        // Quick capability check to avoid spamming 503
+        const probe = await fetch("/api/realtime-token", { method: "GET" });
+        const probeJson = await probe.json().catch(() => ({ enabled: false }));
+        if (!probe.ok || !probeJson?.enabled) return; // not configured => skip
         ablyRealtime = new Ably.Realtime({ authUrl: "/api/realtime-token" });
         ablyChannel = ablyRealtime.channels.get(room);
         await new Promise<void>((resolve) =>
           ablyRealtime!.connection.once("connected", () => resolve())
         );
         ablyChannel.presence.enter({ id });
-        ablyChannel.subscribe("cursor", (msg) => {
+        // cleanup remote cursors on leave
+        ablyChannel.presence.subscribe(
+          "leave",
+          (m: any) => {
+            // We use 'any' here to avoid TypeScript errors, since Ably.Types may not be available.
+            // 'm' is the presence message received when a user leaves the channel.
+
+            // Try to get the peer's ID from either clientId or data.id
+            const peerId = (m && typeof m.clientId === "string" && m.clientId) || (m && m.data && (m.data as any).id);
+            if (!peerId) return; // If we can't determine the peer ID, exit early.
+
+            // Look up the cursor entry for this peer
+            const entry = cursorsRef.current.get(peerId);
+            if (entry) {
+              entry.el.remove();
+              cursorsRef.current.delete(peerId);
+            }
+          }
+        );
+        // Ably's TypeScript types may not always be available, so we avoid using Ably.Types.Message.
+        ablyChannel.subscribe("cursor", (msg: any) => {
+          // 'msg' is the message object received from Ably when a "cursor" event is published.
+          // We expect the cursor data to be in msg.data.
           const data = msg.data as CursorEvent;
+          // Ignore messages from ourselves.
           if (data?.id === id) return;
+          // Handle the incoming cursor data from another user.
           handleMessageData(data);
         });
       } catch {
@@ -143,7 +183,12 @@ export default function RealtimeCursors(): null {
     // Local "You" cursor so you always see something
     const selfEl = document.createElement("div");
     selfEl.className = "rtc";
-    selfEl.innerHTML = `<svg width="14" height="20" viewBox="0 0 24 24" style="filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))"><path fill="${color}" d="M2 2l18 8-7 3 3 7-8-18z"/></svg>`;
+    // Custom cursor icon (teardrop pointer with dot)
+    selfEl.innerHTML = `
+      <svg width="18" height="26" viewBox="0 0 32 44" style="filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))">
+        <path fill="${color}" d="M3 2l24 11-9 3 3 10-10-24z"/>
+        <circle cx="20" cy="30" r="2.2" fill="white"/>
+      </svg>`;
     const selfBadge = document.createElement("div");
     selfBadge.className = "rtc-badge";
     selfBadge.textContent = "You";
@@ -158,9 +203,13 @@ export default function RealtimeCursors(): null {
       if (!entry) {
         const el = document.createElement("div");
         el.className = "rtc";
-        el.innerHTML = `<svg width="14" height="20" viewBox="0 0 24 24" style="filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))"><path fill="${pickColorFromId(
-          peerId
-        )}" d="M2 2l18 8-7 3 3 7-8-18z"/></svg>`;
+        el.innerHTML = `
+          <svg width="18" height="26" viewBox="0 0 32 44" style="filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))">
+            <path fill="${pickColorFromId(
+              peerId
+            )}" d="M3 2l24 11-9 3 3 10-10-24z"/>
+            <circle cx="20" cy="30" r="2.2" fill="white"/>
+          </svg>`;
         const badge = document.createElement("div");
         badge.className = "rtc-badge";
         badge.textContent = nameFromId(peerId);
@@ -180,14 +229,43 @@ export default function RealtimeCursors(): null {
       return entry;
     }
 
+    function showClickRipple(
+      xNorm: number,
+      yNorm: number,
+      colorForPeer: string
+    ) {
+      const { w, h } = viewportRef.current;
+      const px = Math.round(xNorm * w);
+      const py = Math.round(yNorm * h);
+      const ripple = document.createElement("div");
+      ripple.className = "rtc-click";
+      ripple.style.left = `${px - 10}px`;
+      ripple.style.top = `${py - 10}px`;
+      ripple.style.width = `20px`;
+      ripple.style.height = `20px`;
+      ripple.style.background = colorForPeer;
+      ripple.style.opacity = "0.15";
+      ripple.style.animation = "rtc-ripple 500ms ease-out forwards";
+      layer.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
+
     function handleMessageData(msg: CursorEvent | null) {
       if (!msg) return;
-      if (!msg || msg.t !== "cursor" || msg.id === id) return;
-      const entry = ensureRemote(msg.id);
-      if (!entry) return;
-      entry.tx = Math.max(0, Math.min(1, msg.x));
-      entry.ty = Math.max(0, Math.min(1, msg.y));
-      entry.last = performance.now();
+      if (msg.id === id) return;
+      if (msg.t === "cursor") {
+        const entry = ensureRemote(msg.id);
+        if (!entry) return;
+        entry.tx = Math.max(0, Math.min(1, msg.x));
+        entry.ty = Math.max(0, Math.min(1, msg.y));
+        entry.last = performance.now();
+      } else if (msg.t === "click") {
+        showClickRipple(
+          Math.max(0, Math.min(1, msg.x)),
+          Math.max(0, Math.min(1, msg.y)),
+          pickColorFromId(msg.id)
+        );
+      }
     }
     function handleMessage(ev: MessageEvent<CursorEvent>) {
       handleMessageData(ev.data);
@@ -225,6 +303,24 @@ export default function RealtimeCursors(): null {
     }
     window.addEventListener("pointermove", onPointerMove, { passive: true });
 
+    function onPointerDown(e: PointerEvent) {
+      const { w, h } = viewportRef.current;
+      const x = Math.max(0, Math.min(1, e.clientX / w));
+      const y = Math.max(0, Math.min(1, e.clientY / h));
+      // local ripple
+      showClickRipple(x, y, color);
+      const payload: CursorEvent = { t: "click", id, x, y, ts: Date.now() };
+      if (ablyChannel) {
+        ablyChannel.publish("cursor", payload);
+      } else if (bc) bc.postMessage(payload);
+      else {
+        try {
+          localStorage.setItem(room, JSON.stringify(payload));
+        } catch {}
+      }
+    }
+    window.addEventListener("pointerdown", onPointerDown, { passive: true });
+
     function frame() {
       const t = 0.2;
       const { w, h } = viewportRef.current;
@@ -244,6 +340,7 @@ export default function RealtimeCursors(): null {
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("resize", onResize);
       if (ablyChannel) {
         try {
@@ -266,6 +363,11 @@ export default function RealtimeCursors(): null {
       cursorsRef.current.clear();
       selfEl.remove();
       layer.remove();
+      // restore system cursor if we hid it
+      if (prevCursorCssRef.current !== null) {
+        document.body.style.cursor = prevCursorCssRef.current;
+        prevCursorCssRef.current = null;
+      }
     };
   }, [id, color]);
 

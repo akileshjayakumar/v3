@@ -19,6 +19,26 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const projects = [
     {
+      id: "hawker-helper",
+      title: "Hawker Food Menu Helper",
+      icon: "🍜",
+      iconBg: "bg-green-100",
+      description: [
+        "Upload a hawker centre menu photo to extract dishes and prices.",
+        "Get healthy and value picks, and chat to explore the menu.",
+      ],
+      status: "EMERGENCY GPT HACKATHON 2025 (August 2025)",
+      tech: ["Next.js", "Tailwind CSS", "Groq", "Vercel AI SDK"],
+      links: {
+        demo: "https://emergency-gpt-hackathon-2025.vercel.app/",
+        marketing:
+          "https://www.linkedin.com/feed/update/urn:li:activity:7360651593400135683/",
+        github:
+          "https://github.com/akileshjayakumar/emergency-gpt-hackathon-2025",
+        marketingLabel: "LinkedIn Post",
+      },
+    },
+    {
       id: "deeppurple",
       title: "DeepPurple",
       icon: "🧠",
@@ -27,7 +47,7 @@ export default function Portfolio() {
         "Built a cloud-based multimodal GenAI platform to analyse customer emotions, sentiment, and key topics.",
         "Deployed on AWS with RESTful APIs for automated, scalable analysis tasks across uploaded files and chat data.",
       ],
-      status: "UOW Final Year Capstone Project 2025",
+      status: "UOW Final Year Capstone Project (April 2025 - September 2025)",
       tech: [
         "Python",
         "Next.js",
@@ -54,7 +74,7 @@ export default function Portfolio() {
         "A high-precision assistant that rewrites and generates prompts and prompt templates.",
         "Runs inside Perplexity Spaces and generates prompts from descriptions and produces prompt templates for devs using LangChain and LlamaIndex.",
       ],
-      status: "Side Project 2025",
+      status: "Side Project (April 2025)",
       tech: ["Perplexity Spaces"],
       links: {
         demo: "https://www.perplexity.ai/spaces/prompttacular-kWSdzdeGRMyTLgnG5NmzFg",

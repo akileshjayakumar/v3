@@ -72,6 +72,22 @@ html {
   }
 }
 
+/* CSS-only custom cursor option (bold, high-contrast). Enable with body[data-cursor-mode="css"] */
+body[data-cursor-mode="css"] {
+  cursor: url("/placeholder.svg") 2 2, auto;
+}
+
+/* Default: use JS follower ring globally; hide OS cursor for clarity */
+body[data-cursor-mode="ring"],
+body[data-cursor-mode="canvas"] {
+  cursor: none;
+}
+
+/* Helper class to fully hide the cursor when a JS follower is active */
+.cursor-none {
+  cursor: none !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

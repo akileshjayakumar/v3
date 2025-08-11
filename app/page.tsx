@@ -24,7 +24,7 @@ export default function Portfolio() {
       icon: "🍜",
       iconBg: "bg-green-100",
       description: [
-        "Upload a hawker centre menu photo to extract dishes and prices.",
+        "Upload a hawker centre menu photo to extract all dishes and prices.",
         "Get healthy and value picks, and chat to explore the menu.",
       ],
       status: "EMERGENCY GPT HACKATHON 2025 (August 2025)",
@@ -87,6 +87,7 @@ export default function Portfolio() {
   ];
 
   const navItems = [
+    { label: "education", href: "#education" },
     { label: "experience", href: "#experience" },
     { label: "projects", href: "#projects" },
     { label: "contact", href: "#contact" },
@@ -242,6 +243,51 @@ export default function Portfolio() {
           </div>
         </div>
 
+        {/* Education Section */}
+        <section id="education" className="mt-16 sm:mt-20">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
+            Education
+          </h2>
+          <div className="space-y-3 sm:space-y-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto">
+              <div className="flex items-start space-x-4">
+                <a
+                  href="https://www.uow.edu.au"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  aria-label="University of Wollongong website"
+                >
+                  <img
+                    src="/logos/uow.png"
+                    alt="University of Wollongong logo"
+                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    onError={(e) => {
+                      // @ts-ignore
+                      e.currentTarget.src = "/placeholder-logo.png";
+                    }}
+                  />
+                </a>
+                <div className="flex-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        University of Wollongong
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        Bachelor of Computer Science in Cyber Security
+                      </p>
+                    </div>
+                    <span className="text-sm text-gray-500 mt-1 sm:mt-0 whitespace-nowrap">
+                      June 2026
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Experience Section */}
         <section id="experience" className="mt-16 sm:mt-20">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
@@ -255,13 +301,13 @@ export default function Portfolio() {
                   href="https://www.iras.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-14 h-14 sm:w-16 sm:h-16 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="IRAS website"
                 >
                   <img
                     src="/logos/iras.png"
                     alt="IRAS logo"
-                    className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
@@ -292,13 +338,13 @@ export default function Portfolio() {
                   href="https://www.singstat.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-14 h-14 sm:w-16 sm:h-16 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="Singapore Department of Statistics website"
                 >
                   <img
                     src="/logos/singstat.png"
                     alt="Singapore Department of Statistics logo"
-                    className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
@@ -329,13 +375,13 @@ export default function Portfolio() {
                   href="https://www.htx.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-14 h-14 sm:w-16 sm:h-16 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="HTX website"
                 >
                   <img
                     src="/logos/htx.png"
                     alt="HTX logo"
-                    className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
@@ -366,13 +412,13 @@ export default function Portfolio() {
                   href="https://www.cpf.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-14 h-14 sm:w-16 sm:h-16 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="CPF Board website"
                 >
                   <img
                     src="/logos/cpf.png"
                     alt="CPF Board logo"
-                    className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
@@ -412,7 +458,8 @@ export default function Portfolio() {
               >
                 <div className="flex items-start gap-6">
                   <div
-                    className={`flex-shrink-0 w-14 h-14 rounded-xl ${project.iconBg} flex items-center justify-center text-3xl`}
+                    className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl ${project.iconBg} flex items-center justify-center leading-none text-[28px] sm:text-[36px]`}
+                    aria-hidden="true"
                   >
                     {project.icon}
                   </div>

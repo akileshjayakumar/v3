@@ -149,33 +149,35 @@ export default function Portfolio() {
                 <DialogContent className="p-0 bg-white max-w-xs w-full rounded-lg">
                   <nav className="flex flex-col py-6 px-6 space-y-4">
                     {navItems.map((item) => (
-                      <DialogClose asChild key={item.label}>
-                        <a
-                          href={item.href}
-                          className="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors"
-                          onClick={(e) => {
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        className="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                        onClick={(e) => {
+                          if (item.href.startsWith("#")) {
                             e.preventDefault();
-                            if (item.href.startsWith("#")) {
-                              const target = document.querySelector(item.href);
+                            setMenuOpen(false);
+                            const href = item.href;
+                            setTimeout(() => {
+                              const target = document.querySelector(href);
                               if (target) {
                                 target.scrollIntoView({
                                   behavior: "smooth",
                                   block: "start",
                                 });
                                 try {
-                                  history.replaceState(null, "", item.href);
+                                  history.replaceState(null, "", href);
                                 } catch {}
                               }
-                              setMenuOpen(false);
-                            } else {
-                              setMenuOpen(false);
-                              window.location.href = item.href;
-                            }
-                          }}
-                        >
-                          {item.label}
-                        </a>
-                      </DialogClose>
+                            }, 100);
+                          } else {
+                            setMenuOpen(false);
+                            // let default navigation proceed for non-hash links
+                          }
+                        }}
+                      >
+                        {item.label}
+                      </a>
                     ))}
                   </nav>
                 </DialogContent>
@@ -354,7 +356,7 @@ export default function Portfolio() {
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                         AI Engineer Intern
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
@@ -391,7 +393,7 @@ export default function Portfolio() {
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                         AI Engineer Intern
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
@@ -428,7 +430,7 @@ export default function Portfolio() {
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                         AI Engineer Intern
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
@@ -458,13 +460,13 @@ export default function Portfolio() {
               >
                 <div className="flex items-start gap-6">
                   <div
-                    className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl ${project.iconBg} flex items-center justify-center leading-none text-[28px] sm:text-[36px]`}
+                    className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl ${project.iconBg} flex items-center justify-center leading-none text-[40px] sm:text-[48px]`}
                     aria-hidden="true"
                   >
                     {project.icon}
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
                       {project.title}
                     </h3>
                     {project.description &&

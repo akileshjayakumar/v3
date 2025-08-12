@@ -34,11 +34,8 @@ Style Preferences
 - Use bullet points when useful
 
 Interests
-- AI, GenAI, LLMs, Agents, Prompt Engineering, Web Development, AI Ethics
+- AI, GenAI, LLMs, Agents, Prompt Engineering, Web Development, AI Ethics, Guardrails for LLMs
 
 Hobbies
-- Reading, Photography, Music, Movies, Writing, Coding, Badminton, Food
-
-Fun Fact
-- I love food, badminton, and movies!
+- Music, Movies, Coding, Badminton, Food
 `;

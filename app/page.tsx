@@ -92,6 +92,7 @@ export default function Portfolio() {
     { label: "projects", href: "#projects" },
     { label: "contact", href: "#contact" },
     { label: "resume", href: "/cv" },
+    { label: "chat", href: "/chat" },
   ];
 
   return (

@@ -2,11 +2,21 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  Copy,
+  Check,
+  Send,
+  Sparkles,
+  MessageSquare,
+  Loader2,
+  Search,
+  Globe,
+} from "lucide-react";
 
 type Message = {
   id: string;
@@ -14,15 +24,45 @@ type Message = {
   content: string;
   citations?: Array<{ title?: string; url: string }>;
   reasoning?: string[];
+  createdAt?: number;
 };
 
 export default function ChatPage() {
+  const formatAssistantContent = (raw: string): string => {
+    if (!raw) return "";
+    const lines = raw.split("\n").map((l) => l.trim());
+    const srcIdx = lines.findIndex((l) => /^sources?:/i.test(l));
+    const bodyLines = (srcIdx === -1 ? lines : lines.slice(0, srcIdx)).filter(
+      (l) => l.length > 0
+    );
+    const sourcesLines = (srcIdx === -1 ? [] : lines.slice(srcIdx + 1)).filter(
+      (l) => l.length > 0
+    );
+
+    const hasBulletsAlready = bodyLines.some((l) => /^[-*]\s/.test(l));
+    let body = "";
+    if (!hasBulletsAlready && bodyLines.length >= 3) {
+      body = `${bodyLines[0]}\n\n${bodyLines
+        .slice(1)
+        .map((l) => `- ${l}`)
+        .join("\n")}`;
+    } else {
+      body = bodyLines.join("\n");
+    }
+
+    const sources = sourcesLines.length
+      ? `\n\n**Sources**\n${sourcesLines.map((l) => `- ${l}`).join("\n")}`
+      : "";
+    return body + sources;
+  };
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: crypto.randomUUID(),
       role: "assistant",
       content:
-        "Hi! I’m Akilesh. Ask me anything about my interests, projects, and work. I can search the web too.",
+        "Hi! I'm Akilesh. Ask me anything about my interests, projects, and work. I can search the web too.",
+      createdAt: Date.now(),
     },
   ]);
   const [input, setInput] = useState("");
@@ -34,6 +74,17 @@ export default function ChatPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [pendingMessageId, setPendingMessageId] = useState<string | null>(null);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null);
+
+  const getFavicon = (url: string): string => {
+    try {
+      const u = new URL(url);
+      return `https://www.google.com/s2/favicons?sz=32&domain=${u.hostname}`;
+    } catch {
+      return `https://www.google.com/s2/favicons?sz=32&domain=${url}`;
+    }
+  };
+
   const initialSuggestions = [
     "What is your name?",
     "What are your hobbies?",
@@ -44,8 +95,13 @@ export default function ChatPage() {
     setSuggestions(initialSuggestions);
   }, []);
 
+  const composerRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages]);
 
   const handleSend = async (override?: string) => {
@@ -55,6 +111,7 @@ export default function ChatPage() {
       id: crypto.randomUUID(),
       role: "user",
       content: trimmed,
+      createdAt: Date.now(),
     };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
@@ -83,7 +140,12 @@ export default function ChatPage() {
       let cited: Array<{ title?: string; url: string }> = [];
       setMessages((prev) => [
         ...prev,
-        { id: pendingId, role: "assistant", content: "" },
+        {
+          id: pendingId,
+          role: "assistant",
+          content: "",
+          createdAt: Date.now(),
+        },
       ]);
       setIsGenerating(true);
 
@@ -167,7 +229,9 @@ export default function ChatPage() {
           try {
             const parsedSuggestions = JSON.parse(sugData.message || "[]");
             setSuggestions(
-              Array.isArray(parsedSuggestions) ? parsedSuggestions : []
+              Array.isArray(parsedSuggestions)
+                ? parsedSuggestions.slice(0, 3)
+                : []
             );
           } catch (e) {
             console.error("Failed to parse suggestions:", e);
@@ -194,135 +258,326 @@ export default function ChatPage() {
     }
   };
 
+  const onComposerKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      void handleSend();
+    }
+  };
+
+  const handleCopy = async (id: string, text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedMessageId(id);
+      setTimeout(() => setCopiedMessageId(null), 1500);
+    } catch {}
+  };
+
   return (
-    <div className="min-h-screen w-full">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Chat</h1>
-          <Button variant="outline" asChild>
+    <div className="h-screen w-full overflow-hidden bg-gradient-to-b from-gray-50 to-white flex flex-col">
+      {/* Header */}
+      <header className="shrink-0 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+              <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            </div>
+            <h1 className="text-lg sm:text-xl font-semibold text-gray-900">
+              chat with me
+            </h1>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            asChild
+            className="text-gray-600 hover:text-gray-900"
+          >
             <a href="/">
-              <ArrowLeft className="h-4 w-4 mr-2" /> Back to site
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              <span className="hidden sm:inline">Back</span>
             </a>
           </Button>
         </div>
+      </header>
 
-        <div
-          ref={scrollRef}
-          className="border border-gray-200 rounded-lg bg-white h-[70vh] sm:h-[72vh] overflow-y-auto p-5 sm:p-6 space-y-5"
-        >
-          {messages.map((m) => (
-            <div
-              key={m.id}
-              className={cn(
-                "flex",
-                m.role === "user" ? "justify-end" : "justify-start"
-              )}
-            >
-              <div
-                className={cn(
-                  "max-w-[85%] rounded-lg px-4 py-3 text-base sm:text-[0.95rem] leading-relaxed",
-                  m.role === "user"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-900"
-                )}
-              >
-                <div className="prose prose-sm sm:prose-base max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-p:my-1.5">
-                  {m.content ? (
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                      {m.content}
-                    </ReactMarkdown>
-                  ) : m.id === pendingMessageId ? (
+      {/* Chat Container */}
+      <div className="flex-1 overflow-hidden flex flex-col">
+        <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-6">
+          <div className="max-w-3xl mx-auto space-y-6">
+            {/* Status indicator */}
+            {(status === "searching" || status === "receiving_results") && (
+              <div className="flex justify-center animate-in fade-in-0 duration-300">
+                <div className="inline-flex items-center gap-3 px-4 py-3 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 text-blue-700 text-sm shadow-sm search-pulse">
+                  {status === "searching" ? (
                     <>
-                      {status === "searching" && (
-                        <p className="text-gray-500 italic">
-                          Searching the web...
-                        </p>
-                      )}
-                      {status === "receiving_results" && (
-                        <p className="text-gray-500 italic">
-                          Receiving web results...
-                        </p>
-                      )}
-                      {isGenerating && (
-                        <div className="flex space-x-1">
-                          <span className="animate-pulse">.</span>
-                          <span className="animate-pulse delay-100">.</span>
-                          <span className="animate-pulse delay-200">.</span>
+                      <div className="relative">
+                        <Search className="w-4 h-4 web-search" />
+                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full animate-ping"></div>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="animate-pulse">Searching</span>
+                        <div className="flex gap-1">
+                          <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                          <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                          <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce"></div>
                         </div>
-                      )}
+                        <span className="animate-pulse">the web</span>
+                      </div>
                     </>
-                  ) : null}
+                  ) : (
+                    <>
+                      <div className="relative">
+                        <Globe className="w-4 h-4 animate-spin" />
+                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="animate-pulse">Receiving</span>
+                        <div className="flex gap-1">
+                          <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                          <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                          <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce"></div>
+                        </div>
+                        <span className="animate-pulse">results</span>
+                      </div>
+                    </>
+                  )}
                 </div>
-                {m.reasoning && m.reasoning.length > 0 && (
-                  <div className="mt-3 border-t border-gray-200 pt-2">
-                    <div className="text-xs font-semibold text-gray-600 mb-1">
-                      Reasoning
-                    </div>
-                    <ul className="list-disc pl-4 space-y-1 text-xs text-gray-700">
-                      {m.reasoning.map((step, idx) => (
-                        <li key={idx}>{step}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {m.citations && m.citations.length > 0 && (
-                  <div className="mt-3 border-t border-gray-200 pt-2">
-                    <div className="text-xs font-semibold text-gray-600 mb-1">
-                      Sources
-                    </div>
-                    <ul className="space-y-1 text-xs">
-                      {m.citations.map((c, idx) => (
-                        <li key={idx}>
-                          <a
-                            href={c.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:underline break-all"
-                            title={c.title ?? c.url}
-                          >
-                            {c.title ?? c.url}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
               </div>
-            </div>
-          ))}
+            )}
+
+            {/* Messages */}
+            {messages.map((m) => (
+              <div
+                key={m.id}
+                className={cn(
+                  "flex gap-3 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
+                  m.role === "user" ? "flex-row-reverse" : "flex-row"
+                )}
+              >
+                {/* Avatar */}
+                <div
+                  className={cn(
+                    "shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
+                    m.role === "user"
+                      ? "bg-gradient-to-r from-blue-500 to-blue-600"
+                      : "bg-gradient-to-r from-gray-100 to-gray-200"
+                  )}
+                >
+                  {m.role === "user" ? (
+                    <span className="text-white text-sm font-medium">U</span>
+                  ) : (
+                    <Sparkles className="w-4 h-4 text-gray-700" />
+                  )}
+                </div>
+
+                {/* Message Bubble */}
+                <div
+                  className={cn(
+                    "group relative max-w-[80%] sm:max-w-[70%]",
+                    m.role === "user" ? "items-end" : "items-start"
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "rounded-2xl px-4 py-3 shadow-sm transition-all",
+                      m.role === "user"
+                        ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                        : "bg-white border border-gray-100"
+                    )}
+                  >
+                    {m.content ? (
+                      <div
+                        className={cn(
+                          "prose prose-sm max-w-none",
+                          m.role === "user"
+                            ? "prose-invert prose-p:my-2 prose-li:my-1"
+                            : "prose-p:my-2 prose-li:my-1 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline"
+                        )}
+                      >
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            a: ({ node, className, ...props }) => (
+                              <a
+                                {...props}
+                                className={cn(
+                                  "break-words hover:underline",
+                                  m.role === "user"
+                                    ? "text-blue-100"
+                                    : "text-blue-600",
+                                  className
+                                )}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              />
+                            ),
+                            p: (props) => {
+                              const { children, className, ...rest } =
+                                props as any;
+                              const parts: React.ReactNode[] = [];
+                              React.Children.toArray(children ?? []).forEach(
+                                (child: any, idx: number) => {
+                                  if (typeof child === "string") {
+                                    const segments = child.split("\n");
+                                    segments.forEach((seg, j) => {
+                                      if (j > 0) {
+                                        parts.push(
+                                          <br key={`p-br-${idx}-${j}`} />
+                                        );
+                                      }
+                                      parts.push(seg);
+                                    });
+                                  } else {
+                                    parts.push(child);
+                                  }
+                                }
+                              );
+                              return (
+                                <p
+                                  {...rest}
+                                  className={cn(
+                                    "whitespace-pre-wrap",
+                                    className
+                                  )}
+                                >
+                                  {parts}
+                                </p>
+                              );
+                            },
+                          }}
+                        >
+                          {m.role === "assistant"
+                            ? formatAssistantContent(m.content)
+                            : m.content}
+                        </ReactMarkdown>
+                      </div>
+                    ) : m.id === pendingMessageId && isGenerating ? (
+                      <div className="flex items-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin text-gray-500" />
+                        <span className="text-sm text-gray-500">
+                          Thinking...
+                        </span>
+                      </div>
+                    ) : null}
+
+                    {/* Citations */}
+                    {m.citations && m.citations.length > 0 && (
+                      <div className="mt-3 pt-3 border-t border-gray-100">
+                        <p className="text-xs text-gray-500 mb-2">Sources:</p>
+                        <div className="space-y-1">
+                          {m.citations.map((citation, idx) => (
+                            <a
+                              key={idx}
+                              href={citation.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 text-xs text-blue-600 hover:underline"
+                            >
+                              <img
+                                src={getFavicon(citation.url)}
+                                alt=""
+                                className="w-4 h-4 rounded"
+                              />
+                              <span className="truncate">
+                                {citation.title ||
+                                  new URL(citation.url).hostname}
+                              </span>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Copy button */}
+                  {m.role === "assistant" && m.content && (
+                    <button
+                      aria-label="Copy message"
+                      className={cn(
+                        "absolute -top-2 -right-2 opacity-0 group-hover:opacity-100",
+                        "transition-opacity duration-200",
+                        "w-8 h-8 rounded-full bg-white border border-gray-200",
+                        "flex items-center justify-center shadow-sm",
+                        "hover:bg-gray-50"
+                      )}
+                      onClick={() => handleCopy(m.id, m.content)}
+                    >
+                      {copiedMessageId === m.id ? (
+                        <Check className="w-3.5 h-3.5 text-green-600" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5 text-gray-600" />
+                      )}
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+
+            {/* Suggestions */}
+            {suggestions.length > 0 && !isSubmitting && (
+              <div className="flex justify-center mt-4">
+                <div className="inline-block">
+                  <p className="text-xs text-gray-500 mb-3 text-center">
+                    Suggested questions:
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {suggestions.map((sug, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleSend(sug)}
+                        className="px-3 py-1.5 text-sm rounded-full border border-gray-200 
+                                 bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900
+                                 transition-all duration-200 hover:shadow-sm"
+                      >
+                        {sug}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className="mt-4 flex gap-2">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={onKeyDown}
-            placeholder="Ask me anything..."
-          />
-          <Button onClick={() => handleSend()} disabled={isSubmitting}>
-            {isSubmitting ? "Thinking..." : "Send"}
-          </Button>
-        </div>
-        <div className="mt-4">
-          {suggestions.length > 0 && (
-            <div className="text-xl font-semibold text-gray-600 mb-2">
-              Suggested questions
-            </div>
-          )}
-          <div className="flex flex-wrap gap-2">
-            {suggestions.map((sug, idx) => (
+        {/* Composer */}
+        <div className="shrink-0 border-t border-gray-100 bg-white/80 backdrop-blur-lg">
+          <div className="max-w-3xl mx-auto p-4">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSend();
+              }}
+              className="relative"
+            >
+              <Textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={onComposerKeyDown}
+                placeholder="Type a message..."
+                rows={1}
+                className="w-full min-h-[56px] max-h-32 resize-none rounded-2xl border border-gray-200
+                         bg-gray-50 px-4 py-4 pr-14 text-gray-900 placeholder:text-gray-500
+                         focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 
+                         focus:ring-blue-500/20 transition-all duration-200"
+              />
               <Button
-                key={idx}
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  void handleSend(sug);
-                }}
-                type="button"
+                type="submit"
+                disabled={isSubmitting || !input.trim()}
+                className={cn(
+                  "absolute right-2 bottom-2 w-10 h-10 rounded-full p-0",
+                  "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700",
+                  "text-white shadow-sm transition-all duration-200",
+                  "disabled:opacity-50 disabled:cursor-not-allowed",
+                  "hover:shadow-md active:scale-95"
+                )}
               >
-                {sug}
+                <Send className="w-4 h-4" />
+                <span className="sr-only">Send</span>
               </Button>
-            ))}
+            </form>
+            <p className="text-xs text-gray-500 mt-2 text-center">
+              Press Enter to send • Shift+Enter for new line
+            </p>
           </div>
         </div>
       </div>

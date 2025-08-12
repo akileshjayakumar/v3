@@ -28,14 +28,10 @@ Projects
 - PromptTacular: Prompt engineering assistant for Perplexity Spaces; generates prompts/templates using LangChain and LlamaIndex.
     - Source: https://github.com/akileshjayakumar/perplexity-spaces-prompts
 
-Style Preferences
-- Clean, simple layout
-- Short, helpful answers
-- Use bullet points when useful
 
 Interests
 - AI, GenAI, LLMs, Agents, Prompt Engineering, Web Development, AI Ethics, Guardrails for LLMs
 
 Hobbies
-- Music, Movies, Coding, Badminton, Food
+- Music, Movies, Coding, Badminton
 `;

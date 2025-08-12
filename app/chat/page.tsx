@@ -22,7 +22,7 @@ export default function ChatPage() {
       id: crypto.randomUUID(),
       role: "assistant",
       content:
-        "Hi! I’m Akilesh. Ask me anything about my interests, projects, or anything else.",
+        "Hi! I’m Akilesh. Ask me anything about my interests, projects, and work. I can search the web too.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -36,15 +36,12 @@ export default function ChatPage() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const initialSuggestions = [
     "What is your name?",
-    "What is the latest news in AI?",
     "What are your hobbies?",
-    "What are you working on?",
+    "What is the latest news in AI?",
   ];
 
-  // Show initial suggestions on first load
   useEffect(() => {
     setSuggestions(initialSuggestions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -63,7 +60,6 @@ export default function ChatPage() {
     setInput("");
     setIsSubmitting(true);
     setStatus("thinking");
-    // capture assistant text across try/finally for suggestion generation
     let assistantContentLocal = "";
     try {
       const res = await fetch("/api/chat", {
@@ -85,7 +81,6 @@ export default function ChatPage() {
       const pendingId = crypto.randomUUID();
       setPendingMessageId(pendingId);
       let cited: Array<{ title?: string; url: string }> = [];
-      // assistantContentLocal declared outside try/finally
       setMessages((prev) => [
         ...prev,
         { id: pendingId, role: "assistant", content: "" },
@@ -150,10 +145,8 @@ export default function ChatPage() {
         },
       ]);
     } finally {
-      // Generate new suggestions (AI-only after first view)
       try {
         const sugRes = await fetch("/api/chat", {
-          // Use non-streaming route
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -165,14 +158,13 @@ export default function ChatPage() {
               content:
                 "Based on our conversation, suggest 4 varied follow-up questions I could ask. Make them concise, relevant, and non-repetitive. Output as a JSON array of strings.",
             }),
-            stream: false, // Explicitly request non-streaming
+            stream: false,
           }),
         });
 
         if (sugRes.ok) {
           const sugData = await sugRes.json();
           try {
-            // Parse the suggestions
             const parsedSuggestions = JSON.parse(sugData.message || "[]");
             setSuggestions(
               Array.isArray(parsedSuggestions) ? parsedSuggestions : []
@@ -182,7 +174,6 @@ export default function ChatPage() {
             setSuggestions([]);
           }
         } else {
-          // Fallback if request fails
           setSuggestions([]);
         }
       } catch (e) {

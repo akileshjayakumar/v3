@@ -84,6 +84,23 @@ export default function Portfolio() {
         marketingLabel: "LinkedIn Post",
       },
     },
+    {
+      id: "edux",
+      title: "EduX - AI-Powered Educational Assistant",
+      icon: "📚",
+      iconBg: "bg-blue-100",
+      description: [
+        "Interactive AI tutor application that processes PDFs, PowerPoint files, and images for multimodal learning.",
+        "Features speech-to-text, text-to-speech capabilities, and support for accessibility.",
+      ],
+      status: "CatalystX Hackathon 2024 (October 2024)",
+      tech: ["Streamlit", "NVIDIA AI", "LlamaIndex"],
+      links: {
+        demo: "https://eduxcatalystx2024.streamlit.app/",
+        github:
+          "https://github.com/akileshjayakumar/nes-catalystx-hackathon-2024",
+      },
+    },
   ];
 
   const navItems = [
@@ -514,15 +531,17 @@ export default function Portfolio() {
                     <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
                     Demo
                   </a>
-                  <a
-                    href={project.links.marketing}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2 text-gray-800 hover:text-gray-900 font-medium text-xs sm:text-sm md:text-base"
-                  >
-                    <Globe className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                    {project.links.marketingLabel ?? "Website"}
-                  </a>
+                  {project.links.marketing && (
+                    <a
+                      href={project.links.marketing}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-2 text-gray-800 hover:text-gray-900 font-medium text-xs sm:text-sm md:text-base"
+                    >
+                      <Globe className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                      {project.links.marketingLabel ?? "Website"}
+                    </a>
+                  )}
                   <a
                     href={project.links.github}
                     target="_blank"

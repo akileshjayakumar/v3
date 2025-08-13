@@ -86,14 +86,14 @@ export default function Portfolio() {
     },
     {
       id: "edux",
-      title: "EduX - AI-Powered Educational Assistant",
+      title: "EduX",
       icon: "📚",
       iconBg: "bg-blue-100",
       description: [
         "Interactive AI tutor application that processes PDFs, PowerPoint files, and images for multimodal learning.",
         "Features speech-to-text, text-to-speech capabilities, and support for accessibility.",
       ],
-      status: "CatalystX Hackathon 2024 (October 2024)",
+      status: "NES CatalystX Hackathon 2024 (October 2024)",
       tech: ["Streamlit", "NVIDIA AI", "LlamaIndex"],
       links: {
         demo: "https://eduxcatalystx2024.streamlit.app/",

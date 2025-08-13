@@ -39,21 +39,25 @@ export default function ChatPage() {
       (l) => l.length > 0
     );
 
-    const hasBulletsAlready = bodyLines.some((l) => /^[-*]\s/.test(l));
+    // Improved formatting for better readability
     let body = "";
-    if (!hasBulletsAlready && bodyLines.length >= 3) {
-      body = `${bodyLines[0]}\n\n${bodyLines
-        .slice(1)
-        .map((l) => `- ${l}`)
-        .join("\n")}`;
-    } else {
-      body = bodyLines.join("\n");
+    if (bodyLines.length > 0) {
+      // Check if content already has proper formatting
+      const hasBulletsAlready = bodyLines.some((l) => /^[-*•]\s/.test(l));
+      const hasNumberedList = bodyLines.some((l) => /^\d+\.\s/.test(l));
+
+      if (!hasBulletsAlready && !hasNumberedList && bodyLines.length >= 3) {
+        // Format as bullet points for better readability
+        body = `${bodyLines[0]}\n\n${bodyLines
+          .slice(1)
+          .map((l) => `• ${l}`)
+          .join("\n")}`;
+      } else {
+        body = bodyLines.join("\n");
+      }
     }
 
-    const sources = sourcesLines.length
-      ? `\n\n**Sources**\n${sourcesLines.map((l) => `- ${l}`).join("\n")}`
-      : "";
-    return body + sources;
+    return body;
   };
 
   const [messages, setMessages] = useState<Message[]>([
@@ -61,7 +65,7 @@ export default function ChatPage() {
       id: crypto.randomUUID(),
       role: "assistant",
       content:
-        "Hi! I'm Akilesh. Ask me anything about my interests, projects, and work. I can search the web too.",
+        "Hi! I'm Akilesh. Ask me anything about my interests, projects, and work. \n I can search the web too.",
       createdAt: Date.now(),
     },
   ]);
@@ -277,7 +281,7 @@ export default function ChatPage() {
     <div className="h-screen w-full overflow-hidden bg-gradient-to-b from-gray-50 to-white flex flex-col">
       {/* Header */}
       <header className="shrink-0 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-        <div className="max-w-3xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
               <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
@@ -302,49 +306,11 @@ export default function ChatPage() {
 
       {/* Chat Container */}
       <div className="flex-1 overflow-hidden flex flex-col">
-        <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-6">
-          <div className="max-w-3xl mx-auto space-y-6">
-            {/* Status indicator */}
-            {(status === "searching" || status === "receiving_results") && (
-              <div className="flex justify-center animate-in fade-in-0 duration-300">
-                <div className="inline-flex items-center gap-3 px-4 py-3 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 text-blue-700 text-sm shadow-sm search-pulse">
-                  {status === "searching" ? (
-                    <>
-                      <div className="relative">
-                        <Search className="w-4 h-4 web-search" />
-                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full animate-ping"></div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="animate-pulse">Searching</span>
-                        <div className="flex gap-1">
-                          <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                          <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                          <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce"></div>
-                        </div>
-                        <span className="animate-pulse">the web</span>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="relative">
-                        <Globe className="w-4 h-4 animate-spin" />
-                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="animate-pulse">Receiving</span>
-                        <div className="flex gap-1">
-                          <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                          <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                          <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce"></div>
-                        </div>
-                        <span className="animate-pulse">results</span>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-
+        <div
+          ref={scrollRef}
+          className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6"
+        >
+          <div className="max-w-6xl mx-auto space-y-6">
             {/* Messages */}
             {messages.map((m) => (
               <div
@@ -357,29 +323,31 @@ export default function ChatPage() {
                 {/* Avatar */}
                 <div
                   className={cn(
-                    "shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
+                    "shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center",
                     m.role === "user"
                       ? "bg-gradient-to-r from-blue-500 to-blue-600"
                       : "bg-gradient-to-r from-gray-100 to-gray-200"
                   )}
                 >
                   {m.role === "user" ? (
-                    <span className="text-white text-sm font-medium">U</span>
+                    <span className="text-white text-sm sm:text-base font-medium">
+                      U
+                    </span>
                   ) : (
-                    <Sparkles className="w-4 h-4 text-gray-700" />
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
                   )}
                 </div>
 
                 {/* Message Bubble */}
                 <div
                   className={cn(
-                    "group relative max-w-[80%] sm:max-w-[70%]",
+                    "group relative max-w-[85%] sm:max-w-[75%] lg:max-w-[70%] xl:max-w-[65%]",
                     m.role === "user" ? "items-end" : "items-start"
                   )}
                 >
                   <div
                     className={cn(
-                      "rounded-2xl px-4 py-3 shadow-sm transition-all",
+                      "rounded-2xl px-4 sm:px-6 py-3 sm:py-4 shadow-sm transition-all",
                       m.role === "user"
                         ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
                         : "bg-white border border-gray-100"
@@ -388,10 +356,19 @@ export default function ChatPage() {
                     {m.content ? (
                       <div
                         className={cn(
-                          "prose prose-sm max-w-none",
+                          "prose prose-sm sm:prose-base max-w-none",
                           m.role === "user"
-                            ? "prose-invert prose-p:my-2 prose-li:my-1"
-                            : "prose-p:my-2 prose-li:my-1 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline"
+                            ? "prose-invert prose-p:my-2 prose-li:my-1 prose-p:text-white prose-li:text-white prose-strong:text-white prose-headings:text-white prose-a:text-blue-100"
+                            : [
+                                "prose-p:my-3 prose-li:my-2",
+                                "prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline",
+                                "prose-headings:font-semibold prose-headings:text-gray-900",
+                                "prose-h1:text-lg prose-h2:text-base prose-h3:text-sm",
+                                "prose-strong:text-gray-900 prose-strong:font-semibold",
+                                "prose-blockquote:border-l-4 prose-blockquote:border-gray-200 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-600",
+                                "prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm",
+                                "prose-pre:bg-gray-50 prose-pre:border prose-pre:border-gray-200 prose-pre:rounded-lg prose-pre:p-4",
+                              ].join(" ")
                         )}
                       >
                         <ReactMarkdown
@@ -401,7 +378,7 @@ export default function ChatPage() {
                               <a
                                 {...props}
                                 className={cn(
-                                  "break-words hover:underline",
+                                  "break-words hover:underline font-medium",
                                   m.role === "user"
                                     ? "text-blue-100"
                                     : "text-blue-600",
@@ -436,7 +413,10 @@ export default function ChatPage() {
                                 <p
                                   {...rest}
                                   className={cn(
-                                    "whitespace-pre-wrap",
+                                    "whitespace-pre-wrap leading-relaxed",
+                                    m.role === "user"
+                                      ? "text-white"
+                                      : "text-gray-800",
                                     className
                                   )}
                                 >
@@ -444,6 +424,71 @@ export default function ChatPage() {
                                 </p>
                               );
                             },
+                            li: (props) => (
+                              <li
+                                {...props}
+                                className={cn(
+                                  "leading-relaxed marker:font-medium",
+                                  m.role === "user"
+                                    ? "text-white marker:text-blue-200"
+                                    : "text-gray-800 marker:text-blue-500"
+                                )}
+                              />
+                            ),
+                            ul: (props) => (
+                              <ul
+                                {...props}
+                                className="space-y-2 my-4 list-disc list-inside"
+                              />
+                            ),
+                            ol: (props) => (
+                              <ol
+                                {...props}
+                                className="space-y-2 my-4 list-decimal list-inside"
+                              />
+                            ),
+                            h1: (props) => (
+                              <h1
+                                {...props}
+                                className="text-lg font-semibold text-gray-900 mt-6 mb-3 first:mt-0"
+                              />
+                            ),
+                            h2: (props) => (
+                              <h2
+                                {...props}
+                                className="text-base font-semibold text-gray-900 mt-5 mb-2 first:mt-0"
+                              />
+                            ),
+                            h3: (props) => (
+                              <h3
+                                {...props}
+                                className="text-sm font-semibold text-gray-900 mt-4 mb-2 first:mt-0"
+                              />
+                            ),
+                            strong: (props) => (
+                              <strong
+                                {...props}
+                                className="font-semibold text-gray-900"
+                              />
+                            ),
+                            blockquote: (props) => (
+                              <blockquote
+                                {...props}
+                                className="border-l-4 border-gray-200 pl-4 italic text-gray-600 my-4"
+                              />
+                            ),
+                            code: (props) => (
+                              <code
+                                {...props}
+                                className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono"
+                              />
+                            ),
+                            pre: (props) => (
+                              <pre
+                                {...props}
+                                className="bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-x-auto my-4"
+                              />
+                            ),
                           }}
                         >
                           {m.role === "assistant"
@@ -451,37 +496,100 @@ export default function ChatPage() {
                             : m.content}
                         </ReactMarkdown>
                       </div>
-                    ) : m.id === pendingMessageId && isGenerating ? (
+                    ) : m.id === pendingMessageId &&
+                      (isGenerating ||
+                        status === "searching" ||
+                        status === "receiving_results") ? (
                       <div className="flex items-center gap-2">
-                        <Loader2 className="w-4 h-4 animate-spin text-gray-500" />
-                        <span className="text-sm text-gray-500">
-                          Thinking...
-                        </span>
+                        {status === "searching" ? (
+                          <>
+                            <div className="relative">
+                              <Search className="w-4 h-4 text-blue-500" />
+                              <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full animate-ping"></div>
+                            </div>
+                            <span className="text-sm text-gray-600">
+                              searching the web...
+                            </span>
+                          </>
+                        ) : status === "receiving_results" ? (
+                          <>
+                            <div className="relative">
+                              <Globe className="w-4 h-4 text-green-500 animate-spin" />
+                              <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <span className="text-sm text-gray-600">
+                                Receiving
+                              </span>
+                              <div className="flex gap-1">
+                                <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                <div className="w-1 h-1 bg-green-500 rounded-full animate-bounce"></div>
+                              </div>
+                              <span className="text-sm text-gray-600">
+                                results
+                              </span>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin text-gray-500" />
+                            <span className="text-sm text-gray-500">
+                              Thinking...
+                            </span>
+                          </>
+                        )}
                       </div>
                     ) : null}
 
                     {/* Citations */}
                     {m.citations && m.citations.length > 0 && (
-                      <div className="mt-3 pt-3 border-t border-gray-100">
-                        <p className="text-xs text-gray-500 mb-2">Sources:</p>
-                        <div className="space-y-1">
+                      <div className="mt-6 pt-4 border-t border-gray-200 bg-gray-50 rounded-lg p-4">
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          <p className="text-sm font-semibold text-gray-700">
+                            Sources
+                          </p>
+                        </div>
+                        <div className="space-y-3">
                           {m.citations.map((citation, idx) => (
                             <a
                               key={idx}
                               href={citation.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-xs text-blue-600 hover:underline"
+                              className="flex items-center gap-3 p-2 rounded-md hover:bg-white hover:shadow-sm transition-all duration-200 group"
                             >
                               <img
                                 src={getFavicon(citation.url)}
                                 alt=""
-                                className="w-4 h-4 rounded"
+                                className="w-5 h-5 rounded flex-shrink-0"
                               />
-                              <span className="truncate">
-                                {citation.title ||
-                                  new URL(citation.url).hostname}
+                              <span className="text-sm text-gray-700 group-hover:text-blue-600 transition-colors leading-relaxed flex-1 min-w-0">
+                                <span className="truncate block">
+                                  {citation.title ||
+                                    new URL(citation.url).hostname}
+                                </span>
+                                <span className="text-xs text-gray-500 truncate block">
+                                  {new URL(citation.url).hostname}
+                                </span>
                               </span>
+                              <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="w-4 h-4 text-gray-400">
+                                  <svg
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
                             </a>
                           ))}
                         </div>
@@ -515,19 +623,19 @@ export default function ChatPage() {
 
             {/* Suggestions */}
             {suggestions.length > 0 && !isSubmitting && (
-              <div className="flex justify-center mt-4">
-                <div className="inline-block">
-                  <p className="text-xs text-gray-500 mb-3 text-center">
+              <div className="flex justify-center mt-6 sm:mt-8">
+                <div className="inline-block max-w-full">
+                  <p className="text-xs sm:text-sm text-gray-500 mb-3 text-center">
                     Suggested questions:
                   </p>
-                  <div className="flex flex-wrap gap-2 justify-center">
+                  <div className="flex flex-wrap gap-2 justify-center px-4">
                     {suggestions.map((sug, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSend(sug)}
-                        className="px-3 py-1.5 text-sm rounded-full border border-gray-200 
+                        className="px-3 py-1.5 text-sm sm:text-base rounded-full border border-gray-200 
                                  bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900
-                                 transition-all duration-200 hover:shadow-sm"
+                                 transition-all duration-200 hover:shadow-sm whitespace-nowrap"
                       >
                         {sug}
                       </button>
@@ -541,7 +649,7 @@ export default function ChatPage() {
 
         {/* Composer */}
         <div className="shrink-0 border-t border-gray-100 bg-white/80 backdrop-blur-lg">
-          <div className="max-w-3xl mx-auto p-4">
+          <div className="max-w-6xl mx-auto p-4 sm:p-6">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -555,10 +663,10 @@ export default function ChatPage() {
                 onKeyDown={onComposerKeyDown}
                 placeholder="Type a message..."
                 rows={1}
-                className="w-full min-h-[56px] max-h-32 resize-none rounded-2xl border border-gray-200
-                         bg-gray-50 px-4 py-4 pr-14 text-gray-900 placeholder:text-gray-500
+                className="w-full min-h-[56px] sm:min-h-[60px] max-h-32 resize-none rounded-2xl border border-gray-200
+                         bg-gray-50 px-4 sm:px-6 py-4 pr-14 text-gray-900 placeholder:text-gray-500
                          focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 
-                         focus:ring-blue-500/20 transition-all duration-200"
+                         focus:ring-blue-500/20 transition-all duration-200 text-sm sm:text-base"
               />
               <Button
                 type="submit"
@@ -575,7 +683,7 @@ export default function ChatPage() {
                 <span className="sr-only">Send</span>
               </Button>
             </form>
-            <p className="text-xs text-gray-500 mt-2 text-center">
+            <p className="text-xs sm:text-sm text-gray-500 mt-2 text-center">
               Press Enter to send • Shift+Enter for new line
             </p>
           </div>

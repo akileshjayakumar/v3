@@ -19,6 +19,7 @@ export default function CursorRing(): null {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+
     // Disable on mobile/tablet (touch/coarse pointers or mobile UA)
     const isTouchOrCoarse =
       navigator.maxTouchPoints > 0 ||
@@ -27,6 +28,7 @@ export default function CursorRing(): null {
     const isMobileUa = /Mobi|Android|iPad|iPhone|iPod/i.test(
       navigator.userAgent
     );
+
     if (mode !== "ring" || reduceMotion || isTouchOrCoarse || isMobileUa) {
       return;
     }

@@ -1,7 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Mail, ExternalLink, Globe, Menu, FileText } from "lucide-react";
+import {
+  Mail,
+  ExternalLink,
+  Globe,
+  Menu,
+  FileText,
+  MessageCircle,
+} from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { FaMedium } from "react-icons/fa";
 import Image from "next/image";
@@ -11,6 +18,7 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
+import AnimatedChatButton from "@/components/animated-chat-button";
 
 import { FaXTwitter } from "react-icons/fa6";
 import React from "react";
@@ -131,30 +139,49 @@ export default function Portfolio() {
             </div>
             {/* Navigation */}
             {/* On desktop, show nav links. On mobile, show hamburger icon. */}
-            <nav className="hidden sm:flex space-x-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
-                  onClick={(e) => {
-                    if (!item.href.startsWith("#")) return; // let normal navigation happen for /cv
-                    e.preventDefault();
-                    const target = document.querySelector(item.href);
-                    if (target) {
-                      target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
-                      try {
-                        history.replaceState(null, "", item.href);
-                      } catch {}
-                    }
-                  }}
-                >
-                  {item.label}
-                </a>
-              ))}
+            <nav className="hidden sm:flex items-center space-x-8">
+              {navItems.map((item) => {
+                // Special handling for chat button with animation
+                if (item.label === "chat") {
+                  return (
+                    <AnimatedChatButton
+                      key={item.label}
+                      href={item.href}
+                      className="text-base font-medium text-gray-500 hover:text-gray-900 transition-colors chat-button-animated px-3 py-2 rounded-md flex items-center"
+                    >
+                      <span className="flex items-center gap-1">
+                        <MessageCircle className="h-4 w-4 chat-icon-bounce" />
+                        {item.label}
+                      </span>
+                    </AnimatedChatButton>
+                  );
+                }
+
+                // Regular navigation items
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="text-base font-medium text-gray-500 hover:text-gray-900 transition-colors py-2"
+                    onClick={(e) => {
+                      if (!item.href.startsWith("#")) return; // let normal navigation happen for /cv
+                      e.preventDefault();
+                      const target = document.querySelector(item.href);
+                      if (target) {
+                        target.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                        try {
+                          history.replaceState(null, "", item.href);
+                        } catch {}
+                      }
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </nav>
             {/* Hamburger for mobile */}
             <div className="sm:hidden absolute top-0 right-0">
@@ -170,7 +197,7 @@ export default function Portfolio() {
                       <a
                         key={item.label}
                         href={item.href}
-                        className="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                        className="text-xl font-medium text-gray-700 hover:text-gray-900 transition-colors flex items-center gap-2"
                         onClick={(e) => {
                           if (item.href.startsWith("#")) {
                             e.preventDefault();
@@ -194,6 +221,9 @@ export default function Portfolio() {
                           }
                         }}
                       >
+                        {item.label === "chat" && (
+                          <MessageCircle className="h-4 w-4" />
+                        )}
                         {item.label}
                       </a>
                     ))}

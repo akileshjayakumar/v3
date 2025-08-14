@@ -11,14 +11,10 @@ import {
   X,
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { SiNextdotjs, SiVercel } from "react-icons/si";
 import { FaMedium } from "react-icons/fa";
 import Image from "next/image";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
+
 import AnimatedChatButton from "@/components/animated-chat-button";
 
 import { FaXTwitter } from "react-icons/fa6";
@@ -32,11 +28,10 @@ export default function Portfolio() {
   const handleOpenMenu = () => {
     setMenuOpen(true);
     setIsOpening(true);
-    // Disable body scroll when menu opens
     document.body.style.overflow = "hidden";
     setTimeout(() => {
       setIsOpening(false);
-    }, 300); // Match the animation duration
+    }, 300);
   };
 
   const handleCloseMenu = () => {
@@ -44,12 +39,11 @@ export default function Portfolio() {
     setTimeout(() => {
       setMenuOpen(false);
       setIsClosing(false);
-      // Re-enable body scroll when menu closes
+
       document.body.style.overflow = "unset";
-    }, 300); // Match the animation duration
+    }, 300);
   };
 
-  // Cleanup effect to re-enable scroll if component unmounts with menu open
   React.useEffect(() => {
     return () => {
       document.body.style.overflow = "unset";
@@ -154,7 +148,6 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {/* Profile Section */}
         <div className="mb-12 relative">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-4 sm:space-x-6">
@@ -168,11 +161,8 @@ export default function Portfolio() {
                 />
               </div>
             </div>
-            {/* Navigation */}
-            {/* On desktop, show nav links. On mobile, show hamburger icon. */}
             <nav className="hidden sm:flex items-center space-x-8">
               {navItems.map((item) => {
-                // Special handling for chat button with animation
                 if (item.label === "chat") {
                   return (
                     <AnimatedChatButton
@@ -188,14 +178,13 @@ export default function Portfolio() {
                   );
                 }
 
-                // Regular navigation items
                 return (
                   <a
                     key={item.label}
                     href={item.href}
                     className="text-base font-medium text-gray-500 hover:text-gray-900 transition-colors py-2"
                     onClick={(e) => {
-                      if (!item.href.startsWith("#")) return; // let normal navigation happen for /cv
+                      if (!item.href.startsWith("#")) return;
                       e.preventDefault();
                       const target = document.querySelector(item.href);
                       if (target) {
@@ -214,7 +203,6 @@ export default function Portfolio() {
                 );
               })}
             </nav>
-            {/* Hamburger for mobile */}
             <div className="sm:hidden absolute top-0 right-0">
               <Button
                 variant="ghost"
@@ -226,10 +214,8 @@ export default function Portfolio() {
                 <Menu className="h-8 w-8 font-bold" strokeWidth={2.5} />
               </Button>
 
-              {/* Custom Mobile Menu Modal */}
               {(menuOpen || isClosing) && (
                 <div className="fixed inset-0 z-50 flex items-start justify-end">
-                  {/* Backdrop */}
                   <div
                     className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-200 ${
                       isClosing ? "opacity-0" : "opacity-100"
@@ -237,7 +223,6 @@ export default function Portfolio() {
                     onClick={handleCloseMenu}
                   />
 
-                  {/* Menu Content */}
                   <div
                     className={`relative bg-white w-80 max-w-[90vw] h-full shadow-xl transition-transform duration-300 ease-out ${
                       isClosing
@@ -247,7 +232,6 @@ export default function Portfolio() {
                         : "translate-x-0"
                     }`}
                   >
-                    {/* Custom close button */}
                     <button
                       onClick={handleCloseMenu}
                       className="absolute right-4 top-4 z-50 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none bg-white shadow-sm"
@@ -256,7 +240,6 @@ export default function Portfolio() {
                       <X className="h-6 w-6 text-red-500" />
                     </button>
 
-                    {/* Navigation */}
                     <nav className="flex flex-col py-6 px-6 space-y-4 mt-16">
                       {navItems.map((item) => (
                         <a
@@ -279,10 +262,9 @@ export default function Portfolio() {
                                     history.replaceState(null, "", href);
                                   } catch {}
                                 }
-                              }, 400); // Increased delay to account for animation
+                              }, 400);
                             } else {
                               handleCloseMenu();
-                              // let default navigation proceed for non-hash links
                             }
                           }}
                         >
@@ -306,12 +288,11 @@ export default function Portfolio() {
               exploring genai, llms & agents
             </p>
           </div>
-          {/* Social Links */}
           <div className="flex items-center space-x-4 sm:space-x-5 mt-2">
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 sm:h-11 sm:w-11 hover:translate-y-0 active:scale-100"
+              className="h-10 w-10 sm:h-11 sm:w-11"
               asChild
             >
               <a
@@ -319,15 +300,15 @@ export default function Portfolio() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
-                className="icon-link"
+                className="icon-link group"
               >
-                <FaXTwitter className="h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-200 hover:text-gray-900" />
+                <FaXTwitter className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 hover:text-gray-900" />
               </a>
             </Button>
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 sm:h-11 sm:w-11 hover:translate-y-0 active:scale-100"
+              className="h-10 w-10 sm:h-11 sm:w-11"
               asChild
             >
               <a
@@ -335,15 +316,15 @@ export default function Portfolio() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="icon-link"
+                className="icon-link group"
               >
-                <FaGithub className="h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-200 hover:text-gray-900" />
+                <FaGithub className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 hover:text-gray-900" />
               </a>
             </Button>
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 sm:h-11 sm:w-11 hover:translate-y-0 active:scale-100"
+              className="h-10 w-10 sm:h-11 sm:w-11"
               asChild
             >
               <a
@@ -351,15 +332,14 @@ export default function Portfolio() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="icon-link"
+                className="icon-link group"
               >
-                <FaLinkedin className="h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-200 hover:text-gray-900" />
+                <FaLinkedin className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 hover:text-gray-900" />
               </a>
             </Button>
           </div>
         </div>
 
-        {/* Education Section */}
         <section id="education" className="mt-16 sm:mt-20">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
             Education
@@ -379,7 +359,6 @@ export default function Portfolio() {
                     alt="University of Wollongong logo"
                     className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
-                      // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
                   />
@@ -404,13 +383,11 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Experience Section */}
         <section id="experience" className="mt-16 sm:mt-20">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
             Experience
           </h2>
           <div className="space-y-3 sm:space-y-6">
-            {/* Each experience card */}
             <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto">
               <div className="flex items-start space-x-4">
                 <a
@@ -425,7 +402,6 @@ export default function Portfolio() {
                     alt="IRAS logo"
                     className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
-                      // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
                   />
@@ -462,7 +438,6 @@ export default function Portfolio() {
                     alt="Singapore Department of Statistics logo"
                     className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
-                      // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
                   />
@@ -499,7 +474,6 @@ export default function Portfolio() {
                     alt="HTX logo"
                     className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
-                      // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
                   />
@@ -536,7 +510,6 @@ export default function Portfolio() {
                     alt="CPF Board logo"
                     className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
-                      // @ts-ignore
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
                   />
@@ -561,7 +534,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Projects Section */}
         <section id="projects" className="mt-16 sm:mt-20">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
             Projects
@@ -653,7 +625,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Contact Section */}
         <section id="contact" className="mt-16 sm:mt-20">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
             Contact
@@ -715,7 +686,6 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-        {/* Footer */}
         <footer className="w-full py-6 sm:py-8 flex flex-col items-center justify-center bg-transparent mt-8 sm:mt-12">
           <a
             href="https://github.com/akileshjayakumar?tab=repositories"
@@ -728,9 +698,42 @@ export default function Portfolio() {
               more projects on my github!
             </span>
           </a>
+
           <span className="text-base sm:text-xl text-gray-400">
             &copy; 2025 akilesh jayakumar
           </span>
+
+          <div className="flex items-center gap-3 text-gray-500 mb-3 text-sm sm:text-base mt-4">
+            <span>built with</span>
+            <a
+              href="https://nextjs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Next.js"
+            >
+              <SiNextdotjs className="!h-4 !w-4 sm:!h-5 sm:!w-5 hover:text-gray-900 transition-colors" />
+            </a>
+            <a
+              href="https://ai-sdk.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Vercel AI SDK"
+            >
+              <SiVercel className="!h-4 !w-4 sm:!h-5 sm:!w-5 hover:text-gray-900 transition-colors" />
+            </a>
+            <a
+              href="https://groq.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Groq"
+            >
+              <img
+                src="https://groq.com/favicon.ico"
+                alt="Groq"
+                className="h-4 w-4 sm:h-5 sm:w-5 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+          </div>
         </footer>
       </div>
     </div>

@@ -32,6 +32,8 @@ export default function Portfolio() {
   const handleOpenMenu = () => {
     setMenuOpen(true);
     setIsOpening(true);
+    // Disable body scroll when menu opens
+    document.body.style.overflow = "hidden";
     setTimeout(() => {
       setIsOpening(false);
     }, 300); // Match the animation duration
@@ -42,8 +44,17 @@ export default function Portfolio() {
     setTimeout(() => {
       setMenuOpen(false);
       setIsClosing(false);
+      // Re-enable body scroll when menu closes
+      document.body.style.overflow = "unset";
     }, 300); // Match the animation duration
   };
+
+  // Cleanup effect to re-enable scroll if component unmounts with menu open
+  React.useEffect(() => {
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   const projects = [
     {

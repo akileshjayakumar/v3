@@ -412,7 +412,7 @@ export default function Portfolio() {
           <div className="space-y-3 sm:space-y-6">
             {/* Each experience card */}
             <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+              <div className="flex items-start space-x-4">
                 <a
                   href="https://www.iras.gov.sg"
                   target="_blank"
@@ -436,11 +436,11 @@ export default function Portfolio() {
                       <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                         Software Engineer Intern
                       </h3>
-                      <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                      <p className="text-gray-600 leading-relaxed">
                         Inland Revenue Authority of Singapore (IRAS)
                       </p>
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-0 whitespace-nowrap">
+                    <span className="text-sm text-gray-500 mt-1 sm:mt-0 whitespace-nowrap">
                       Jul 2025 – Present
                     </span>
                   </div>

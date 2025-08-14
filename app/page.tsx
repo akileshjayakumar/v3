@@ -8,6 +8,7 @@ import {
   Menu,
   FileText,
   MessageCircle,
+  X,
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { FaMedium } from "react-icons/fa";
@@ -25,6 +26,25 @@ import React from "react";
 
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [isClosing, setIsClosing] = React.useState(false);
+  const [isOpening, setIsOpening] = React.useState(false);
+
+  const handleOpenMenu = () => {
+    setMenuOpen(true);
+    setIsOpening(true);
+    setTimeout(() => {
+      setIsOpening(false);
+    }, 300); // Match the animation duration
+  };
+
+  const handleCloseMenu = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setMenuOpen(false);
+      setIsClosing(false);
+    }, 300); // Match the animation duration
+  };
+
   const projects = [
     {
       id: "hawker-helper",
@@ -185,51 +205,86 @@ export default function Portfolio() {
             </nav>
             {/* Hamburger for mobile */}
             <div className="sm:hidden absolute top-0 right-0">
-              <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="ghost" size="icon" aria-label="Open menu">
-                    <Menu className="h-6 w-6" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="p-0 bg-white max-w-xs w-full rounded-lg">
-                  <nav className="flex flex-col py-6 px-6 space-y-4">
-                    {navItems.map((item) => (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        className="text-xl font-medium text-gray-700 hover:text-gray-900 transition-colors flex items-center gap-2"
-                        onClick={(e) => {
-                          if (item.href.startsWith("#")) {
-                            e.preventDefault();
-                            setMenuOpen(false);
-                            const href = item.href;
-                            setTimeout(() => {
-                              const target = document.querySelector(href);
-                              if (target) {
-                                target.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "start",
-                                });
-                                try {
-                                  history.replaceState(null, "", href);
-                                } catch {}
-                              }
-                            }, 100);
-                          } else {
-                            setMenuOpen(false);
-                            // let default navigation proceed for non-hash links
-                          }
-                        }}
-                      >
-                        {item.label === "chat" && (
-                          <MessageCircle className="h-4 w-4" />
-                        )}
-                        {item.label}
-                      </a>
-                    ))}
-                  </nav>
-                </DialogContent>
-              </Dialog>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Open menu"
+                onClick={handleOpenMenu}
+                className="h-12 w-12 hover:bg-gray-100"
+              >
+                <Menu className="h-8 w-8 font-bold" strokeWidth={2.5} />
+              </Button>
+
+              {/* Custom Mobile Menu Modal */}
+              {(menuOpen || isClosing) && (
+                <div className="fixed inset-0 z-50 flex items-start justify-end">
+                  {/* Backdrop */}
+                  <div
+                    className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-200 ${
+                      isClosing ? "opacity-0" : "opacity-100"
+                    }`}
+                    onClick={handleCloseMenu}
+                  />
+
+                  {/* Menu Content */}
+                  <div
+                    className={`relative bg-white w-80 max-w-[90vw] h-full shadow-xl transition-transform duration-300 ease-out ${
+                      isClosing
+                        ? "translate-x-full"
+                        : isOpening
+                        ? "translate-x-full"
+                        : "translate-x-0"
+                    }`}
+                  >
+                    {/* Custom close button */}
+                    <button
+                      onClick={handleCloseMenu}
+                      className="absolute right-4 top-4 z-50 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none bg-white shadow-sm"
+                      aria-label="Close menu"
+                    >
+                      <X className="h-6 w-6 text-red-500" />
+                    </button>
+
+                    {/* Navigation */}
+                    <nav className="flex flex-col py-6 px-6 space-y-4 mt-16">
+                      {navItems.map((item) => (
+                        <a
+                          key={item.label}
+                          href={item.href}
+                          className="text-xl font-medium text-gray-700 hover:text-gray-900 transition-colors flex items-center gap-2 py-2"
+                          onClick={(e) => {
+                            if (item.href.startsWith("#")) {
+                              e.preventDefault();
+                              handleCloseMenu();
+                              const href = item.href;
+                              setTimeout(() => {
+                                const target = document.querySelector(href);
+                                if (target) {
+                                  target.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                  });
+                                  try {
+                                    history.replaceState(null, "", href);
+                                  } catch {}
+                                }
+                              }, 400); // Increased delay to account for animation
+                            } else {
+                              handleCloseMenu();
+                              // let default navigation proceed for non-hash links
+                            }
+                          }}
+                        >
+                          {item.label === "chat" && (
+                            <MessageCircle className="h-4 w-4" />
+                          )}
+                          {item.label}
+                        </a>
+                      ))}
+                    </nav>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-6">

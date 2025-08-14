@@ -35,7 +35,7 @@ export default function AnimatedChatButton({
 
       {/* Tooltip for desktop */}
       <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none hidden sm:block whitespace-nowrap">
-        Let's chat! 💬
+        chat with me!
         <span className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45"></span>
       </span>
     </a>

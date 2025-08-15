@@ -410,7 +410,7 @@ export default function Portfolio() {
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
                       <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                        Software Engineer Intern
+                        Intern, Software Engineer
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
                         Inland Revenue Authority of Singapore (IRAS)
@@ -446,7 +446,7 @@ export default function Portfolio() {
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
                       <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                        AI Engineer Intern
+                        Intern, AI Engineer
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
                         Singapore Department of Statistics (DOS)
@@ -482,7 +482,7 @@ export default function Portfolio() {
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
                       <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                        AI Engineer Intern
+                        Intern, AI Engineer
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
                         Home Team Science & Technology Agency (HTX)
@@ -518,7 +518,7 @@ export default function Portfolio() {
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
                       <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                        AI Engineer Intern
+                        Intern, AI Engineer
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
                         Central Provident Fund Board (CPF Board)

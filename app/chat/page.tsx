@@ -65,7 +65,7 @@ export default function ChatPage() {
       id: crypto.randomUUID(),
       role: "assistant",
       content:
-        "Hi! I'm Akilesh. Ask me anything about my interests, projects, and work. \n I can search the web too.",
+        "Hi! I'm Akilesh. Ask me anything about my interests, projects, and work. I can search the web too.",
       createdAt: Date.now(),
     },
   ]);
@@ -308,33 +308,33 @@ export default function ChatPage() {
       <div className="flex-1 overflow-hidden flex flex-col">
         <div
           ref={scrollRef}
-          className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6"
+          className="flex-1 overflow-y-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6"
         >
-          <div className="max-w-6xl mx-auto space-y-6">
+          <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6">
             {/* Messages */}
             {messages.map((m) => (
               <div
                 key={m.id}
                 className={cn(
-                  "flex gap-3 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
+                  "flex gap-2 sm:gap-3 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
                   m.role === "user" ? "flex-row-reverse" : "flex-row"
                 )}
               >
                 {/* Avatar */}
                 <div
                   className={cn(
-                    "shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center",
+                    "shrink-0 w-7 h-7 sm:w-10 sm:h-10 rounded-full flex items-center justify-center",
                     m.role === "user"
                       ? "bg-gradient-to-r from-blue-500 to-blue-600"
                       : "bg-gradient-to-r from-gray-100 to-gray-200"
                   )}
                 >
                   {m.role === "user" ? (
-                    <span className="text-white text-sm sm:text-base font-medium">
+                    <span className="text-white text-xs sm:text-base font-medium">
                       U
                     </span>
                   ) : (
-                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+                    <Sparkles className="w-3 h-3 sm:w-5 sm:h-5 text-gray-700" />
                   )}
                 </div>
 
@@ -347,7 +347,7 @@ export default function ChatPage() {
                 >
                   <div
                     className={cn(
-                      "rounded-2xl px-4 sm:px-6 py-3 sm:py-4 shadow-sm transition-all",
+                      "rounded-xl sm:rounded-2xl px-3 sm:px-6 py-2.5 sm:py-4 shadow-sm transition-all break-words",
                       m.role === "user"
                         ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
                         : "bg-white border border-gray-100"
@@ -356,18 +356,19 @@ export default function ChatPage() {
                     {m.content ? (
                       <div
                         className={cn(
-                          "prose prose-sm sm:prose-base max-w-none",
+                          "prose prose-xs sm:prose-sm lg:prose-base max-w-none break-words leading-relaxed",
                           m.role === "user"
-                            ? "prose-invert prose-p:my-2 prose-li:my-1 prose-p:text-white prose-li:text-white prose-strong:text-white prose-headings:text-white prose-a:text-blue-100"
+                            ? "prose-invert prose-p:my-1.5 sm:prose-p:my-2 prose-li:my-1 prose-p:text-white prose-li:text-white prose-strong:text-white prose-headings:text-white prose-a:text-blue-100 prose-p:break-words prose-li:break-words prose-p:leading-relaxed"
                             : [
-                                "prose-p:my-3 prose-li:my-2",
+                                "prose-p:my-2 sm:prose-p:my-3 prose-li:my-1.5 sm:prose-li:my-2",
                                 "prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline",
                                 "prose-headings:font-semibold prose-headings:text-gray-900",
-                                "prose-h1:text-lg prose-h2:text-base prose-h3:text-sm",
+                                "prose-h1:text-base sm:prose-h1:text-lg prose-h2:text-sm sm:prose-h2:text-base prose-h3:text-xs sm:prose-h3:text-sm",
                                 "prose-strong:text-gray-900 prose-strong:font-semibold",
-                                "prose-blockquote:border-l-4 prose-blockquote:border-gray-200 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-600",
-                                "prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm",
-                                "prose-pre:bg-gray-50 prose-pre:border prose-pre:border-gray-200 prose-pre:rounded-lg prose-pre:p-4",
+                                "prose-blockquote:border-l-4 prose-blockquote:border-gray-200 prose-blockquote:pl-3 sm:prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-600",
+                                "prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-xs sm:prose-code:text-sm",
+                                "prose-pre:bg-gray-50 prose-pre:border prose-pre:border-gray-200 prose-pre:rounded-lg prose-pre:p-3 sm:prose-pre:p-4",
+                                "prose-p:break-words prose-li:break-words prose-a:break-words prose-p:leading-relaxed",
                               ].join(" ")
                         )}
                       >
@@ -602,18 +603,18 @@ export default function ChatPage() {
                     <button
                       aria-label="Copy message"
                       className={cn(
-                        "absolute -top-2 -right-2 opacity-0 group-hover:opacity-100",
+                        "absolute -top-1 -right-1 sm:-top-2 sm:-right-2 opacity-0 group-hover:opacity-100",
                         "transition-opacity duration-200",
-                        "w-8 h-8 rounded-full bg-white border border-gray-200",
+                        "w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white border border-gray-200",
                         "flex items-center justify-center shadow-sm",
                         "hover:bg-gray-50"
                       )}
                       onClick={() => handleCopy(m.id, m.content)}
                     >
                       {copiedMessageId === m.id ? (
-                        <Check className="w-3.5 h-3.5 text-green-600" />
+                        <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600" />
                       ) : (
-                        <Copy className="w-3.5 h-3.5 text-gray-600" />
+                        <Copy className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gray-600" />
                       )}
                     </button>
                   )}
@@ -624,18 +625,19 @@ export default function ChatPage() {
             {/* Suggestions */}
             {suggestions.length > 0 && !isSubmitting && (
               <div className="flex justify-center mt-6 sm:mt-8">
-                <div className="inline-block max-w-full">
+                <div className="w-full max-w-full">
                   <p className="text-xs sm:text-sm text-gray-500 mb-3 text-center">
                     Suggested questions:
                   </p>
-                  <div className="flex flex-wrap gap-2 justify-center px-4">
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-2 justify-center px-2 sm:px-4">
                     {suggestions.map((sug, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSend(sug)}
-                        className="px-3 py-1.5 text-sm sm:text-base rounded-full border border-gray-200 
+                        className="px-3 py-2 text-xs sm:text-sm rounded-full border border-gray-200 
                                  bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900
-                                 transition-all duration-200 hover:shadow-sm whitespace-nowrap"
+                                 transition-all duration-200 hover:shadow-sm break-words text-left
+                                 max-w-full sm:max-w-none sm:whitespace-nowrap"
                       >
                         {sug}
                       </button>
@@ -649,7 +651,7 @@ export default function ChatPage() {
 
         {/* Composer */}
         <div className="shrink-0 border-t border-gray-100 bg-white/80 backdrop-blur-lg">
-          <div className="max-w-6xl mx-auto p-4 sm:p-6">
+          <div className="max-w-6xl mx-auto p-3 sm:p-6">
             <form
               onSubmit={(e) => {
                 e.preventDefault();

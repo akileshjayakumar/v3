@@ -686,51 +686,56 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-        <footer className="w-full py-6 sm:py-8 flex flex-col items-center justify-center bg-transparent mt-8 sm:mt-12">
+        <footer className="w-full py-8 sm:py-12 flex flex-col items-center justify-center bg-transparent mt-12 sm:mt-16">
           <a
             href="https://github.com/akileshjayakumar?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 rounded-md font-medium text-white bg-blue-500 hover:bg-blue-600 transition-colors mb-4"
+            className="group flex items-center px-6 py-3 rounded-lg font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200 mb-6 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           >
-            <FaGithub className="h-6 w-6 mr-2 inline-block" />
-            <span className="text-base sm:text-lg font-medium">
+            <FaGithub className="h-5 w-5 mr-3 transition-transform duration-200 group-hover:scale-110" />
+            <span className="text-base sm:text-lg font-semibold">
               more projects on my github!
             </span>
           </a>
 
-          <span className="text-base sm:text-xl text-gray-400">
-            &copy; 2025 akilesh jayakumar
+          <span className="text-base sm:text-lg text-gray-500 mb-6">
+            &copy; 2025 akilesh jayakumar. all rights reserved
           </span>
 
-          <div className="flex items-center gap-3 text-gray-500 mb-3 text-sm sm:text-base mt-4">
-            <span>built with</span>
+          <div className="flex items-center justify-center gap-6 sm:gap-8 text-gray-400 text-sm sm:text-base px-4">
+            <span className="font-medium whitespace-nowrap flex items-center">
+              built with
+            </span>
             <a
               href="https://nextjs.org/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Next.js"
+              className="hover:text-gray-600 transition-colors duration-200 flex items-center"
             >
-              <SiNextdotjs className="!h-4 !w-4 sm:!h-5 sm:!w-5 hover:text-gray-900 transition-colors" />
+              <SiNextdotjs className="h-4 w-4 sm:h-5 sm:w-5" />
             </a>
             <a
-              href="https://ai-sdk.dev/"
+              href="https://vercel.com/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Vercel AI SDK"
+              aria-label="Vercel"
+              className="hover:text-gray-600 transition-colors duration-200 flex items-center"
             >
-              <SiVercel className="!h-4 !w-4 sm:!h-5 sm:!w-5 hover:text-gray-900 transition-colors" />
+              <SiVercel className="h-4 w-4 sm:h-5 sm:w-5" />
             </a>
             <a
               href="https://groq.com/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Groq"
+              className="hover:opacity-100 transition-opacity duration-200 flex items-center"
             >
               <img
                 src="https://groq.com/favicon.ico"
                 alt="Groq"
-                className="h-4 w-4 sm:h-5 sm:w-5 opacity-80 hover:opacity-100 transition-opacity"
+                className="h-4 w-4 sm:h-5 sm:w-5 opacity-70"
               />
             </a>
           </div>

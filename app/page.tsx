@@ -82,7 +82,7 @@ export default function Portfolio() {
       ],
       status: "UOW Final Year Capstone Project (April 2025 - September 2025)",
       tech: [
-        "Python",
+        "OpenAI",
         "Next.js",
         "Docker",
         "LangChain",
@@ -127,7 +127,7 @@ export default function Portfolio() {
         "Features speech-to-text, text-to-speech capabilities, and support for accessibility.",
       ],
       status: "NES CatalystX Hackathon 2024 (October 2024)",
-      tech: ["Streamlit", "NVIDIA AI", "LlamaIndex"],
+      tech: ["Streamlit", "NVIDIA NIM", "LlamaIndex"],
       links: {
         demo: "https://eduxcatalystx2024.streamlit.app/",
         github:
@@ -538,87 +538,145 @@ export default function Portfolio() {
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
             Projects
           </h2>
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-6 sm:space-y-8">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 max-w-4xl mx-auto flex flex-col gap-6"
+                className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 max-w-4xl mx-auto shadow-sm hover:shadow-md transition-shadow duration-300"
               >
-                <div className="flex items-start gap-6">
+                {/* Project Header */}
+                <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6 mb-6">
                   <div
-                    className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl ${project.iconBg} flex items-center justify-center leading-none text-[40px] sm:text-[48px]`}
+                    className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${project.iconBg} flex items-center justify-center leading-none text-3xl sm:text-4xl shadow-sm`}
                     aria-hidden="true"
                   >
                     {project.icon}
                   </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
-                      {project.title}
-                    </h3>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col gap-2 mb-3">
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
+                        {project.title}
+                      </h3>
+                      <span className="text-sm text-gray-500 font-medium">
+                        {project.status}
+                      </span>
+                    </div>
+
+                    {/* Project Description */}
                     {project.description &&
                     Array.isArray(project.description) ? (
-                      <ul className="text-gray-700 text-base space-y-2 mb-3">
+                      <div className="space-y-3">
                         {project.description.map((point, idx) => (
-                          <li
+                          <div
                             key={idx}
-                            className="flex items-start gap-3 leading-relaxed"
+                            className="flex items-start gap-3 text-gray-700 leading-relaxed"
                           >
-                            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-400 flex-shrink-0" />
-                            <span>{point}</span>
-                          </li>
+                            <div className="mt-2.5 h-2 w-2 rounded-full bg-blue-500 flex-shrink-0" />
+                            <p className="text-sm sm:text-base">{point}</p>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     ) : (
-                      <p className="text-gray-700 mb-2 text-base leading-relaxed">
+                      <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                         {project.description}
                       </p>
                     )}
-                    <div className="italic text-gray-500 text-sm mb-2">
-                      {project.status}
-                    </div>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech &&
-                    project.tech.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+
+                {/* Tech Stack */}
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
+                    Stack
+                  </h4>
+                  <div className="flex flex-wrap gap-2.5 mb-1">
+                    {project.tech &&
+                      project.tech.map((tech, idx) => {
+                        // Define tech tool URLs
+                        const techUrls: { [key: string]: string } = {
+                          "Next.js": "https://nextjs.org/",
+                          "Tailwind CSS": "https://tailwindcss.com/",
+                          Groq: "https://groq.com/",
+                          "Vercel AI SDK": "https://sdk.vercel.ai/",
+                          OpenAI: "https://openai.com/",
+                          Docker: "https://www.docker.com/",
+                          LangChain: "https://www.langchain.com/",
+                          "AWS Elastic Beanstalk":
+                            "https://aws.amazon.com/elasticbeanstalk/",
+                          "AWS Amplify": "https://aws.amazon.com/pm/amplify/",
+                          "AWS S3": "https://aws.amazon.com/s3/",
+                          "AWS RDS": "https://aws.amazon.com/rds/",
+                          "Perplexity Spaces": "https://www.perplexity.ai/",
+                          Streamlit: "https://docs.streamlit.io/",
+                          "NVIDIA NIM":
+                            "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
+                          LlamaIndex: "https://www.llamaindex.ai/",
+                        };
+
+                        const url = techUrls[tech];
+
+                        if (url) {
+                          return (
+                            <a
+                              key={idx}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 h-6 rounded-full sm:text-xs sm:rounded-md sm:px-2.5 sm:py-0.5 sm:h-auto font-medium hover:bg-blue-100 hover:text-blue-800 transition-all duration-200 border border-blue-200"
+                            >
+                              {tech}
+                            </a>
+                          );
+                        }
+
+                        return (
+                          <span
+                            key={idx}
+                            className="inline-flex items-center justify-center bg-gray-100 text-gray-600 text-xs px-2.5 py-0.5 h-6 rounded-full sm:text-xs sm:rounded-md sm:px-2.5 sm:py-0.5 sm:h-auto font-medium"
+                          >
+                            {tech}
+                          </span>
+                        );
+                      })}
+                  </div>
                 </div>
-                <div className="flex gap-4 sm:gap-6 pt-2 border-t border-gray-100">
-                  <a
-                    href={project.links.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2 text-gray-800 hover:text-gray-900 font-medium text-xs sm:text-sm md:text-base"
-                  >
-                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                    Demo
-                  </a>
-                  {project.links.marketing && (
+
+                {/* Project Links */}
+                <div className="border-t border-gray-100 pt-4">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
+                    Links
+                  </h4>
+                  <div className="flex flex-wrap gap-3 sm:gap-4">
                     <a
-                      href={project.links.marketing}
+                      href={project.links.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-2 text-gray-800 hover:text-gray-900 font-medium text-xs sm:text-sm md:text-base"
+                      className="group flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-base px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200"
                     >
-                      <Globe className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                      {project.links.marketingLabel ?? "Website"}
+                      <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                      <span>Demo</span>
                     </a>
-                  )}
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2 text-gray-800 hover:text-gray-900 font-medium text-xs sm:text-sm md:text-base"
-                  >
-                    <FaGithub className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                    Source Code
-                  </a>
+                    {project.links.marketing && (
+                      <a
+                        href={project.links.marketing}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-base px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                      >
+                        <Globe className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                        <span>{project.links.marketingLabel ?? "Website"}</span>
+                      </a>
+                    )}
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-base px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                    >
+                      <FaGithub className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                      <span>Source Code</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}

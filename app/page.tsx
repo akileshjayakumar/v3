@@ -586,10 +586,7 @@ export default function Portfolio() {
 
                 {/* Tech Stack */}
                 <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
-                    Stack
-                  </h4>
-                  <div className="flex flex-wrap gap-2.5 mb-1">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2.5 mb-1">
                     {project.tech &&
                       project.tech.map((tech, idx) => {
                         // Define tech tool URLs
@@ -622,7 +619,7 @@ export default function Portfolio() {
                               href={url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 h-6 rounded-full sm:text-xs sm:rounded-md sm:px-2.5 sm:py-0.5 sm:h-auto font-medium hover:bg-blue-100 hover:text-blue-800 transition-all duration-200 border border-blue-200"
+                              className="inline-flex items-center justify-center bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-md sm:text-xs sm:rounded-md sm:px-2.5 sm:py-0.5 sm:h-auto font-medium hover:bg-blue-100 hover:text-blue-800 transition-all duration-200 border border-blue-200"
                             >
                               {tech}
                             </a>
@@ -632,7 +629,7 @@ export default function Portfolio() {
                         return (
                           <span
                             key={idx}
-                            className="inline-flex items-center justify-center bg-gray-100 text-gray-600 text-xs px-2.5 py-0.5 h-6 rounded-full sm:text-xs sm:rounded-md sm:px-2.5 sm:py-0.5 sm:h-auto font-medium"
+                            className="inline-flex items-center justify-center bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-md sm:text-xs sm:rounded-md sm:px-2.5 sm:py-0.5 sm:h-auto font-medium"
                           >
                             {tech}
                           </span>
@@ -643,17 +640,14 @@ export default function Portfolio() {
 
                 {/* Project Links */}
                 <div className="border-t border-gray-100 pt-4">
-                  <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
-                    Links
-                  </h4>
-                  <div className="flex flex-wrap gap-3 sm:gap-4">
+                  <div className="flex flex-nowrap gap-2 sm:gap-3">
                     <a
                       href={project.links.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-base px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                      className="group flex items-center gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs sm:text-sm px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-all duration-200"
                     >
-                      <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                      <ExternalLink className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
                       <span>Demo</span>
                     </a>
                     {project.links.marketing && (
@@ -661,9 +655,9 @@ export default function Portfolio() {
                         href={project.links.marketing}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-base px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                        className="group flex items-center gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs sm:text-sm px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-all duration-200"
                       >
-                        <Globe className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                        <Globe className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
                         <span>{project.links.marketingLabel ?? "Website"}</span>
                       </a>
                     )}
@@ -671,9 +665,9 @@ export default function Portfolio() {
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-base px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                      className="group flex items-center gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs sm:text-sm px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-all duration-200"
                     >
-                      <FaGithub className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                      <FaGithub className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
                       <span>Source Code</span>
                     </a>
                   </div>

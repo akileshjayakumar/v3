@@ -542,19 +542,21 @@ export default function Portfolio() {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 max-w-4xl mx-auto shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="bg-white border border-gray-200 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm hover:shadow-md transition-shadow duration-300"
               >
                 {/* Project Header */}
-                <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 mb-5 sm:mb-6">
                   <div
-                    className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${project.iconBg} flex items-center justify-center leading-none text-3xl sm:text-4xl shadow-sm`}
+                    className={`flex-shrink-0 w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl ${project.iconBg} flex items-center justify-center leading-none text-2xl sm:text-4xl shadow-sm select-none`}
                     aria-hidden="true"
                   >
-                    {project.icon}
+                    <span className="flex items-center justify-center w-full h-full">
+                      {project.icon}
+                    </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex flex-col gap-2 mb-3">
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
+                    <div className="flex flex-col gap-1.5 mb-3">
+                      <h3 className="text-lg sm:text-2xl font-bold text-gray-900 leading-tight">
                         {project.title}
                       </h3>
                       <span className="text-sm text-gray-500 font-medium">
@@ -565,14 +567,16 @@ export default function Portfolio() {
                     {/* Project Description */}
                     {project.description &&
                     Array.isArray(project.description) ? (
-                      <div className="space-y-3">
+                      <div className="space-y-2 sm:space-y-3">
                         {project.description.map((point, idx) => (
                           <div
                             key={idx}
-                            className="flex items-start gap-3 text-gray-700 leading-relaxed"
+                            className="flex items-start gap-2 sm:gap-3 text-gray-700 leading-relaxed"
                           >
-                            <div className="mt-2.5 h-2 w-2 rounded-full bg-blue-500 flex-shrink-0" />
-                            <p className="text-sm sm:text-base">{point}</p>
+                            <div className="mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-blue-500 flex-shrink-0" />
+                            <p className="text-sm sm:text-base leading-relaxed">
+                              {point}
+                            </p>
                           </div>
                         ))}
                       </div>
@@ -585,7 +589,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Tech Stack */}
-                <div className="mb-6">
+                <div className="mt-4 sm:mt-5 mb-5 sm:mb-6">
                   <div className="flex flex-wrap gap-1.5 sm:gap-2.5 mb-1">
                     {project.tech &&
                       project.tech.map((tech, idx) => {
@@ -619,7 +623,7 @@ export default function Portfolio() {
                               href={url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-md sm:text-xs sm:rounded-md sm:px-2.5 sm:py-0.5 sm:h-auto font-medium hover:bg-blue-100 hover:text-blue-800 transition-all duration-200 border border-blue-200"
+                              className="inline-flex items-center justify-center bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-md font-medium hover:bg-blue-100 hover:text-blue-800 transition-all duration-200 border border-blue-200"
                             >
                               {tech}
                             </a>
@@ -629,7 +633,7 @@ export default function Portfolio() {
                         return (
                           <span
                             key={idx}
-                            className="inline-flex items-center justify-center bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-md sm:text-xs sm:rounded-md sm:px-2.5 sm:py-0.5 sm:h-auto font-medium"
+                            className="inline-flex items-center justify-center bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-md font-medium"
                           >
                             {tech}
                           </span>
@@ -639,36 +643,38 @@ export default function Portfolio() {
                 </div>
 
                 {/* Project Links */}
-                <div className="border-t border-gray-100 pt-4">
-                  <div className="flex flex-nowrap gap-2 sm:gap-3">
+                <div className="border-t border-gray-100 pt-3 sm:pt-4">
+                  <div className="flex flex-nowrap items-center gap-5 sm:gap-6 px-1">
                     <a
                       href={project.links.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs sm:text-sm px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                      className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs transition-all duration-200"
                     >
-                      <ExternalLink className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                      <span>Demo</span>
+                      <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                      <span className="whitespace-nowrap">Demo</span>
                     </a>
                     {project.links.marketing && (
                       <a
                         href={project.links.marketing}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs sm:text-sm px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                        className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs transition-all duration-200"
                       >
-                        <Globe className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                        <span>{project.links.marketingLabel ?? "Website"}</span>
+                        <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                        <span className="whitespace-nowrap">
+                          {project.links.marketingLabel ?? "Website"}
+                        </span>
                       </a>
                     )}
                     <a
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs sm:text-sm px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                      className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs transition-all duration-200"
                     >
-                      <FaGithub className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                      <span>Source Code</span>
+                      <FaGithub className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                      <span className="whitespace-nowrap">Source Code</span>
                     </a>
                   </div>
                 </div>

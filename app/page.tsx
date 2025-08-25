@@ -573,7 +573,7 @@ export default function Portfolio() {
                             key={idx}
                             className="flex items-start gap-2 sm:gap-3 text-gray-700 leading-relaxed"
                           >
-                            <div className="mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-blue-500 flex-shrink-0" />
+                            <div className="mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-gray-400 flex-shrink-0" />
                             <p className="text-sm sm:text-base leading-relaxed">
                               {point}
                             </p>
@@ -623,7 +623,7 @@ export default function Portfolio() {
                               href={url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-md font-medium hover:bg-blue-100 hover:text-blue-800 transition-all duration-200 border border-blue-200"
+                              className="inline-flex items-center justify-center bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded-md font-medium hover:bg-gray-200 hover:text-gray-900 transition-all duration-200 border border-gray-200"
                             >
                               {tech}
                             </a>
@@ -649,7 +649,7 @@ export default function Portfolio() {
                       href={project.links.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs transition-all duration-200"
+                      className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
                     >
                       <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
                       <span className="whitespace-nowrap">Demo</span>
@@ -659,7 +659,7 @@ export default function Portfolio() {
                         href={project.links.marketing}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs transition-all duration-200"
+                        className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
                       >
                         <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
                         <span className="whitespace-nowrap">
@@ -671,7 +671,7 @@ export default function Portfolio() {
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs transition-all duration-200"
+                      className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
                     >
                       <FaGithub className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
                       <span className="whitespace-nowrap">Source Code</span>
@@ -770,30 +770,30 @@ export default function Portfolio() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Next.js"
-              className="hover:text-gray-600 transition-colors duration-200 flex items-center"
+              className="group transition-colors duration-200 ease-out flex items-center hover:text-black"
             >
-              <SiNextdotjs className="h-4 w-4 sm:h-5 sm:w-5" />
+              <SiNextdotjs className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-200 ease-out group-hover:scale-110" />
             </a>
             <a
               href="https://vercel.com/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Vercel"
-              className="hover:text-gray-600 transition-colors duration-200 flex items-center"
+              className="group transition-colors duration-200 ease-out flex items-center hover:text-black"
             >
-              <SiVercel className="h-4 w-4 sm:h-5 sm:w-5" />
+              <SiVercel className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-200 ease-out group-hover:scale-110" />
             </a>
             <a
               href="https://groq.com/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Groq"
-              className="hover:opacity-100 transition-opacity duration-200 flex items-center"
+              className="group transition-all duration-200 ease-out flex items-center"
             >
               <img
                 src="https://groq.com/favicon.ico"
                 alt="Groq"
-                className="h-4 w-4 sm:h-5 sm:w-5 opacity-70"
+                className="h-4 w-4 sm:h-5 sm:w-5 opacity-80 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:scale-110"
               />
             </a>
           </div>

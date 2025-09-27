@@ -410,7 +410,7 @@ export default function Portfolio() {
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
                       <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                        Intern, Software Engineer
+                        Intern, AI Engineer
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
                         Inland Revenue Authority of Singapore (IRAS)

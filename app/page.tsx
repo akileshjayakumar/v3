@@ -285,7 +285,7 @@ export default function Portfolio() {
               Akilesh Jayakumar
             </h1>
             <p className="text-gray-700 leading-relaxed mt-2 mb-6 text-base sm:text-lg">
-              exploring genai, llms & agents
+              exploring / experimenting with GenAI & LLMs
             </p>
           </div>
           <div className="flex items-center space-x-4 sm:space-x-5 mt-2">

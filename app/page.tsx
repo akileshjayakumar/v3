@@ -139,6 +139,7 @@ export default function Portfolio() {
   const navItems = [
     { label: "education", href: "#education" },
     { label: "experience", href: "#experience" },
+    { label: "writing", href: "#writing" },
     { label: "projects", href: "#projects" },
     { label: "contact", href: "#contact" },
     { label: "resume", href: "/cv" },
@@ -534,6 +535,84 @@ export default function Portfolio() {
           </div>
         </section>
 
+        <section id="writing" className="mt-16 sm:mt-20">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
+            Writing
+          </h2>
+          <div className="space-y-6 sm:space-y-8">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm hover:shadow-md transition-shadow duration-300">
+              {/* Article Header */}
+              <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 mb-5 sm:mb-6">
+                <div className="flex-shrink-0 w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm select-none">
+                  <Image
+                    src="/article-preview.jpg"
+                    alt="Article preview: One Month with Comet"
+                    width={80}
+                    height={80}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col gap-1.5 mb-3">
+                    <h3 className="text-lg sm:text-2xl font-bold text-gray-900 leading-tight">
+                      One Month with Comet: The AI Browser That Changed How I
+                      Research
+                    </h3>
+                    <span className="text-sm text-gray-500 font-medium">
+                      Published on Medium • 3 October 2025
+                    </span>
+                  </div>
+
+                  {/* Article Description */}
+                  <div className="space-y-2 sm:space-y-3">
+                    <div className="flex items-start gap-2 sm:gap-3 text-gray-700 leading-relaxed">
+                      <div className="mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-gray-400 flex-shrink-0" />
+                      <p className="text-sm sm:text-base leading-relaxed">
+                        My experience using Perplexity's Comet, the AI browser:
+                        best features, agentic workflows, and how shortcuts
+                        changed my daily browsing.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2 sm:gap-3 text-gray-700 leading-relaxed">
+                      <div className="mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-gray-400 flex-shrink-0" />
+                      <p className="text-sm sm:text-base leading-relaxed">
+                        Thoughts on areas for improvement and sample prompts for
+                        new users.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Article Tags removed per request */}
+
+              {/* Article Links */}
+              <div className="border-t border-gray-100 pt-3 sm:pt-4">
+                <div className="flex flex-nowrap items-center gap-5 sm:gap-6 px-1">
+                  <a
+                    href="https://akileshjayakumar.medium.com/one-month-with-comet-the-ai-browser-that-changed-how-i-research-02933e08bf15"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
+                  >
+                    <FaMedium className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                    <span className="whitespace-nowrap">Read on Medium</span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/feed/update/urn:li:activity:7379780468411461632/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
+                  >
+                    <FaLinkedin className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                    <span className="whitespace-nowrap">LinkedIn Post</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="projects" className="mt-16 sm:mt-20">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">
             Projects
@@ -661,7 +740,11 @@ export default function Portfolio() {
                         rel="noopener noreferrer"
                         className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
                       >
-                        <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                        {project.links.marketingLabel === "LinkedIn Post" ? (
+                          <FaLinkedin className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                        ) : (
+                          <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                        )}
                         <span className="whitespace-nowrap">
                           {project.links.marketingLabel ?? "Website"}
                         </span>
@@ -744,58 +827,70 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-        <footer className="w-full py-8 sm:py-12 flex flex-col items-center justify-center bg-transparent mt-12 sm:mt-16">
-          <a
-            href="https://github.com/akileshjayakumar?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center px-6 py-3 rounded-lg font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200 mb-6 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-          >
-            <FaGithub className="h-5 w-5 mr-3 transition-transform duration-200 group-hover:scale-110" />
-            <span className="text-base sm:text-lg font-semibold">
-              more projects on my github!
-            </span>
-          </a>
+        <footer className="w-full mt-12 sm:mt-16 border-t border-gray-100 bg-transparent py-6 sm:py-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-5 sm:gap-6">
+              <div className="text-center sm:text-left">
+                <p className="text-sm sm:text-base text-gray-500">
+                  &copy; 2025 akilesh jayakumar
+                </p>
+              </div>
 
-          <span className="text-base sm:text-lg text-gray-500 mb-6">
-            &copy; 2025 akilesh jayakumar. all rights reserved
-          </span>
+              <div className="flex items-center justify-center gap-3 sm:gap-4">
+                <a
+                  href="https://github.com/akileshjayakumar?tab=repositories"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white px-3 py-2 text-xs sm:text-sm font-medium shadow-sm hover:bg-black transition-colors"
+                >
+                  <FaGithub className="h-4 w-4" />
+                  <span>more projects on my github</span>
+                </a>
 
-          <div className="flex items-center justify-center gap-6 sm:gap-8 text-gray-400 text-sm sm:text-base px-4">
-            <span className="font-medium whitespace-nowrap flex items-center">
-              built with
-            </span>
-            <a
-              href="https://nextjs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Next.js"
-              className="group transition-colors duration-200 ease-out flex items-center hover:text-black"
-            >
-              <SiNextdotjs className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-200 ease-out group-hover:scale-110" />
-            </a>
-            <a
-              href="https://vercel.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Vercel"
-              className="group transition-colors duration-200 ease-out flex items-center hover:text-black"
-            >
-              <SiVercel className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-200 ease-out group-hover:scale-110" />
-            </a>
-            <a
-              href="https://groq.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Groq"
-              className="group transition-all duration-200 ease-out flex items-center"
-            >
-              <img
-                src="https://groq.com/favicon.ico"
-                alt="Groq"
-                className="h-4 w-4 sm:h-5 sm:w-5 opacity-80 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:scale-110"
-              />
-            </a>
+                <div className="hidden sm:block h-6 w-px bg-gray-200" />
+
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-gray-500">built with</span>
+                  <a
+                    href="https://nextjs.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Next.js"
+                    className="group"
+                  >
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-black shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:text-gray-500">
+                      <SiNextdotjs className="h-4 w-4" />
+                    </span>
+                  </a>
+                  <a
+                    href="https://vercel.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Vercel"
+                    className="group"
+                  >
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-black shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:text-gray-500">
+                      <SiVercel className="h-4 w-4" />
+                    </span>
+                  </a>
+                  <a
+                    href="https://groq.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Groq"
+                    className="group"
+                  >
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 shadow-sm transition-transform group-hover:-translate-y-0.5">
+                      <img
+                        src="https://groq.com/favicon.ico"
+                        alt="Groq"
+                        className="h-4 w-4 opacity-100 transition-all duration-200 group-hover:grayscale group-hover:opacity-70"
+                      />
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </footer>
       </div>

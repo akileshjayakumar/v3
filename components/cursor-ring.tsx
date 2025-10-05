@@ -29,9 +29,8 @@ export default function CursorRing(): null {
       navigator.userAgent
     );
 
-    if (mode !== "ring" || reduceMotion || isTouchOrCoarse || isMobileUa) {
-      return;
-    }
+    // Disable custom cursor - use default system cursor
+    return;
 
     // Hide native cursor and create ring element
     prevCursorRef.current = document.body.style.cursor;

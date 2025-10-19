@@ -52,6 +52,31 @@ export default function Portfolio() {
 
   const projects = [
     {
+      id: "doodlemorph",
+      title: "DoodleMorph",
+      icon: "🎨",
+      iconBg: "bg-orange-100",
+      description: [
+        "Built an app that transforms your doodles/sketches into creative images, character designs, and cinematic animations.",
+        "Used fal for media generation and Groq for fast prompt enhancements.",
+      ],
+      status: "Cursor Hackathon Singapore 2025 (October 2025)",
+      tech: [
+        "TypeScript",
+        "TLDraw",
+        "Fal.AI",
+        "Google Gemini & Veo 3.1",
+        "Groq",
+      ],
+      links: {
+        demo: "https://doodlemorph.vercel.app/",
+        marketing:
+          "https://www.linkedin.com/feed/update/urn:li:activity:7385710583221817344/",
+        github: "https://github.com/akileshjayakumar/doodlemorph",
+        marketingLabel: "LinkedIn Post",
+      },
+    },
+    {
       id: "hawker-helper",
       title: "Hawker Food Menu Helper",
       icon: "🍜",
@@ -691,6 +716,12 @@ export default function Portfolio() {
                           "NVIDIA NIM":
                             "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
                           LlamaIndex: "https://www.llamaindex.ai/",
+                          TypeScript: "https://www.typescriptlang.org/",
+                          TLDraw: "https://tldraw.dev/",
+                          "Fal.AI": "https://fal.ai/",
+                          "Google Gemini & Veo 3.1":
+                            "https://deepmind.google/technologies/gemini/",
+                          "Groq AI Inference": "https://groq.com/",
                         };
 
                         const url = techUrls[tech];

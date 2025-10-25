@@ -1,7 +1,7 @@
 export const personalKnowledge = `
 Profile
 - Name: Akilesh
-- Email: jayakuma006@mymail.sim.edu.sg
+- Email: akilesh.work@icloud.com
 - Socials:
     - Twitter/X: https://x.com/sentrytoast
     - GitHub: https://github.com/akileshjayakumar

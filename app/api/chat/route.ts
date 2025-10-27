@@ -10,30 +10,31 @@ const CACHE = new Map<
 const normalize = (q: string) => q.toLowerCase().replace(/\s+/g, " ").trim();
 
 const SYSTEM_PROMPT = `
-You are "Akilesh", an AI assistant who always speaks in the first person as Akilesh. Your job is to help visitors learn about me (Akilesh) accurately, clearly, and concisely.
+You are Akilesh. Respond in first person as if you are talking directly to the visitor about yourself.
+
+Use the following knowledge about yourself to answer questions accurately and truthfully.
+
+Knowledge:
+${personalKnowledge}
 
 Guidelines:
-- Always answer as "I", never in the third person.
-- Be concise, friendly, and approachable. Use short sentences and bullet points where helpful.
-- Never make up or exaggerate achievements, dates, or employers. Only use information you know or that is provided.
-- If you do not know something, say so honestly.
+- Always use "I" when referring to yourself. Never refer to yourself as "Akilesh" in third person.
+- Be concise, friendly, and direct. Keep answers to 1-2 sentences or use bullet points for lists.
+- Only use information from the knowledge provided. Do not make up or exaggerate details.
+- If information is not available, say "I don't have that information" honestly.
+- Respond conversationally, as if sharing about yourself.
 
-Web search policy:
-- Only use web search if the question is about current events, time-sensitive topics, or external facts not found in the knowledge below, or if the user asks for sources or verification.
-- If the answer can be found in the knowledge below, do not search the web.
-- If you do search, briefly explain your reasoning steps and include a short "Sources" list using markdown links.
+Examples:
+Question: What are your hobbies?
+Answer: My hobbies are music, movies, coding, and badminton.
 
-Formatting:
-- Keep answers to 1 or 2 sentences when possible.
-- Use bullet points for lists or multiple facts.
-- When providing links, use markdown format: [link text](link url).
+Question: Tell me about your education.
+Answer: I am pursuing a Bachelor of Computer Science with a focus on Cyber Security at the University of Wollongong, expected to graduate in June 2026.
 
-When the user asks what model are you using, say you are using an open source model from groq.
+Question: What are your interests?
+Answer: My interests are AI, GenAI, LLMs, Agents, Prompt Engineering, Web Development, AI Ethics, Guardrails for LLMs.
 
-
-Here is my knowledge base:
-
-${personalKnowledge}
+When asked about the model, say you are using an open source model from Groq.
 `;
 
 export async function POST(req: Request) {
@@ -68,12 +69,13 @@ export async function POST(req: Request) {
               Authorization: `Bearer ${apiKeyEnv}`,
             },
             body: JSON.stringify({
-              model: "compound-beta", // native search
+              model: "groq/compound",
               messages: [
                 { role: "system", content: SYSTEM_PROMPT },
                 ...messages,
               ],
               stream: true,
+              temperature: 0.3,
             }),
           }
         );
@@ -97,7 +99,7 @@ export async function POST(req: Request) {
                 const data = line.slice(6);
                 if (data === "[DONE]") {
                   controller.enqueue(
-                    new TextEncoder().encode("data: [DONE]\n\n")
+                    encoder.encode("data: [DONE]\n\n")
                   );
                   break;
                 }
@@ -200,7 +202,7 @@ export async function POST(req: Request) {
             },
             body: JSON.stringify({
               // Use a strong suggestion model; must return ONLY a JSON array
-              model: "llama3-8b-8192",
+              model: "llama-3.1-8b-instant",
               messages: [
                 {
                   role: "system",
@@ -265,90 +267,32 @@ export async function POST(req: Request) {
       );
     }
 
-    // Try Responses API first, then fall back to Chat Completions if needed
-    try {
-      const res = await fetch("https://api.groq.com/openai/v1/responses", {
+    const res = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: "openai/gpt-oss-20b",
-          instructions: SYSTEM_PROMPT,
-          input: messages.map((m) => ({ role: m.role, content: m.content })),
-          tools: [{ type: "web_search" }],
+          model: "groq/compound",
+          messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+          temperature: 0.3,
         }),
-      });
-      if (!res.ok) throw new Error(await res.text());
-
-      const data = await res.json();
-      let message = "";
-      const citations: Array<{ title?: string; url: string }> = [];
-      const reasoning: string[] = [];
-
-      if (typeof data.output_text === "string" && data.output_text.length > 0) {
-        message = data.output_text;
       }
-      const outputs = Array.isArray(data.output) ? data.output : [];
-      for (const out of outputs) {
-        if (out.type === "message" && out.content) {
-          if (Array.isArray(out.content)) {
-            const textParts = out.content
-              .filter((c: any) => c.type === "output_text")
-              .map((c: any) => c.text);
-            if (textParts.length) {
-              message = textParts.join("\n\n");
-            }
-          } else if (typeof out.content === "string") {
-            message = out.content;
-          }
-        }
-        if (out.type === "tool_call" && out.name === "web_search") {
-          if (out.arguments && out.arguments.query) {
-            reasoning.push(`Search: ${out.arguments.query}`);
-          }
-        }
-        if (out.type === "tool_result" && out.name === "web_search") {
-          const results = out.result?.results ?? out.result ?? [];
-          if (Array.isArray(results)) {
-            for (const r of results) {
-              if (r?.url) citations.push({ title: r.title, url: r.url });
-            }
-          }
-        }
-      }
-
-      CACHE.set(key, { message, citations });
-      return NextResponse.json({ message, citations, reasoning });
-    } catch (e) {
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${apiKey}`,
-          },
-          body: JSON.stringify({
-            model: "openai/gpt-oss-20b",
-            messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
-            temperature: 0.3,
-          }),
-        }
+    );
+    if (!res.ok) {
+      const txt = await res.text();
+      return NextResponse.json(
+        { error: `Groq error: ${txt}` },
+        { status: 500 }
       );
-      if (!res.ok) {
-        const txt = await res.text();
-        return NextResponse.json(
-          { error: `Groq error: ${txt}` },
-          { status: 500 }
-        );
-      }
-      const data = await res.json();
-      const answer = data?.choices?.[0]?.message?.content ?? "";
-      CACHE.set(key, { message: answer });
-      return NextResponse.json({ message: answer, citations: [] });
     }
+    const data = await res.json();
+    const answer = data?.choices?.[0]?.message?.content ?? "";
+    CACHE.set(key, { message: answer });
+    return NextResponse.json({ message: answer, citations: [] });
   } catch (err: any) {
     console.error("API error:", err);
     return NextResponse.json(

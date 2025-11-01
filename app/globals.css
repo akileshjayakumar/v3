@@ -276,12 +276,12 @@ textarea {
     0%,
     100% {
       transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);
     }
 
     50% {
       transform: scale(1.02);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
     }
   }
 
@@ -312,14 +312,14 @@ textarea {
     0%,
     100% {
       background: linear-gradient(45deg,
-          rgba(59, 130, 246, 0.1),
-          rgba(147, 51, 234, 0.1));
+          rgba(56, 189, 248, 0.1),
+          rgba(125, 211, 252, 0.1));
     }
 
     50% {
       background: linear-gradient(45deg,
-          rgba(59, 130, 246, 0.2),
-          rgba(147, 51, 234, 0.2));
+          rgba(56, 189, 248, 0.2),
+          rgba(125, 211, 252, 0.2));
     }
   }
 
@@ -332,7 +332,7 @@ textarea {
   .chat-button-animated:hover {
     animation: none;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
   }
 
   .chat-button-animated::before {
@@ -341,7 +341,7 @@ textarea {
     inset: -2px;
     border-radius: inherit;
     padding: 2px;
-    background: linear-gradient(45deg, #3b82f6, #9333ea);
+    background: linear-gradient(45deg, #38bdf8, #7dd3fc);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     opacity: 0;

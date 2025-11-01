@@ -965,29 +965,29 @@ export default function Portfolio() {
 
                 {/* Project Links */}
                 <div className="border-t border-gray-100 pt-3 sm:pt-4">
-                  <div className="flex flex-nowrap items-center gap-5 sm:gap-6 px-1">
+                  <div className="flex flex-col sm:flex-row sm:flex-nowrap sm:items-center gap-3 sm:gap-5 sm:gap-6 px-1">
                     <a
                       href={project.links.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
+                      className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
                     >
-                      <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                      <span className="whitespace-nowrap">Demo</span>
+                      <ExternalLink className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                      <span>Demo</span>
                     </a>
                     {project.links.marketing && (
                       <a
                         href={project.links.marketing}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
+                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
                       >
                         {project.links.marketingLabel === "LinkedIn Post" ? (
-                          <FaLinkedin className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                          <FaLinkedin className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                         ) : (
-                          <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                          <Globe className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                         )}
-                        <span className="whitespace-nowrap">
+                        <span>
                           {project.links.marketingLabel ?? "Website"}
                         </span>
                       </a>
@@ -1007,11 +1007,22 @@ export default function Portfolio() {
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
+                      className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
                     >
-                      <FaGithub className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                      <span className="whitespace-nowrap">Source Code</span>
+                      <FaGithub className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                      <span>Source Code</span>
                     </a>
+                    {project.links.event && (
+                      <a
+                        href={project.links.event}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
+                      >
+                        <Calendar className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                        <span>Event</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

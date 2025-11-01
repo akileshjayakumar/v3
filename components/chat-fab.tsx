@@ -9,16 +9,28 @@ import { MessageCircle } from "lucide-react";
  * - Icon-only design, semi-transparent when idle
  * - Appears when scrolling, fades to subtle opacity after inactivity
  * - Moves above footer to avoid blocking content
- * - Hidden on desktop (lg and up) and `/chat` page
+ * - Hidden on desktop (md and up) and `/chat` page - only visible on mobile devices
  */
 export default function ChatFab(): JSX.Element | null {
   const pathname = usePathname();
   const [visible, setVisible] = React.useState(false);
   const [isActive, setIsActive] = React.useState(false);
   const [nearFooter, setNearFooter] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   // Hide on the chat page
   if (pathname === "/chat") return null;
+
+  // Check if device is mobile/tablet (screen width < 768px)
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   React.useEffect(() => {
     let hideTimer: ReturnType<typeof setTimeout> | undefined;
@@ -56,10 +68,13 @@ export default function ChatFab(): JSX.Element | null {
     };
   }, []);
 
+  // Only render on mobile/tablet devices
+  if (!isMobile) return null;
+
   return (
     <div
       className={
-        `lg:hidden fixed right-4 z-40 transition-all duration-500 ease-out ` +
+        `md:hidden fixed right-4 z-40 transition-all duration-500 ease-out ` +
         // Move up when near footer
         (nearFooter ? "bottom-[220px]" : "bottom-6") + " " +
         // Fade in/out based on scroll

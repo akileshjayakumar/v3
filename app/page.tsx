@@ -9,9 +9,10 @@ import {
   FileText,
   MessageCircle,
   X,
+  Calendar,
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { SiNextdotjs, SiVercel } from "react-icons/si";
+import { SiNextdotjs, SiVercel, SiTypescript, SiLangchain, SiPerplexity } from "react-icons/si";
 import { FaMedium } from "react-icons/fa";
 import Image from "next/image";
 
@@ -24,6 +25,7 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [isOpening, setIsOpening] = React.useState(false);
+  const [showAllProjects, setShowAllProjects] = React.useState(false);
 
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -62,10 +64,11 @@ export default function Portfolio() {
       ],
       status: "Cursor Hackathon Singapore 2025 (October 2025)",
       tech: [
-        "TypeScript",
+        "Next.js",
+        "Vercel",
         "TLDraw",
         "Fal.AI",
-        "Google Gemini & Veo 3.1",
+        "Google DeepMind",
         "Groq",
       ],
       links: {
@@ -74,6 +77,7 @@ export default function Portfolio() {
           "https://www.linkedin.com/feed/update/urn:li:activity:7385710583221817344/",
         github: "https://github.com/akileshjayakumar/doodlemorph",
         marketingLabel: "LinkedIn Post",
+        event: "https://luma.com/cursor-hack-sg?tk=Nxhea6",
       },
     },
     {
@@ -94,6 +98,7 @@ export default function Portfolio() {
         github:
           "https://github.com/akileshjayakumar/emergency-gpt-hackathon-2025",
         marketingLabel: "LinkedIn Post",
+        event: "https://luma.com/dn2iqbwu?tk=kM5Qjp",
       },
     },
     {
@@ -377,13 +382,13 @@ export default function Portfolio() {
                   href="https://www.uow.edu.au"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="University of Wollongong website"
                 >
                   <img
                     src="/logos/uow.png"
                     alt="University of Wollongong logo"
-                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -420,13 +425,13 @@ export default function Portfolio() {
                   href="https://www.iras.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="IRAS website"
                 >
                   <img
                     src="/logos/iras.png"
                     alt="IRAS logo"
-                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -456,13 +461,13 @@ export default function Portfolio() {
                   href="https://www.singstat.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="Singapore Department of Statistics website"
                 >
                   <img
                     src="/logos/singstat.png"
                     alt="Singapore Department of Statistics logo"
-                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -492,13 +497,13 @@ export default function Portfolio() {
                   href="https://www.htx.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="HTX website"
                 >
                   <img
                     src="/logos/htx.png"
                     alt="HTX logo"
-                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -528,13 +533,13 @@ export default function Portfolio() {
                   href="https://www.cpf.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-16 h-16 sm:w-20 sm:h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="CPF Board website"
                 >
                   <img
                     src="/logos/cpf.png"
                     alt="CPF Board logo"
-                    className="h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -565,17 +570,11 @@ export default function Portfolio() {
             Writing
           </h2>
           <div className="space-y-6 sm:space-y-8">
-            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm">
               {/* Article Header */}
               <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 mb-5 sm:mb-6">
-                <div className="flex-shrink-0 w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm select-none">
-                  <Image
-                    src="/article-preview.jpg"
-                    alt="Article preview: One Month with Comet"
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white border border-gray-200 flex items-center justify-center shadow-sm select-none">
+                  <FaMedium className="w-6 h-6 sm:w-7 sm:h-7 text-gray-900" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-col gap-1.5 mb-3">
@@ -643,15 +642,20 @@ export default function Portfolio() {
             Projects
           </h2>
           <div className="space-y-6 sm:space-y-8">
-            {projects.map((project) => (
+            {projects.slice(0, showAllProjects ? projects.length : 2).map((project, index) => (
               <div
                 key={project.id}
-                className="bg-white border border-gray-200 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm hover:shadow-md transition-shadow duration-300"
+                className={`bg-white border border-gray-200 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm project-item ${
+                  showAllProjects && index >= 2 ? "project-reveal" : ""
+                }`}
+                style={{
+                  animationDelay: showAllProjects && index >= 2 ? `${(index - 2) * 150}ms` : "0ms",
+                }}
               >
                 {/* Project Header */}
                 <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 mb-5 sm:mb-6">
                   <div
-                    className={`flex-shrink-0 w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl ${project.iconBg} flex items-center justify-center leading-none text-2xl sm:text-4xl shadow-sm select-none`}
+                    className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white border border-gray-200 flex items-center justify-center leading-none text-lg sm:text-xl shadow-sm select-none"
                     aria-hidden="true"
                   >
                     <span className="flex items-center justify-center w-full h-full">
@@ -689,66 +693,273 @@ export default function Portfolio() {
                         {project.description}
                       </p>
                     )}
-                  </div>
-                </div>
 
-                {/* Tech Stack */}
-                <div className="mt-4 sm:mt-5 mb-5 sm:mb-6">
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2.5 mb-1">
-                    {project.tech &&
-                      project.tech.map((tech, idx) => {
-                        // Define tech tool URLs
-                        const techUrls: { [key: string]: string } = {
-                          "Next.js": "https://nextjs.org/",
-                          "Tailwind CSS": "https://tailwindcss.com/",
-                          Groq: "https://groq.com/",
-                          "Vercel AI SDK": "https://sdk.vercel.ai/",
-                          OpenAI: "https://openai.com/",
-                          Docker: "https://www.docker.com/",
-                          LangChain: "https://www.langchain.com/",
-                          "AWS Elastic Beanstalk":
-                            "https://aws.amazon.com/elasticbeanstalk/",
-                          "AWS Amplify": "https://aws.amazon.com/pm/amplify/",
-                          "AWS S3": "https://aws.amazon.com/s3/",
-                          "AWS RDS": "https://aws.amazon.com/rds/",
-                          "Perplexity Spaces": "https://www.perplexity.ai/",
-                          Streamlit: "https://docs.streamlit.io/",
-                          "NVIDIA NIM":
-                            "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
-                          LlamaIndex: "https://www.llamaindex.ai/",
-                          TypeScript: "https://www.typescriptlang.org/",
-                          TLDraw: "https://tldraw.dev/",
-                          "Fal.AI": "https://fal.ai/",
-                          "Google Gemini & Veo 3.1":
-                            "https://deepmind.google/technologies/gemini/",
-                          "Groq AI Inference": "https://groq.com/",
-                        };
-
-                        const url = techUrls[tech];
-
-                        if (url) {
-                          return (
-                            <a
-                              key={idx}
-                              href={url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded-md font-medium hover:bg-gray-200 hover:text-gray-900 transition-all duration-200 border border-gray-200"
-                            >
-                              {tech}
-                            </a>
-                          );
-                        }
-
-                        return (
-                          <span
-                            key={idx}
-                            className="inline-flex items-center justify-center bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-md font-medium"
+                    {/* Tech Logos */}
+                    {project.tech && (
+                      <div className="flex items-center gap-3 mt-4 flex-wrap">
+                        {/* Common tools first */}
+                        {project.tech.includes("Next.js") && (
+                          <a
+                            href="https://nextjs.org/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="Next.js"
                           >
-                            {tech}
-                          </span>
-                        );
-                      })}
+                            <SiNextdotjs className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                          </a>
+                        )}
+                        {(project.tech.includes("Vercel") || project.tech.includes("Vercel AI SDK")) && (
+                          <a
+                            href={project.tech.includes("Vercel AI SDK") ? "https://sdk.vercel.ai/" : "https://vercel.com/"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label={project.tech.includes("Vercel AI SDK") ? "Vercel AI SDK" : "Vercel"}
+                          >
+                            <SiVercel className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                          </a>
+                        )}
+                        {project.tech.includes("TypeScript") && (
+                          <a
+                            href="https://www.typescriptlang.org/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="TypeScript"
+                          >
+                            <SiTypescript className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:scale-110 transition-transform" />
+                          </a>
+                        )}
+                        {project.tech.includes("Tailwind CSS") && (
+                          <a
+                            href="https://tailwindcss.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="Tailwind CSS"
+                          >
+                            <img
+                              src="https://tailwindcss.com/favicon.ico"
+                              alt="Tailwind CSS"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {project.tech.includes("OpenAI") && (
+                          <a
+                            href="https://openai.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="OpenAI"
+                          >
+                            <img
+                              src="https://openai.com/favicon.ico"
+                              alt="OpenAI"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=openai.com";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {project.tech.includes("Docker") && (
+                          <a
+                            href="https://www.docker.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="Docker"
+                          >
+                            <img
+                              src="https://www.docker.com/favicon.ico"
+                              alt="Docker"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=docker.com";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {project.tech.includes("LangChain") && (
+                          <a
+                            href="https://www.langchain.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="LangChain"
+                          >
+                            <SiLangchain className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                          </a>
+                        )}
+                        {(project.tech.includes("AWS Elastic Beanstalk") || project.tech.includes("AWS Amplify") || project.tech.includes("AWS S3") || project.tech.includes("AWS RDS")) && (
+                          <a
+                            href="https://aws.amazon.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="AWS"
+                          >
+                            <img
+                              src="https://aws.amazon.com/favicon.ico"
+                              alt="AWS"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {project.tech.includes("Perplexity Spaces") && (
+                          <a
+                            href="https://www.perplexity.ai/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="Perplexity"
+                          >
+                            <SiPerplexity className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                          </a>
+                        )}
+                        {project.tech.includes("Streamlit") && (
+                          <a
+                            href="https://docs.streamlit.io/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="Streamlit"
+                          >
+                            <img
+                              src="https://docs.streamlit.io/favicon.ico"
+                              alt="Streamlit"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {project.tech.includes("NVIDIA NIM") && (
+                          <a
+                            href="https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="NVIDIA NIM"
+                          >
+                            <img
+                              src="https://www.nvidia.com/favicon.ico"
+                              alt="NVIDIA"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {project.tech.includes("LlamaIndex") && (
+                          <a
+                            href="https://www.llamaindex.ai/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="LlamaIndex"
+                          >
+                            <img
+                              src="https://raw.githubusercontent.com/run-llama/llama_index/main/docs/assets/llama_logo.svg"
+                              alt="LlamaIndex"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.llamaindex.ai/favicon.ico";
+                                if (e.currentTarget.src === "https://www.llamaindex.ai/favicon.ico") {
+                                  e.currentTarget.onerror = null;
+                                  e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=llamaindex.ai";
+                                }
+                              }}
+                            />
+                          </a>
+                        )}
+                        {/* Differentiating tools */}
+                        {project.tech.includes("TLDraw") && (
+                          <a
+                            href="https://tldraw.dev/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="TLDraw"
+                          >
+                            <img
+                              src="https://tldraw.dev/favicon.ico"
+                              alt="TLDraw"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform brightness-0"
+                              style={{ filter: "brightness(0)" }}
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev";
+                                e.currentTarget.style.filter = "none";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {project.tech.includes("Fal.AI") && (
+                          <a
+                            href="https://fal.ai/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="Fal.AI"
+                          >
+                            <img
+                              src="https://fal.ai/favicon.ico"
+                              alt="Fal.AI"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=fal.ai";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {(project.tech.includes("Google DeepMind") || project.tech.includes("Google Gemini & Veo 3.1")) && (
+                          <a
+                            href="https://deepmind.google/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="Google DeepMind"
+                          >
+                            <img
+                              src="https://deepmind.google/favicon.ico"
+                              alt="Google DeepMind"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google";
+                              }}
+                            />
+                          </a>
+                        )}
+                        {(project.tech.includes("Groq") || project.tech.includes("Groq AI Inference")) && (
+                          <a
+                            href="https://groq.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+                            aria-label="Groq"
+                          >
+                            <img
+                              src="https://groq.com/favicon.ico"
+                              alt="Groq"
+                              className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=groq.com";
+                              }}
+                            />
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -781,6 +992,17 @@ export default function Portfolio() {
                         </span>
                       </a>
                     )}
+                    {project.links.event && (
+                      <a
+                        href={project.links.event}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-xs md:text-sm transition-all duration-200"
+                      >
+                        <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                        <span className="whitespace-nowrap">Event</span>
+                      </a>
+                    )}
                     <a
                       href={project.links.github}
                       target="_blank"
@@ -794,6 +1016,18 @@ export default function Portfolio() {
                 </div>
               </div>
             ))}
+            
+            {/* Show More Button */}
+            {!showAllProjects && projects.length > 2 && (
+              <div className="flex justify-center pt-4">
+                <button
+                  onClick={() => setShowAllProjects(true)}
+                  className="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+                >
+                  Show more
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
@@ -856,66 +1090,62 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-        <footer className="w-full mt-12 sm:mt-16 border-t border-gray-100 bg-transparent py-6 sm:py-8">
+        <footer className="w-full mt-12 sm:mt-16 border-t border-gray-200 bg-transparent py-8 sm:py-10">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-5 sm:gap-6">
-              <div className="text-center sm:text-left">
-                <p className="text-sm sm:text-base text-gray-500">
+            <div className="space-y-6">
+              {/* Top Row: Copyright and GitHub Link */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-sm text-gray-500 text-center sm:text-left">
                   &copy; 2025 akilesh jayakumar
                 </p>
-              </div>
-
-              <div className="flex items-center justify-center gap-3 sm:gap-4">
                 <a
                   href="https://github.com/akileshjayakumar?tab=repositories"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white px-3 py-2 text-xs sm:text-sm font-medium shadow-sm hover:bg-black transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors border border-gray-200 rounded-lg bg-white hover:bg-gray-50"
                 >
                   <FaGithub className="h-4 w-4" />
-                  <span>more projects on my github</span>
+                  <span>more projects on github</span>
                 </a>
+              </div>
 
-                <div className="hidden sm:block h-6 w-px bg-gray-200" />
-
-                <div className="flex items-center gap-3">
-                  <span className="text-xs text-gray-500">built with</span>
+              {/* Bottom Row: Built with section */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-gray-100">
+                <span className="text-xs text-gray-500 font-medium">built with</span>
+                <div className="flex items-center gap-2">
                   <a
                     href="https://nextjs.org/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Next.js"
-                    className="group"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white shadow-sm hover:bg-gray-50 transition-colors"
                   >
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-black shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:text-gray-500">
-                      <SiNextdotjs className="h-4 w-4" />
-                    </span>
+                    <SiNextdotjs className="h-4 w-4 text-gray-900" />
                   </a>
                   <a
                     href="https://vercel.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Vercel"
-                    className="group"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white shadow-sm hover:bg-gray-50 transition-colors"
                   >
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-black shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:text-gray-500">
-                      <SiVercel className="h-4 w-4" />
-                    </span>
+                    <SiVercel className="h-4 w-4 text-gray-900" />
                   </a>
                   <a
                     href="https://groq.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Groq"
-                    className="group"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white shadow-sm hover:bg-gray-50 transition-colors"
                   >
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 shadow-sm transition-transform group-hover:-translate-y-0.5">
-                      <img
-                        src="https://groq.com/favicon.ico"
-                        alt="Groq"
-                        className="h-4 w-4 opacity-100 transition-all duration-200 group-hover:grayscale group-hover:opacity-70"
-                      />
-                    </span>
+                    <img
+                      src="https://groq.com/favicon.ico"
+                      alt="Groq"
+                      className="h-4 w-4 object-contain"
+                      onError={(e) => {
+                        e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=groq.com";
+                      }}
+                    />
                   </a>
                 </div>
               </div>

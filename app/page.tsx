@@ -439,13 +439,13 @@ export default function Portfolio() {
                   href="https://www.uow.edu.au"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="University of Wollongong website"
                 >
                   <img
                     src="/logos/uow.png"
                     alt="University of Wollongong logo"
-                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -482,13 +482,13 @@ export default function Portfolio() {
                   href="https://www.iras.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="IRAS website"
                 >
                   <img
                     src="/logos/iras.png"
                     alt="IRAS logo"
-                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -518,13 +518,13 @@ export default function Portfolio() {
                   href="https://www.singstat.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="Singapore Department of Statistics website"
                 >
                   <img
                     src="/logos/singstat.png"
                     alt="Singapore Department of Statistics logo"
-                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -554,13 +554,13 @@ export default function Portfolio() {
                   href="https://www.htx.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="HTX website"
                 >
                   <img
                     src="/logos/htx.png"
                     alt="HTX logo"
-                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -590,13 +590,13 @@ export default function Portfolio() {
                   href="https://www.cpf.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="CPF Board website"
                 >
                   <img
                     src="/logos/cpf.png"
                     alt="CPF Board logo"
-                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -629,18 +629,13 @@ export default function Portfolio() {
           <div className="space-y-6 sm:space-y-8">
             <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm">
               {/* Article Header */}
-              <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 mb-5 sm:mb-6">
-                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white border border-gray-200 flex items-center justify-center shadow-sm select-none">
-                  <FaMedium className="w-6 h-6 sm:w-7 sm:h-7 text-gray-900" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight mb-2">
-                    One Month with Comet: The AI Browser That Changed How I Research
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 font-medium">
-                    October 2025
-                  </p>
-                </div>
+              <div className="mb-5 sm:mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight mb-1.5 sm:mb-2">
+                  One Month with Comet: The AI Browser That Changed How I Research
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-500 font-medium">
+                  October 2025
+                </p>
               </div>
 
               {/* Article Description with Bullet Points */}
@@ -704,7 +699,7 @@ export default function Portfolio() {
                 {/* Project Header */}
                 <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 mb-5 sm:mb-6">
                   <div
-                    className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white border border-gray-200 flex items-center justify-center leading-none text-lg sm:text-xl shadow-sm select-none"
+                    className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center leading-none text-xl sm:text-2xl shadow-sm select-none"
                     aria-hidden="true"
                   >
                     <span className="flex items-center justify-center w-full h-full">
@@ -720,131 +715,6 @@ export default function Portfolio() {
                         {project.status}
                       </p>
                     </div>
-
-                    {/* Tech Logos */}
-                    {project.tech && (
-                      <div className="flex items-center gap-3 mt-4 flex-wrap">
-                        {/* Common Tools */}
-                        {renderTechLogo(
-                          project.tech.includes("Next.js"),
-                          "https://nextjs.org/",
-                          "Next.js",
-                          <SiNextdotjs className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
-                        )}
-                        {(project.tech.includes("Vercel") || project.tech.includes("Vercel AI SDK")) &&
-                          renderTechLogo(
-                            true,
-                            project.tech.includes("Vercel AI SDK") ? "https://sdk.vercel.ai/" : "https://vercel.com/",
-                            project.tech.includes("Vercel AI SDK") ? "Vercel AI SDK" : "Vercel",
-                            <SiVercel className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
-                          )}
-                        {renderTechLogo(
-                          project.tech.includes("TypeScript"),
-                          "https://www.typescriptlang.org/",
-                          "TypeScript",
-                          <SiTypescript className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:scale-110 transition-transform" />
-                        )}
-                        {renderTechLogoImage(
-                          project.tech.includes("Tailwind CSS"),
-                          "https://tailwindcss.com/",
-                          "Tailwind CSS",
-                          "https://tailwindcss.com/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com"
-                        )}
-                        {renderTechLogoImage(
-                          project.tech.includes("OpenAI"),
-                          "https://openai.com/",
-                          "OpenAI",
-                          "https://openai.com/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=openai.com"
-                        )}
-                        {renderTechLogoImage(
-                          project.tech.includes("Docker"),
-                          "https://www.docker.com/",
-                          "Docker",
-                          "https://www.docker.com/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=docker.com"
-                        )}
-                        {renderTechLogo(
-                          project.tech.includes("LangChain"),
-                          "https://www.langchain.com/",
-                          "LangChain",
-                          <SiLangchain className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
-                        )}
-                        {(project.tech.includes("AWS Elastic Beanstalk") ||
-                          project.tech.includes("AWS Amplify") ||
-                          project.tech.includes("AWS S3") ||
-                          project.tech.includes("AWS RDS")) &&
-                          renderTechLogoImage(
-                            true,
-                            "https://aws.amazon.com/",
-                            "AWS",
-                            "https://aws.amazon.com/favicon.ico",
-                            "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
-                          )}
-                        {renderTechLogo(
-                          project.tech.includes("Perplexity Spaces"),
-                          "https://www.perplexity.ai/",
-                          "Perplexity",
-                          <SiPerplexity className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
-                        )}
-                        {renderTechLogoImage(
-                          project.tech.includes("Streamlit"),
-                          "https://docs.streamlit.io/",
-                          "Streamlit",
-                          "https://docs.streamlit.io/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io"
-                        )}
-                        {renderTechLogoImage(
-                          project.tech.includes("NVIDIA NIM"),
-                          "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
-                          "NVIDIA NIM",
-                          "https://www.nvidia.com/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com"
-                        )}
-                        {renderTechLogoImage(
-                          project.tech.includes("LlamaIndex"),
-                          "https://www.llamaindex.ai/",
-                          "LlamaIndex",
-                          "https://raw.githubusercontent.com/run-llama/llama_index/main/docs/assets/llama_logo.svg",
-                          "https://www.llamaindex.ai/favicon.ico"
-                        )}
-
-                        {/* Project-Specific Tools */}
-                        {renderTechLogoImage(
-                          project.tech.includes("TLDraw"),
-                          "https://tldraw.dev/",
-                          "TLDraw",
-                          "https://tldraw.dev/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
-                          { filter: "brightness(0)" }
-                        )}
-                        {renderTechLogoImage(
-                          project.tech.includes("Fal.AI"),
-                          "https://fal.ai/",
-                          "Fal.AI",
-                          "https://fal.ai/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=fal.ai"
-                        )}
-                        {(project.tech.includes("Google DeepMind") ||
-                          project.tech.includes("Google Gemini & Veo 3.1")) &&
-                          renderTechLogoImage(
-                            true,
-                            "https://deepmind.google/",
-                            "Google DeepMind",
-                            "https://deepmind.google/favicon.ico",
-                            "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google"
-                          )}
-                        {(project.tech.includes("Groq") || project.tech.includes("Groq AI Inference")) &&
-                          renderTechLogoImage(
-                            true,
-                            "https://groq.com/",
-                            "Groq",
-                            "https://groq.com/favicon.ico",
-                            "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
-                          )}
-                      </div>
-                    )}
                   </div>
                 </div>
 
@@ -868,6 +738,131 @@ export default function Portfolio() {
                     <p className="text-gray-700 text-sm sm:text-base leading-relaxed text-left">
                       {project.description}
                     </p>
+                  </div>
+                )}
+
+                {/* Tech Logos */}
+                {project.tech && (
+                  <div className="flex items-center gap-3 mb-5 sm:mb-6 flex-wrap">
+                    {/* Common Tools */}
+                    {renderTechLogo(
+                      project.tech.includes("Next.js"),
+                      "https://nextjs.org/",
+                      "Next.js",
+                      <SiNextdotjs className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                    )}
+                    {(project.tech.includes("Vercel") || project.tech.includes("Vercel AI SDK")) &&
+                      renderTechLogo(
+                        true,
+                        project.tech.includes("Vercel AI SDK") ? "https://sdk.vercel.ai/" : "https://vercel.com/",
+                        project.tech.includes("Vercel AI SDK") ? "Vercel AI SDK" : "Vercel",
+                        <SiVercel className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                      )}
+                    {renderTechLogo(
+                      project.tech.includes("TypeScript"),
+                      "https://www.typescriptlang.org/",
+                      "TypeScript",
+                      <SiTypescript className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:scale-110 transition-transform" />
+                    )}
+                    {renderTechLogoImage(
+                      project.tech.includes("Tailwind CSS"),
+                      "https://tailwindcss.com/",
+                      "Tailwind CSS",
+                      "https://tailwindcss.com/favicon.ico",
+                      "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com"
+                    )}
+                    {renderTechLogoImage(
+                      project.tech.includes("OpenAI"),
+                      "https://openai.com/",
+                      "OpenAI",
+                      "https://openai.com/favicon.ico",
+                      "https://www.google.com/s2/favicons?sz=64&domain=openai.com"
+                    )}
+                    {renderTechLogoImage(
+                      project.tech.includes("Docker"),
+                      "https://www.docker.com/",
+                      "Docker",
+                      "https://www.docker.com/favicon.ico",
+                      "https://www.google.com/s2/favicons?sz=64&domain=docker.com"
+                    )}
+                    {renderTechLogo(
+                      project.tech.includes("LangChain"),
+                      "https://www.langchain.com/",
+                      "LangChain",
+                      <SiLangchain className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                    )}
+                    {(project.tech.includes("AWS Elastic Beanstalk") ||
+                      project.tech.includes("AWS Amplify") ||
+                      project.tech.includes("AWS S3") ||
+                      project.tech.includes("AWS RDS")) &&
+                      renderTechLogoImage(
+                        true,
+                        "https://aws.amazon.com/",
+                        "AWS",
+                        "https://aws.amazon.com/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
+                      )}
+                    {renderTechLogo(
+                      project.tech.includes("Perplexity Spaces"),
+                      "https://www.perplexity.ai/",
+                      "Perplexity",
+                      <SiPerplexity className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                    )}
+                    {renderTechLogoImage(
+                      project.tech.includes("Streamlit"),
+                      "https://docs.streamlit.io/",
+                      "Streamlit",
+                      "https://docs.streamlit.io/favicon.ico",
+                      "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io"
+                    )}
+                    {renderTechLogoImage(
+                      project.tech.includes("NVIDIA NIM"),
+                      "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
+                      "NVIDIA NIM",
+                      "https://www.nvidia.com/favicon.ico",
+                      "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com"
+                    )}
+                    {renderTechLogoImage(
+                      project.tech.includes("LlamaIndex"),
+                      "https://www.llamaindex.ai/",
+                      "LlamaIndex",
+                      "https://cdn.brandfetch.io/id6a4s3gXI/w/400/h/400/theme/dark/icon.png",
+                      "https://www.llamaindex.ai/favicon.ico"
+                    )}
+
+                    {/* Project-Specific Tools */}
+                    {renderTechLogoImage(
+                      project.tech.includes("TLDraw"),
+                      "https://tldraw.dev/",
+                      "TLDraw",
+                      "https://tldraw.dev/favicon.ico",
+                      "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
+                      { filter: "brightness(0)" }
+                    )}
+                    {renderTechLogoImage(
+                      project.tech.includes("Fal.AI"),
+                      "https://fal.ai/",
+                      "Fal.AI",
+                      "https://fal.ai/favicon.ico",
+                      "https://www.google.com/s2/favicons?sz=64&domain=fal.ai"
+                    )}
+                    {(project.tech.includes("Google DeepMind") ||
+                      project.tech.includes("Google Gemini & Veo 3.1")) &&
+                      renderTechLogoImage(
+                        true,
+                        "https://deepmind.google/",
+                        "Google DeepMind",
+                        "https://deepmind.google/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google"
+                      )}
+                    {(project.tech.includes("Groq") || project.tech.includes("Groq AI Inference")) &&
+                      renderTechLogoImage(
+                        true,
+                        "https://groq.com/",
+                        "Groq",
+                        "https://groq.com/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
+                      )}
                   </div>
                 )}
 

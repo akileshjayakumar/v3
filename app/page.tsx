@@ -734,7 +734,7 @@ export default function Portfolio() {
                         {(project.tech.includes("Vercel") || project.tech.includes("Vercel AI SDK")) &&
                           renderTechLogo(
                             true,
-                            project.tech.includes("Vercel AI SDK") ? \"https://sdk.vercel.ai/\" : \"https://vercel.com/\",
+                            project.tech.includes("Vercel AI SDK") ? "https://sdk.vercel.ai/" : "https://vercel.com/",
                             project.tech.includes("Vercel AI SDK") ? "Vercel AI SDK" : "Vercel",
                             <SiVercel className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
                           )}

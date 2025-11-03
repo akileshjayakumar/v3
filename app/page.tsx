@@ -923,12 +923,12 @@ export default function Portfolio() {
             {/* Show More Button */}
             {!showAllProjects && projects.length > 2 && (
               <div className="flex justify-center pt-4">
-                <button
+                <Button
                   onClick={() => setShowAllProjects(true)}
                   className="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
                 >
                   Show more
-                </button>
+                </Button>
               </div>
             )}
           </div>

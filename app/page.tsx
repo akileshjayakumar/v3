@@ -10,6 +10,8 @@ import {
   MessageCircle,
   X,
   Calendar,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { SiNextdotjs, SiVercel, SiTypescript, SiLangchain, SiPerplexity } from "react-icons/si";
@@ -920,15 +922,46 @@ export default function Portfolio() {
               </div>
             ))}
             
-            {/* Show More Button */}
-            {!showAllProjects && projects.length > 2 && (
+            {/* Show More / Show Less Buttons */}
+            {projects.length > 2 && (
               <div className="flex justify-center pt-4">
-                <Button
-                  onClick={() => setShowAllProjects(true)}
-                  className="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
-                >
-                  Show more
-                </Button>
+                {!showAllProjects ? (
+                  <Button
+                    onClick={() => setShowAllProjects(true)}
+                    className="group px-6 py-3 sm:px-8 sm:py-3.5 rounded-full font-medium text-sm sm:text-base
+                               bg-white/80 dark:bg-white/10 backdrop-blur-xl border border-white/40 dark:border-white/20
+                               text-gray-900 dark:text-gray-100
+                               hover:bg-white/90 dark:hover:bg-white/20 hover:border-white/60 dark:hover:border-white/30
+                               active:bg-white/70 dark:active:bg-white/15 active:scale-[0.98]
+                               transition-all duration-300 ease-out
+                               shadow-sm hover:shadow-lg
+                               hover:backdrop-blur-2xl
+                               cursor-pointer
+                               flex items-center gap-2
+                               hover:scale-105"
+                  >
+                    <span>show more</span>
+                    <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-y-0.5" />
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => setShowAllProjects(false)}
+                    className="group px-6 py-3 sm:px-8 sm:py-3.5 rounded-full font-medium text-sm sm:text-base
+                               bg-white/80 dark:bg-white/10 backdrop-blur-xl border border-white/40 dark:border-white/20
+                               text-gray-900 dark:text-gray-100
+                               hover:bg-white/90 dark:hover:bg-white/20 hover:border-white/60 dark:hover:border-white/30
+                               active:bg-white/70 dark:active:bg-white/15 active:scale-[0.98]
+                               transition-all duration-300 ease-out
+                               shadow-sm hover:shadow-lg
+                               hover:backdrop-blur-2xl
+                               cursor-pointer
+                               flex items-center gap-2
+                               hover:scale-105"
+                  >
+                    <span>show less</span>
+                    <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
+                  </Button>
+                )}
               </div>
             )}
           </div>

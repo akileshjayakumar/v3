@@ -12,13 +12,29 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
+  ArrowLeft,
+  ArrowRight,
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { SiNextdotjs, SiVercel, SiTypescript, SiLangchain, SiPerplexity } from "react-icons/si";
+import {
+  SiNextdotjs,
+  SiVercel,
+  SiTypescript,
+  SiLangchain,
+  SiPerplexity,
+} from "react-icons/si";
 import { FaMedium } from "react-icons/fa";
 import Image from "next/image";
 
 import AnimatedChatButton from "@/components/animated-chat-button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 import { FaXTwitter } from "react-icons/fa6";
 import React from "react";
@@ -27,7 +43,8 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [isOpening, setIsOpening] = React.useState(false);
-  const [showAllProjects, setShowAllProjects] = React.useState(false);
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
 
   // Helper function to render tech logo with React Icon component
   const renderTechLogo = (
@@ -43,7 +60,7 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+        className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
         aria-label={label}
       >
         {icon}
@@ -67,16 +84,16 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-200 group border border-gray-200"
+        className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
         aria-label={label}
       >
         <img
           src={src}
           alt={label}
-          className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform"
+          className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform duration-300 ease-out"
           style={style}
           onError={(e) => {
-            if (fallbackSrc) {
+            if (fallbackSrc && e.currentTarget.src !== fallbackSrc) {
               e.currentTarget.src = fallbackSrc;
               if (style) e.currentTarget.style.filter = "none";
             }
@@ -110,6 +127,72 @@ export default function Portfolio() {
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  // Carousel state management
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    // Ensure carousel starts at index 0 (DoodleMorph)
+    api.scrollTo(0, false);
+    setCurrent(0);
+
+    const handleSelect = () => {
+      const selectedIndex = api.selectedScrollSnap();
+      const projectCount = projects.length;
+      
+      // Normalize index to handle loop mode
+      let normalizedIndex = selectedIndex % projectCount;
+      if (normalizedIndex < 0) {
+        normalizedIndex = projectCount + normalizedIndex;
+      }
+      
+      // If we're at a clone slide, jump to the real slide
+      if (selectedIndex >= projectCount || selectedIndex < 0) {
+        api.scrollTo(normalizedIndex, true);
+        setCurrent(normalizedIndex);
+        return;
+      }
+      
+      setCurrent(normalizedIndex);
+    };
+
+    api.on("select", handleSelect);
+
+    return () => {
+      api.off("select", handleSelect);
+    };
+  }, [api]);
+
+  // Custom scroll handlers for infinite loop
+  const handleScrollNext = () => {
+    if (!api) return;
+    const currentIndex = api.selectedScrollSnap();
+    const projectCount = projects.length;
+    
+    if (currentIndex === projectCount - 1) {
+      // At last slide, loop to first
+      api.scrollTo(0, false);
+    } else {
+      // Normal next
+      api.scrollNext();
+    }
+  };
+
+  const handleScrollPrev = () => {
+    if (!api) return;
+    const currentIndex = api.selectedScrollSnap();
+    const projectCount = projects.length;
+    
+    if (currentIndex === 0) {
+      // At first slide, loop to last
+      api.scrollTo(projectCount - 1, false);
+    } else {
+      // Normal prev
+      api.scrollPrev();
+    }
+  };
 
   const projects = [
     {
@@ -633,7 +716,8 @@ export default function Portfolio() {
               {/* Article Header */}
               <div className="mb-5 sm:mb-6">
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight mb-1.5 sm:mb-2">
-                  One Month with Comet: The AI Browser That Changed How I Research
+                  One Month with Comet: The AI Browser That Changed How I
+                  Research
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-500 font-medium">
                   October 2025
@@ -645,13 +729,16 @@ export default function Portfolio() {
                 <div className="flex items-start gap-2.5 sm:gap-3 text-gray-700">
                   <div className="mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-gray-400 flex-shrink-0" />
                   <p className="text-sm sm:text-base leading-relaxed flex-1">
-                    My experience using Perplexity's Comet, the AI browser: best features, agentic workflows, and how shortcuts changed my daily browsing.
+                    My experience using Perplexity's Comet, the AI browser: best
+                    features, agentic workflows, and how shortcuts changed my
+                    daily browsing.
                   </p>
                 </div>
                 <div className="flex items-start gap-2.5 sm:gap-3 text-gray-700">
                   <div className="mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-gray-400 flex-shrink-0" />
                   <p className="text-sm sm:text-base leading-relaxed flex-1">
-                    Thoughts on areas for improvement and sample prompts for new users.
+                    Thoughts on areas for improvement and sample prompts for new
+                    users.
                   </p>
                 </div>
               </div>
@@ -687,284 +774,289 @@ export default function Portfolio() {
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8 sm:mb-10">
             Projects
           </h2>
-          <div className="space-y-6 sm:space-y-8">
-            {projects.slice(0, showAllProjects ? projects.length : 2).map((project, index) => (
-              <div
-                key={project.id}
-                className={`bg-white border border-gray-200 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm project-item ${
-                  showAllProjects && index >= 2 ? "project-reveal" : ""
-                }`}
-                style={{
-                  animationDelay: showAllProjects && index >= 2 ? `${(index - 2) * 150}ms` : "0ms",
-                }}
-              >
-                {/* Project Header */}
-                <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 mb-5 sm:mb-6">
-                  <div
-                    className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center leading-none text-xl sm:text-2xl shadow-sm select-none"
-                    aria-hidden="true"
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: false,
+            }}
+            className="w-full max-w-4xl mx-auto relative"
+          >
+            <CarouselContent>
+              {projects.map((project, index) => {
+                return (
+                  <CarouselItem
+                    key={project.id}
+                    className="basis-full carousel-slide"
                   >
-                    <span className="flex items-center justify-center w-full h-full">
-                      {project.icon}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-col gap-1.5 sm:gap-2">
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
-                        {project.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-gray-500 font-medium">
-                        {project.status}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Project Description */}
-                {project.description && Array.isArray(project.description) ? (
-                  <div className="space-y-2.5 sm:space-y-3 mb-5 sm:mb-6">
-                    {project.description.map((point, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-start gap-2.5 sm:gap-3 text-gray-700"
-                      >
-                        <div className="mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-gray-400 flex-shrink-0" />
-                        <p className="text-sm sm:text-base leading-relaxed text-left">
-                          {point}
-                        </p>
+                    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 w-full max-w-4xl mx-auto h-[500px] sm:h-[550px] flex flex-col overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                      {/* Icon and Title Section */}
+                      <div className="flex items-start gap-5 mb-4">
+                        <div
+                          className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 flex items-center justify-center leading-none text-2xl sm:text-3xl shadow-sm select-none"
+                          aria-hidden="true"
+                        >
+                          <span className="flex items-center justify-center w-full h-full">
+                            {project.icon}
+                          </span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5">
+                            {project.title}
+                          </h3>
+                          <p className="text-sm text-gray-500 font-medium">
+                            {project.status}
+                          </p>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="mb-5 sm:mb-6">
-                    <p className="text-gray-700 text-sm sm:text-base leading-relaxed text-left">
-                      {project.description}
-                    </p>
-                  </div>
-                )}
 
-                {/* Tech Logos */}
-                {project.tech && (
-                  <div className="flex items-center gap-3 mb-5 sm:mb-6 flex-wrap">
-                    {/* Common Tools */}
-                    {renderTechLogo(
-                      project.tech.includes("Next.js"),
-                      "https://nextjs.org/",
-                      "Next.js",
-                      <SiNextdotjs className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
-                    )}
-                    {(project.tech.includes("Vercel") || project.tech.includes("Vercel AI SDK")) &&
-                      renderTechLogo(
-                        true,
-                        project.tech.includes("Vercel AI SDK") ? "https://sdk.vercel.ai/" : "https://vercel.com/",
-                        project.tech.includes("Vercel AI SDK") ? "Vercel AI SDK" : "Vercel",
-                        <SiVercel className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
+                      {/* Project Description - Bullet Points */}
+                      {project.description &&
+                      Array.isArray(project.description) ? (
+                        <div className="space-y-3 mb-4 flex-1">
+                          {project.description.map((point, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-start gap-3 text-gray-700"
+                            >
+                              <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-400 flex-shrink-0" />
+                              <p className="text-sm sm:text-base leading-relaxed">
+                                {point}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="mb-4 flex-1">
+                          <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                            {project.description}
+                          </p>
+                        </div>
                       )}
-                    {renderTechLogo(
-                      project.tech.includes("TypeScript"),
-                      "https://www.typescriptlang.org/",
-                      "TypeScript",
-                      <SiTypescript className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:scale-110 transition-transform" />
-                    )}
-                    {renderTechLogoImage(
-                      project.tech.includes("Tailwind CSS"),
-                      "https://tailwindcss.com/",
-                      "Tailwind CSS",
-                      "https://tailwindcss.com/favicon.ico",
-                      "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com"
-                    )}
-                    {renderTechLogoImage(
-                      project.tech.includes("OpenAI"),
-                      "https://openai.com/",
-                      "OpenAI",
-                      "https://openai.com/favicon.ico",
-                      "https://www.google.com/s2/favicons?sz=64&domain=openai.com"
-                    )}
-                    {renderTechLogoImage(
-                      project.tech.includes("Docker"),
-                      "https://www.docker.com/",
-                      "Docker",
-                      "https://www.docker.com/favicon.ico",
-                      "https://www.google.com/s2/favicons?sz=64&domain=docker.com"
-                    )}
-                    {renderTechLogo(
-                      project.tech.includes("LangChain"),
-                      "https://www.langchain.com/",
-                      "LangChain",
-                      <SiLangchain className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
-                    )}
-                    {(project.tech.includes("AWS Elastic Beanstalk") ||
-                      project.tech.includes("AWS Amplify") ||
-                      project.tech.includes("AWS S3") ||
-                      project.tech.includes("AWS RDS")) &&
-                      renderTechLogoImage(
-                        true,
-                        "https://aws.amazon.com/",
-                        "AWS",
-                        "https://aws.amazon.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
-                      )}
-                    {renderTechLogo(
-                      project.tech.includes("Perplexity Spaces"),
-                      "https://www.perplexity.ai/",
-                      "Perplexity",
-                      <SiPerplexity className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform" />
-                    )}
-                    {renderTechLogoImage(
-                      project.tech.includes("Streamlit"),
-                      "https://docs.streamlit.io/",
-                      "Streamlit",
-                      "https://docs.streamlit.io/favicon.ico",
-                      "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io"
-                    )}
-                    {renderTechLogoImage(
-                      project.tech.includes("NVIDIA NIM"),
-                      "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
-                      "NVIDIA NIM",
-                      "https://www.nvidia.com/favicon.ico",
-                      "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com"
-                    )}
-                    {renderTechLogoImage(
-                      project.tech.includes("LlamaIndex"),
-                      "https://www.llamaindex.ai/",
-                      "LlamaIndex",
-                      "https://cdn.brandfetch.io/id6a4s3gXI/w/400/h/400/theme/dark/icon.png",
-                      "https://www.llamaindex.ai/favicon.ico"
-                    )}
 
-                    {/* Project-Specific Tools */}
-                    {renderTechLogoImage(
-                      project.tech.includes("TLDraw"),
-                      "https://tldraw.dev/",
-                      "TLDraw",
-                      "https://tldraw.dev/favicon.ico",
-                      "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
-                      { filter: "brightness(0)" }
-                    )}
-                    {renderTechLogoImage(
-                      project.tech.includes("Fal.AI"),
-                      "https://fal.ai/",
-                      "Fal.AI",
-                      "https://fal.ai/favicon.ico",
-                      "https://www.google.com/s2/favicons?sz=64&domain=fal.ai"
-                    )}
-                    {(project.tech.includes("Google DeepMind") ||
-                      project.tech.includes("Google Gemini & Veo 3.1")) &&
-                      renderTechLogoImage(
-                        true,
-                        "https://deepmind.google/",
-                        "Google DeepMind",
-                        "https://deepmind.google/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google"
+                      {/* Tech Logos */}
+                      {project.tech && (
+                        <div className="flex items-center gap-2.5 mb-4 flex-wrap">
+                          {/* Common Tools */}
+                          {renderTechLogo(
+                        project.tech.includes("Next.js"),
+                        "https://nextjs.org/",
+                        "Next.js",
+                        <SiNextdotjs className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
                       )}
-                    {(project.tech.includes("Groq") || project.tech.includes("Groq AI Inference")) &&
-                      renderTechLogoImage(
-                        true,
-                        "https://groq.com/",
-                        "Groq",
-                        "https://groq.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
-                      )}
-                  </div>
-                )}
-
-                {/* Project Links */}
-                <div className="border-t border-gray-100 pt-3 sm:pt-4">
-                  <div className="flex flex-col sm:flex-row sm:flex-nowrap sm:items-center gap-3 sm:gap-5 sm:gap-6 px-1">
-                    <a
-                      href={project.links.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
-                    >
-                      <ExternalLink className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                      <span>Demo</span>
-                    </a>
-                    {project.links.marketing && (
-                      <a
-                        href={project.links.marketing}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
-                      >
-                        {project.links.marketingLabel === "LinkedIn Post" ? (
-                          <FaLinkedin className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                        ) : (
-                          <Globe className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                      {(project.tech.includes("Vercel") ||
+                        project.tech.includes("Vercel AI SDK")) &&
+                        renderTechLogo(
+                          true,
+                          project.tech.includes("Vercel AI SDK")
+                            ? "https://sdk.vercel.ai/"
+                            : "https://vercel.com/",
+                          project.tech.includes("Vercel AI SDK")
+                            ? "Vercel AI SDK"
+                            : "Vercel",
+                          <SiVercel className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
                         )}
-                        <span>
-                          {project.links.marketingLabel ?? "Website"}
-                        </span>
-                      </a>
-                    )}
-                    {project.links.event && (
-                      <a
-                        href={project.links.event}
+                      {renderTechLogo(
+                        project.tech.includes("TypeScript"),
+                        "https://www.typescriptlang.org/",
+                        "TypeScript",
+                        <SiTypescript className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                      )}
+                      {renderTechLogoImage(
+                        project.tech.includes("Tailwind CSS"),
+                        "https://tailwindcss.com/",
+                        "Tailwind CSS",
+                        "https://tailwindcss.com/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com"
+                      )}
+                      {renderTechLogoImage(
+                        project.tech.includes("OpenAI"),
+                        "https://openai.com/",
+                        "OpenAI",
+                        "https://openai.com/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=openai.com"
+                      )}
+                      {renderTechLogoImage(
+                        project.tech.includes("Docker"),
+                        "https://www.docker.com/",
+                        "Docker",
+                        "https://www.docker.com/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=docker.com"
+                      )}
+                      {renderTechLogo(
+                        project.tech.includes("LangChain"),
+                        "https://www.langchain.com/",
+                        "LangChain",
+                        <SiLangchain className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                      )}
+                      {(project.tech.includes("AWS Elastic Beanstalk") ||
+                        project.tech.includes("AWS Amplify") ||
+                        project.tech.includes("AWS S3") ||
+                        project.tech.includes("AWS RDS")) &&
+                        renderTechLogoImage(
+                          true,
+                          "https://aws.amazon.com/",
+                          "AWS",
+                          "https://aws.amazon.com/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
+                        )}
+                      {renderTechLogo(
+                        project.tech.includes("Perplexity Spaces"),
+                        "https://www.perplexity.ai/",
+                        "Perplexity",
+                        <SiPerplexity className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                      )}
+                      {renderTechLogoImage(
+                        project.tech.includes("Streamlit"),
+                        "https://docs.streamlit.io/",
+                        "Streamlit",
+                        "https://docs.streamlit.io/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io"
+                      )}
+                      {renderTechLogoImage(
+                        project.tech.includes("NVIDIA NIM"),
+                        "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
+                        "NVIDIA NIM",
+                        "https://www.nvidia.com/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com"
+                      )}
+                      {renderTechLogoImage(
+                        project.tech.includes("LlamaIndex"),
+                        "https://www.llamaindex.ai/",
+                        "LlamaIndex",
+                        "https://cdn.brandfetch.io/id6a4s3gXI/w/400/h/400/theme/dark/icon.png",
+                        "https://www.llamaindex.ai/favicon.ico"
+                      )}
+
+                      {/* Project-Specific Tools */}
+                      {renderTechLogoImage(
+                        project.tech.includes("TLDraw"),
+                        "https://tldraw.dev/",
+                        "TLDraw",
+                        "https://tldraw.dev/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
+                        { filter: "brightness(0)" }
+                      )}
+                      {renderTechLogoImage(
+                        project.tech.includes("Fal.AI"),
+                        "https://fal.ai/",
+                        "Fal.AI",
+                        "https://fal.ai/favicon.ico",
+                        "https://www.google.com/s2/favicons?sz=64&domain=fal.ai"
+                      )}
+                      {(project.tech.includes("Google DeepMind") ||
+                        project.tech.includes("Google Gemini & Veo 3.1")) &&
+                        renderTechLogoImage(
+                          true,
+                          "https://deepmind.google/",
+                          "Google DeepMind",
+                          "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google",
+                          "https://deepmind.google/favicon.ico"
+                        )}
+                      {(project.tech.includes("Groq") ||
+                        project.tech.includes("Groq AI Inference")) &&
+                        renderTechLogoImage(
+                          true,
+                          "https://groq.com/",
+                          "Groq",
+                          "https://groq.com/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
+                        )}
+                        </div>
+                      )}
+
+                      {/* Project Links */}
+                      <div className="border-t border-gray-200 pt-4 mt-auto">
+                        <div className="flex flex-wrap items-center gap-4 sm:gap-5">
+                          <a
+                        href={project.links.demo}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
                       >
-                        <Calendar className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                        <span className="whitespace-nowrap">Event</span>
+                        <ExternalLink className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                        <span>Demo</span>
                       </a>
-                    )}
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
-                    >
-                      <FaGithub className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                      <span>Source Code</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
+                      {project.links.marketing && (
+                        <a
+                          href={project.links.marketing}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
+                        >
+                          {project.links.marketingLabel === "LinkedIn Post" ? (
+                            <FaLinkedin className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                          ) : (
+                            <Globe className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                          )}
+                          <span>
+                            {project.links.marketingLabel ?? "Website"}
+                          </span>
+                        </a>
+                      )}
+                      {project.links.event && (
+                        <a
+                          href={project.links.event}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
+                        >
+                          <Calendar className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                          <span className="whitespace-nowrap">Event</span>
+                        </a>
+                      )}
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
+                      >
+                        <FaGithub className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                        <span>Source Code</span>
+                      </a>
+                        </div>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
             
-            {/* Show More / Show Less Buttons */}
-            {projects.length > 2 && (
-              <div className="flex justify-center pt-4">
-                {!showAllProjects ? (
-                  <Button
-                    onClick={() => setShowAllProjects(true)}
-                    className="group px-6 py-3 sm:px-8 sm:py-3.5 rounded-full font-medium text-sm sm:text-base
-                               bg-white/80 dark:bg-white/10 backdrop-blur-xl border border-white/40 dark:border-white/20
-                               text-gray-900 dark:text-gray-100
-                               hover:bg-white/90 dark:hover:bg-white/20 hover:border-white/60 dark:hover:border-white/30
-                               active:bg-white/70 dark:active:bg-white/15 active:scale-[0.98]
-                               transition-all duration-300 ease-out
-                               shadow-sm hover:shadow-lg
-                               hover:backdrop-blur-2xl
-                               cursor-pointer
-                               flex items-center gap-2
-                               hover:scale-105"
-                  >
-                    <span>show more</span>
-                    <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-y-0.5" />
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => setShowAllProjects(false)}
-                    className="group px-6 py-3 sm:px-8 sm:py-3.5 rounded-full font-medium text-sm sm:text-base
-                               bg-white/80 dark:bg-white/10 backdrop-blur-xl border border-white/40 dark:border-white/20
-                               text-gray-900 dark:text-gray-100
-                               hover:bg-white/90 dark:hover:bg-white/20 hover:border-white/60 dark:hover:border-white/30
-                               active:bg-white/70 dark:active:bg-white/15 active:scale-[0.98]
-                               transition-all duration-300 ease-out
-                               shadow-sm hover:shadow-lg
-                               hover:backdrop-blur-2xl
-                               cursor-pointer
-                               flex items-center gap-2
-                               hover:scale-105"
-                  >
-                    <span>show less</span>
-                    <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
-                  </Button>
-                )}
-              </div>
-            )}
-          </div>
+            {/* Custom Navigation Buttons with proper icons */}
+            <button
+              onClick={handleScrollPrev}
+              className="carousel-nav-button hidden md:flex absolute -left-12 lg:-left-16 top-1/2 -translate-y-1/2 h-11 w-11 lg:h-12 lg:w-12 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 z-10 backdrop-blur-sm flex items-center justify-center"
+              aria-label="Previous slide"
+            >
+              <ArrowLeft className="h-5 w-5 text-gray-700" />
+            </button>
+            
+            <button
+              onClick={handleScrollNext}
+              className="carousel-nav-button hidden md:flex absolute -right-12 lg:-right-16 top-1/2 -translate-y-1/2 h-11 w-11 lg:h-12 lg:w-12 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 z-10 backdrop-blur-sm flex items-center justify-center"
+              aria-label="Next slide"
+            >
+              <ArrowRight className="h-5 w-5 text-gray-700" />
+            </button>
+            
+            {/* Mobile and tablet navigation buttons */}
+            <div className="flex justify-center gap-4 mt-8 md:hidden">
+              <button
+                onClick={handleScrollPrev}
+                className="carousel-nav-button relative h-11 w-11 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+                aria-label="Previous slide"
+              >
+                <ArrowLeft className="h-5 w-5 text-gray-700" />
+              </button>
+              <button
+                onClick={handleScrollNext}
+                className="carousel-nav-button relative h-11 w-11 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+                aria-label="Next slide"
+              >
+                <ArrowRight className="h-5 w-5 text-gray-700" />
+              </button>
+            </div>
+          </Carousel>
         </section>
 
         <section id="contact" className="mt-16 sm:mt-20">
@@ -1047,7 +1139,9 @@ export default function Portfolio() {
 
               {/* Bottom Row: Built with section */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-gray-100">
-                <span className="text-xs text-gray-500 font-medium">built with</span>
+                <span className="text-xs text-gray-500 font-medium">
+                  built with
+                </span>
                 <div className="flex items-center gap-2">
                   <a
                     href="https://nextjs.org/"
@@ -1079,7 +1173,8 @@ export default function Portfolio() {
                       alt="Groq"
                       className="h-4 w-4 object-contain"
                       onError={(e) => {
-                        e.currentTarget.src = "https://www.google.com/s2/favicons?sz=64&domain=groq.com";
+                        e.currentTarget.src =
+                          "https://www.google.com/s2/favicons?sz=64&domain=groq.com";
                       }}
                     />
                   </a>

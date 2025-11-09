@@ -379,4 +379,25 @@ textarea {
     animation: projectReveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     opacity: 0;
   }
+
+  /* 3D Carousel Perspective */
+  .carousel-3d-container {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+  }
+
+  /* Fix carousel button hover - prevent translate-y movement */
+  .carousel-nav-button:hover {
+    transform: translateY(0) !important;
+  }
+  
+  /* Preserve centering transform for positioned buttons */
+  .carousel-nav-button.absolute:hover {
+    transform: translateY(-50%) !important;
+  }
+
+  /* Simple carousel - one project at a time, no 3D effects */
+  .carousel-slide {
+    transition: opacity 0.3s ease-in-out;
+  }
 }

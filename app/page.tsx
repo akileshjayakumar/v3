@@ -60,7 +60,7 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
+        className="inline-flex items-center justify-center w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
         aria-label={label}
       >
         {icon}
@@ -84,13 +84,13 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
+        className="inline-flex items-center justify-center w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
         aria-label={label}
       >
         <img
           src={src}
           alt={label}
-          className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform duration-300 ease-out"
+          className="w-4 h-4 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform duration-300 ease-out"
           style={style}
           onError={(e) => {
             if (fallbackSrc && e.currentTarget.src !== fallbackSrc) {
@@ -141,20 +141,20 @@ export default function Portfolio() {
     const handleSelect = () => {
       const selectedIndex = api.selectedScrollSnap();
       const projectCount = projects.length;
-      
+
       // Normalize index to handle loop mode
       let normalizedIndex = selectedIndex % projectCount;
       if (normalizedIndex < 0) {
         normalizedIndex = projectCount + normalizedIndex;
       }
-      
+
       // If we're at a clone slide, jump to the real slide
       if (selectedIndex >= projectCount || selectedIndex < 0) {
         api.scrollTo(normalizedIndex, true);
         setCurrent(normalizedIndex);
         return;
       }
-      
+
       setCurrent(normalizedIndex);
     };
 
@@ -170,7 +170,7 @@ export default function Portfolio() {
     if (!api) return;
     const currentIndex = api.selectedScrollSnap();
     const projectCount = projects.length;
-    
+
     if (currentIndex === projectCount - 1) {
       // At last slide, loop to first
       api.scrollTo(0, false);
@@ -184,7 +184,7 @@ export default function Portfolio() {
     if (!api) return;
     const currentIndex = api.selectedScrollSnap();
     const projectCount = projects.length;
-    
+
     if (currentIndex === 0) {
       // At first slide, loop to last
       api.scrollTo(projectCount - 1, false);
@@ -548,7 +548,7 @@ export default function Portfolio() {
                         University of Wollongong
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
-                        Bachelor of Computer Science in Cyber Security
+                        Bachelor of Computer Science, Cyber Security
                       </p>
                     </div>
                     <span className="text-sm text-gray-500 mt-1 sm:mt-0 whitespace-nowrap">
@@ -794,7 +794,7 @@ export default function Portfolio() {
                     key={project.id}
                     className="basis-full carousel-slide"
                   >
-                    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 w-full max-w-4xl mx-auto min-w-0 h-[650px] sm:h-[550px] flex flex-col overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 w-full max-w-4xl mx-auto min-w-0 h-[750px] sm:h-[550px] flex flex-col overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                       {/* Icon and Title Section */}
                       <div className="flex flex-col sm:flex-row items-start gap-5 mb-4">
                         <div
@@ -806,15 +806,15 @@ export default function Portfolio() {
                           </span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5 sm:mb-2">
+                          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5 sm:mb-2 break-words">
                             {project.title}
                           </h3>
                           {project.date && (
-                            <p className="text-xs sm:text-sm text-gray-500 font-medium mb-1.5">
+                            <p className="text-xs sm:text-sm text-gray-500 font-medium mb-1.5 break-words">
                               {project.date}
                             </p>
                           )}
-                          <p className="text-sm text-gray-500 font-medium">
+                          <p className="text-sm text-gray-500 font-medium break-words">
                             {project.status}
                           </p>
                         </div>
@@ -823,22 +823,22 @@ export default function Portfolio() {
                       {/* Project Description - Bullet Points */}
                       {project.description &&
                       Array.isArray(project.description) ? (
-                        <div className="space-y-3 mb-4 flex-1">
+                        <div className="space-y-3 mb-4 flex-1 overflow-y-auto min-h-0">
                           {project.description.map((point, idx) => (
                             <div
                               key={idx}
                               className="flex items-start gap-3 text-gray-700"
                             >
                               <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-400 flex-shrink-0" />
-                              <p className="text-sm sm:text-base leading-relaxed">
+                              <p className="text-sm sm:text-base leading-relaxed break-words">
                                 {point}
                               </p>
                             </div>
                           ))}
                         </div>
                       ) : (
-                        <div className="mb-4 flex-1">
-                          <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                        <div className="mb-4 flex-1 overflow-y-auto min-h-0">
+                          <p className="text-sm sm:text-base text-gray-700 leading-relaxed break-words">
                             {project.description}
                           </p>
                         </div>
@@ -846,184 +846,185 @@ export default function Portfolio() {
 
                       {/* Tech Logos */}
                       {project.tech && (
-                        <div className="flex items-center gap-2.5 mb-4 flex-wrap">
+                        <div className="flex items-center gap-1.5 sm:gap-2.5 mb-3 sm:mb-4 flex-wrap flex-shrink-0">
                           {/* Common Tools */}
                           {renderTechLogo(
-                        project.tech.includes("Next.js"),
-                        "https://nextjs.org/",
-                        "Next.js",
-                        <SiNextdotjs className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
-                      )}
-                      {(project.tech.includes("Vercel") ||
-                        project.tech.includes("Vercel AI SDK")) &&
-                        renderTechLogo(
-                          true,
-                          project.tech.includes("Vercel AI SDK")
-                            ? "https://sdk.vercel.ai/"
-                            : "https://vercel.com/",
-                          project.tech.includes("Vercel AI SDK")
-                            ? "Vercel AI SDK"
-                            : "Vercel",
-                          <SiVercel className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
-                        )}
-                      {renderTechLogo(
-                        project.tech.includes("TypeScript"),
-                        "https://www.typescriptlang.org/",
-                        "TypeScript",
-                        <SiTypescript className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:scale-110 transition-transform duration-300 ease-out" />
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Tailwind CSS"),
-                        "https://tailwindcss.com/",
-                        "Tailwind CSS",
-                        "https://tailwindcss.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com"
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("OpenAI"),
-                        "https://openai.com/",
-                        "OpenAI",
-                        "https://openai.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=openai.com"
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Docker"),
-                        "https://www.docker.com/",
-                        "Docker",
-                        "https://www.docker.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=docker.com"
-                      )}
-                      {renderTechLogo(
-                        project.tech.includes("LangChain"),
-                        "https://www.langchain.com/",
-                        "LangChain",
-                        <SiLangchain className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
-                      )}
-                      {(project.tech.includes("AWS Elastic Beanstalk") ||
-                        project.tech.includes("AWS Amplify") ||
-                        project.tech.includes("AWS S3") ||
-                        project.tech.includes("AWS RDS")) &&
-                        renderTechLogoImage(
-                          true,
-                          "https://aws.amazon.com/",
-                          "AWS",
-                          "https://aws.amazon.com/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
-                        )}
-                      {renderTechLogo(
-                        project.tech.includes("Perplexity Spaces"),
-                        "https://www.perplexity.ai/",
-                        "Perplexity",
-                        <SiPerplexity className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Streamlit"),
-                        "https://docs.streamlit.io/",
-                        "Streamlit",
-                        "https://docs.streamlit.io/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io"
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("NVIDIA NIM"),
-                        "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
-                        "NVIDIA NIM",
-                        "https://www.nvidia.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com"
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("LlamaIndex"),
-                        "https://www.llamaindex.ai/",
-                        "LlamaIndex",
-                        "https://cdn.brandfetch.io/id6a4s3gXI/w/400/h/400/theme/dark/icon.png",
-                        "https://www.llamaindex.ai/favicon.ico"
-                      )}
+                            project.tech.includes("Next.js"),
+                            "https://nextjs.org/",
+                            "Next.js",
+                            <SiNextdotjs className="w-4 h-4 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                          )}
+                          {(project.tech.includes("Vercel") ||
+                            project.tech.includes("Vercel AI SDK")) &&
+                            renderTechLogo(
+                              true,
+                              project.tech.includes("Vercel AI SDK")
+                                ? "https://sdk.vercel.ai/"
+                                : "https://vercel.com/",
+                              project.tech.includes("Vercel AI SDK")
+                                ? "Vercel AI SDK"
+                                : "Vercel",
+                              <SiVercel className="w-4 h-4 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                            )}
+                          {renderTechLogo(
+                            project.tech.includes("TypeScript"),
+                            "https://www.typescriptlang.org/",
+                            "TypeScript",
+                            <SiTypescript className="w-4 h-4 sm:w-6 sm:h-6 text-blue-600 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                          )}
+                          {renderTechLogoImage(
+                            project.tech.includes("Tailwind CSS"),
+                            "https://tailwindcss.com/",
+                            "Tailwind CSS",
+                            "https://tailwindcss.com/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com"
+                          )}
+                          {renderTechLogoImage(
+                            project.tech.includes("OpenAI"),
+                            "https://openai.com/",
+                            "OpenAI",
+                            "https://openai.com/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=openai.com"
+                          )}
+                          {renderTechLogoImage(
+                            project.tech.includes("Docker"),
+                            "https://www.docker.com/",
+                            "Docker",
+                            "https://www.docker.com/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=docker.com"
+                          )}
+                          {renderTechLogo(
+                            project.tech.includes("LangChain"),
+                            "https://www.langchain.com/",
+                            "LangChain",
+                            <SiLangchain className="w-4 h-4 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                          )}
+                          {(project.tech.includes("AWS Elastic Beanstalk") ||
+                            project.tech.includes("AWS Amplify") ||
+                            project.tech.includes("AWS S3") ||
+                            project.tech.includes("AWS RDS")) &&
+                            renderTechLogoImage(
+                              true,
+                              "https://aws.amazon.com/",
+                              "AWS",
+                              "https://aws.amazon.com/favicon.ico",
+                              "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
+                            )}
+                          {renderTechLogo(
+                            project.tech.includes("Perplexity Spaces"),
+                            "https://www.perplexity.ai/",
+                            "Perplexity",
+                            <SiPerplexity className="w-4 h-4 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                          )}
+                          {renderTechLogoImage(
+                            project.tech.includes("Streamlit"),
+                            "https://docs.streamlit.io/",
+                            "Streamlit",
+                            "https://docs.streamlit.io/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io"
+                          )}
+                          {renderTechLogoImage(
+                            project.tech.includes("NVIDIA NIM"),
+                            "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
+                            "NVIDIA NIM",
+                            "https://www.nvidia.com/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com"
+                          )}
+                          {renderTechLogoImage(
+                            project.tech.includes("LlamaIndex"),
+                            "https://www.llamaindex.ai/",
+                            "LlamaIndex",
+                            "https://cdn.brandfetch.io/id6a4s3gXI/w/400/h/400/theme/dark/icon.png",
+                            "https://www.llamaindex.ai/favicon.ico"
+                          )}
 
-                      {/* Project-Specific Tools */}
-                      {renderTechLogoImage(
-                        project.tech.includes("TLDraw"),
-                        "https://tldraw.dev/",
-                        "TLDraw",
-                        "https://tldraw.dev/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
-                        { filter: "brightness(0)" }
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Fal.AI"),
-                        "https://fal.ai/",
-                        "Fal.AI",
-                        "https://fal.ai/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=fal.ai"
-                      )}
-                      {(project.tech.includes("Google DeepMind") ||
-                        project.tech.includes("Google Gemini & Veo 3.1")) &&
-                        renderTechLogoImage(
-                          true,
-                          "https://deepmind.google/",
-                          "Google DeepMind",
-                          "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google",
-                          "https://deepmind.google/favicon.ico"
-                        )}
-                      {(project.tech.includes("Groq") ||
-                        project.tech.includes("Groq AI Inference")) &&
-                        renderTechLogoImage(
-                          true,
-                          "https://groq.com/",
-                          "Groq",
-                          "https://groq.com/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
-                        )}
+                          {/* Project-Specific Tools */}
+                          {renderTechLogoImage(
+                            project.tech.includes("TLDraw"),
+                            "https://tldraw.dev/",
+                            "TLDraw",
+                            "https://tldraw.dev/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
+                            { filter: "brightness(0)" }
+                          )}
+                          {renderTechLogoImage(
+                            project.tech.includes("Fal.AI"),
+                            "https://fal.ai/",
+                            "Fal.AI",
+                            "https://fal.ai/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=fal.ai"
+                          )}
+                          {(project.tech.includes("Google DeepMind") ||
+                            project.tech.includes("Google Gemini & Veo 3.1")) &&
+                            renderTechLogoImage(
+                              true,
+                              "https://deepmind.google/",
+                              "Google DeepMind",
+                              "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google",
+                              "https://deepmind.google/favicon.ico"
+                            )}
+                          {(project.tech.includes("Groq") ||
+                            project.tech.includes("Groq AI Inference")) &&
+                            renderTechLogoImage(
+                              true,
+                              "https://groq.com/",
+                              "Groq",
+                              "https://groq.com/favicon.ico",
+                              "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
+                            )}
                         </div>
                       )}
 
                       {/* Project Links */}
-                      <div className="border-t border-gray-200 pt-4 mt-auto">
+                      <div className="border-t border-gray-200 pt-4 mt-auto flex-shrink-0">
                         <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-5">
                           <a
-                        href={project.links.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
-                      >
-                        <ExternalLink className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                        <span>Demo</span>
-                      </a>
-                      {project.links.marketing && (
-                        <a
-                          href={project.links.marketing}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
-                        >
-                          {project.links.marketingLabel === "LinkedIn Post" ? (
-                            <FaLinkedin className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                          ) : (
-                            <Globe className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                            href={project.links.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
+                          >
+                            <ExternalLink className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                            <span>Demo</span>
+                          </a>
+                          {project.links.marketing && (
+                            <a
+                              href={project.links.marketing}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
+                            >
+                              {project.links.marketingLabel ===
+                              "LinkedIn Post" ? (
+                                <FaLinkedin className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                              ) : (
+                                <Globe className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                              )}
+                              <span>
+                                {project.links.marketingLabel ?? "Website"}
+                              </span>
+                            </a>
                           )}
-                          <span>
-                            {project.links.marketingLabel ?? "Website"}
-                          </span>
-                        </a>
-                      )}
-                      {project.links.event && (
-                        <a
-                          href={project.links.event}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
-                        >
-                          <Calendar className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                          <span className="whitespace-nowrap">Event</span>
-                        </a>
-                      )}
-                      <a
-                        href={project.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
-                      >
-                        <FaGithub className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                        <span>Source Code</span>
-                      </a>
+                          {project.links.event && (
+                            <a
+                              href={project.links.event}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
+                            >
+                              <Calendar className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                              <span className="whitespace-nowrap">Event</span>
+                            </a>
+                          )}
+                          <a
+                            href={project.links.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
+                          >
+                            <FaGithub className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                            <span>Source Code</span>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -1031,7 +1032,7 @@ export default function Portfolio() {
                 );
               })}
             </CarouselContent>
-            
+
             {/* Custom Navigation Buttons with proper icons */}
             <button
               onClick={handleScrollPrev}
@@ -1040,7 +1041,7 @@ export default function Portfolio() {
             >
               <ArrowLeft className="h-5 w-5 text-gray-700" />
             </button>
-            
+
             <button
               onClick={handleScrollNext}
               className="carousel-nav-button hidden md:flex absolute -right-12 lg:-right-16 top-1/2 -translate-y-1/2 h-11 w-11 lg:h-12 lg:w-12 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 z-10 backdrop-blur-sm flex items-center justify-center"
@@ -1048,7 +1049,7 @@ export default function Portfolio() {
             >
               <ArrowRight className="h-5 w-5 text-gray-700" />
             </button>
-            
+
             {/* Mobile and tablet navigation buttons */}
             <div className="flex justify-center gap-4 mt-8 md:hidden">
               <button

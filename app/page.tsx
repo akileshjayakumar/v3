@@ -204,7 +204,8 @@ export default function Portfolio() {
         "Built an app that transforms your doodles/sketches into creative images, character designs, and cinematic animations.",
         "Used fal for media generation and Groq for fast prompt enhancements.",
       ],
-      status: "Cursor Hackathon Singapore 2025 (October 2025)",
+      date: "October 2025",
+      status: "Cursor Hackathon Singapore 2025",
       tech: [
         "Next.js",
         "Vercel",
@@ -231,7 +232,8 @@ export default function Portfolio() {
         "Upload a hawker centre menu photo to extract all dishes and prices.",
         "Get healthy and value picks, and chat to explore the menu.",
       ],
-      status: "EMERGENCY GPT HACKATHON 2025 (August 2025)",
+      date: "August 2025",
+      status: "EMERGENCY GPT HACKATHON 2025",
       tech: ["Next.js", "Tailwind CSS", "Groq", "Vercel AI SDK"],
       links: {
         demo: "https://emergency-gpt-hackathon-2025.vercel.app/",
@@ -252,7 +254,8 @@ export default function Portfolio() {
         "Built a cloud-based multimodal GenAI platform to analyse customer emotions, sentiment, and key topics.",
         "Deployed on AWS with RESTful APIs for automated, scalable analysis tasks across uploaded files and chat data.",
       ],
-      status: "UOW Final Year Capstone Project (April 2025 - September 2025)",
+      date: "April 2025 - September 2025",
+      status: "UOW Final Year Capstone Project",
       tech: [
         "OpenAI",
         "Next.js",
@@ -279,7 +282,8 @@ export default function Portfolio() {
         "A high-precision assistant that rewrites and generates prompts and prompt templates.",
         "Runs inside Perplexity Spaces and generates prompts from descriptions and produces prompt templates for devs using LangChain and LlamaIndex.",
       ],
-      status: "Side Project (April 2025)",
+      date: "April 2025",
+      status: "Side Project",
       tech: ["Perplexity Spaces"],
       links: {
         demo: "https://www.perplexity.ai/spaces/prompttacular-kWSdzdeGRMyTLgnG5NmzFg",
@@ -298,7 +302,8 @@ export default function Portfolio() {
         "Interactive AI tutor application that processes PDFs, PowerPoint files, and images for multimodal learning.",
         "Features speech-to-text, text-to-speech capabilities, and support for accessibility.",
       ],
-      status: "NES CatalystX Hackathon 2024 (October 2024)",
+      date: "October 2024",
+      status: "NES CatalystX Hackathon 2024",
       tech: ["Streamlit", "NVIDIA NIM", "LlamaIndex"],
       links: {
         demo: "https://eduxcatalystx2024.streamlit.app/",
@@ -789,9 +794,9 @@ export default function Portfolio() {
                     key={project.id}
                     className="basis-full carousel-slide"
                   >
-                    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 w-full max-w-4xl mx-auto h-[500px] sm:h-[550px] flex flex-col overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 w-full max-w-4xl mx-auto min-w-0 h-[650px] sm:h-[550px] flex flex-col overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                       {/* Icon and Title Section */}
-                      <div className="flex items-start gap-5 mb-4">
+                      <div className="flex flex-col sm:flex-row items-start gap-5 mb-4">
                         <div
                           className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 flex items-center justify-center leading-none text-2xl sm:text-3xl shadow-sm select-none"
                           aria-hidden="true"
@@ -801,9 +806,14 @@ export default function Portfolio() {
                           </span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5">
+                          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5 sm:mb-2">
                             {project.title}
                           </h3>
+                          {project.date && (
+                            <p className="text-xs sm:text-sm text-gray-500 font-medium mb-1.5">
+                              {project.date}
+                            </p>
+                          )}
                           <p className="text-sm text-gray-500 font-medium">
                             {project.status}
                           </p>
@@ -967,12 +977,12 @@ export default function Portfolio() {
 
                       {/* Project Links */}
                       <div className="border-t border-gray-200 pt-4 mt-auto">
-                        <div className="flex flex-wrap items-center gap-4 sm:gap-5">
+                        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-5">
                           <a
                         href={project.links.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
+                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
                       >
                         <ExternalLink className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                         <span>Demo</span>
@@ -982,7 +992,7 @@ export default function Portfolio() {
                           href={project.links.marketing}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
+                          className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
                         >
                           {project.links.marketingLabel === "LinkedIn Post" ? (
                             <FaLinkedin className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
@@ -999,7 +1009,7 @@ export default function Portfolio() {
                           href={project.links.event}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
+                          className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
                         >
                           <Calendar className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                           <span className="whitespace-nowrap">Event</span>
@@ -1009,7 +1019,7 @@ export default function Portfolio() {
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1.5 sm:py-0"
+                        className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
                       >
                         <FaGithub className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                         <span>Source Code</span>

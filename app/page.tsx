@@ -14,6 +14,10 @@ import {
   ChevronUp,
   ArrowLeft,
   ArrowRight,
+  GraduationCap,
+  Briefcase,
+  BookOpen,
+  FolderKanban,
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import {
@@ -35,6 +39,12 @@ import {
   CarouselNext,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { FaXTwitter } from "react-icons/fa6";
 import React from "react";
@@ -320,12 +330,78 @@ export default function Portfolio() {
     { label: "projects", href: "#projects" },
     { label: "contact", href: "#contact" },
     { label: "resume", href: "/cv" },
-    { label: "chat", href: "/chat" },
   ];
+  
+  const chatItem = { label: "chat", href: "/chat" };
+
+  // Helper function to get icon component for nav items
+  const getNavIcon = (label: string) => {
+    const iconProps = { className: "h-6 w-6 text-gray-800" };
+    switch (label) {
+      case "education":
+        return <GraduationCap {...iconProps} />;
+      case "experience":
+        return <Briefcase {...iconProps} />;
+      case "writing":
+        return <BookOpen {...iconProps} />;
+      case "projects":
+        return <FolderKanban {...iconProps} />;
+      case "contact":
+        return <Mail {...iconProps} />;
+      case "resume":
+        return <FileText {...iconProps} />;
+      case "chat":
+        return <MessageCircle {...iconProps} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      {/* Fixed Desktop Icon Navigation Sidebar */}
+      <TooltipProvider>
+        <nav className="hidden sm:flex fixed left-4 top-1/2 -translate-y-1/2 z-40">
+          <div className="flex flex-col space-y-2 bg-white/95 backdrop-blur-sm rounded-full px-3 py-4 border border-gray-200/50 shadow-lg">
+            {navItems.filter((item) => item.label !== "chat").map((item) => {
+              const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+                if (!item.href.startsWith("#")) return;
+                e.preventDefault();
+                const target = document.querySelector(item.href);
+                if (target) {
+                  target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                  try {
+                    history.replaceState(null, "", item.href);
+                  } catch {}
+                }
+              };
+
+              return (
+                <Tooltip key={item.label}>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={item.href}
+                      onClick={handleClick}
+                      className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-200 hover:scale-110"
+                      aria-label={item.label}
+                    >
+                      {getNavIcon(item.label)}
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent side="right" sideOffset={8}>
+                    <p className="capitalize">{item.label}</p>
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
+          </div>
+        </nav>
+      </TooltipProvider>
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 sm:pl-14">
         <div className="mb-12 relative">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-4 sm:space-x-6">
@@ -339,48 +415,20 @@ export default function Portfolio() {
                 />
               </div>
             </div>
-            <nav className="hidden sm:flex items-center space-x-8">
-              {navItems.map((item) => {
-                if (item.label === "chat") {
-                  return (
-                    <AnimatedChatButton
-                      key={item.label}
-                      href={item.href}
-                      className="text-base font-medium text-gray-500 hover:text-gray-900 transition-colors chat-button-animated px-3 py-2 rounded-md flex items-center"
-                    >
-                      <span className="flex items-center gap-1">
-                        <MessageCircle className="h-4 w-4 chat-icon-bounce" />
-                        {item.label}
-                      </span>
-                    </AnimatedChatButton>
-                  );
-                }
-
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="text-base font-medium text-gray-500 hover:text-gray-900 transition-colors py-2"
-                    onClick={(e) => {
-                      if (!item.href.startsWith("#")) return;
-                      e.preventDefault();
-                      const target = document.querySelector(item.href);
-                      if (target) {
-                        target.scrollIntoView({
-                          behavior: "smooth",
-                          block: "start",
-                        });
-                        try {
-                          history.replaceState(null, "", item.href);
-                        } catch {}
-                      }
-                    }}
-                  >
-                    {item.label}
-                  </a>
-                );
-              })}
+            
+            {/* Desktop Chat Button - Top Right */}
+            <nav className="hidden sm:flex items-center">
+              <AnimatedChatButton
+                href={chatItem.href}
+                className="text-base font-medium text-gray-500 hover:text-gray-900 transition-colors chat-button-animated px-3 py-2 rounded-md flex items-center"
+              >
+                <span className="flex items-center gap-1">
+                  <MessageCircle className="h-4 w-4 chat-icon-bounce" />
+                  {chatItem.label}
+                </span>
+              </AnimatedChatButton>
             </nav>
+            
             <div className="sm:hidden absolute top-0 right-0">
               <Button
                 variant="ghost"

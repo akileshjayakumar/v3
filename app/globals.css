@@ -360,6 +360,95 @@ textarea {
     animation: chat-glow 4s ease-in-out infinite;
   }
 
+  @keyframes chatPulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes chatPing {
+    75%, 100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .chat-button-pulse {
+    animation: chatPulse 2s ease-in-out infinite;
+  }
+
+  .chat-ring-ping {
+    animation: chatPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .chat-gradient-border {
+    background: linear-gradient(
+      45deg,
+      #3b82f6,
+      #8b5cf6,
+      #ec4899,
+      #f59e0b,
+      #10b981,
+      #3b82f6
+    );
+    background-size: 300% 300%;
+    animation: gradientFlow 3s ease infinite;
+    padding: 2px;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  @keyframes chatGentlePulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes iconBounceSubtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  .chat-button-clean {
+    animation: chatGentlePulse 3s ease-in-out infinite;
+  }
+
+  .chat-button-clean:hover {
+    animation: none;
+    transform: translateY(-2px);
+  }
+
+  .chat-icon-bounce-subtle {
+    animation: iconBounceSubtle 2s ease-in-out infinite;
+  }
+
+  .chat-button-clean:hover .chat-icon-bounce-subtle {
+    animation: none;
+  }
+
   @keyframes projectReveal {
     0% {
       opacity: 0;

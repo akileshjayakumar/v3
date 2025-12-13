@@ -12,8 +12,6 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
-  ArrowLeft,
-  ArrowRight,
   GraduationCap,
   Briefcase,
   BookOpen,
@@ -26,19 +24,12 @@ import {
   SiTypescript,
   SiLangchain,
   SiPerplexity,
+  SiSupabase,
 } from "react-icons/si";
 import { FaMedium } from "react-icons/fa";
 import Image from "next/image";
 
 import AnimatedChatButton from "@/components/animated-chat-button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 import {
   Tooltip,
   TooltipContent,
@@ -53,8 +44,6 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [isOpening, setIsOpening] = React.useState(false);
-  const [api, setApi] = React.useState<CarouselApi>();
-  const [current, setCurrent] = React.useState(0);
 
   // Helper function to render tech logo with React Icon component
   const renderTechLogo = (
@@ -70,7 +59,7 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
+        className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
         aria-label={label}
       >
         {icon}
@@ -94,13 +83,13 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
+        className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200"
         aria-label={label}
       >
         <img
           src={src}
           alt={label}
-          className="w-4 h-4 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform duration-300 ease-out"
+          className="w-5 h-5 object-contain group-hover:scale-110 transition-transform duration-300 ease-out"
           style={style}
           onError={(e) => {
             if (fallbackSrc && e.currentTarget.src !== fallbackSrc) {
@@ -138,73 +127,35 @@ export default function Portfolio() {
     };
   }, []);
 
-  // Carousel state management
-  React.useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    // Ensure carousel starts at index 0 (DoodleMorph)
-    api.scrollTo(0, false);
-    setCurrent(0);
-
-    const handleSelect = () => {
-      const selectedIndex = api.selectedScrollSnap();
-      const projectCount = projects.length;
-
-      // Normalize index to handle loop mode
-      let normalizedIndex = selectedIndex % projectCount;
-      if (normalizedIndex < 0) {
-        normalizedIndex = projectCount + normalizedIndex;
-      }
-
-      // If we're at a clone slide, jump to the real slide
-      if (selectedIndex >= projectCount || selectedIndex < 0) {
-        api.scrollTo(normalizedIndex, true);
-        setCurrent(normalizedIndex);
-        return;
-      }
-
-      setCurrent(normalizedIndex);
-    };
-
-    api.on("select", handleSelect);
-
-    return () => {
-      api.off("select", handleSelect);
-    };
-  }, [api]);
-
-  // Custom scroll handlers for infinite loop
-  const handleScrollNext = () => {
-    if (!api) return;
-    const currentIndex = api.selectedScrollSnap();
-    const projectCount = projects.length;
-
-    if (currentIndex === projectCount - 1) {
-      // At last slide, loop to first
-      api.scrollTo(0, false);
-    } else {
-      // Normal next
-      api.scrollNext();
-    }
-  };
-
-  const handleScrollPrev = () => {
-    if (!api) return;
-    const currentIndex = api.selectedScrollSnap();
-    const projectCount = projects.length;
-
-    if (currentIndex === 0) {
-      // At first slide, loop to last
-      api.scrollTo(projectCount - 1, false);
-    } else {
-      // Normal prev
-      api.scrollPrev();
-    }
-  };
 
   const projects = [
+    {
+      id: "guesssg",
+      title: "GuessSG",
+      icon: "🦁",
+      iconBg: "bg-red-100",
+      description: [
+        "A Wordle-style word guessing game that lets players guess words based on Singapore food, landmarks, and local slang.",
+        "Features AI-powered hints using Perplexity API and real-time feedback on guesses.",
+      ],
+      date: "December 2025",
+      status: "Side Project",
+      tech: [
+        "Next.js",
+        "Vercel",
+        "TypeScript",
+        "Tailwind CSS",
+        "Supabase",
+        "Perplexity API",
+      ],
+      links: {
+        demo: "https://gusss-singapore.vercel.app/",
+        marketing:
+          "https://www.linkedin.com/feed/update/urn:li:activity:7404812112889450497/",
+        github: "https://github.com/akileshjayakumar/guess-singapore",
+        marketingLabel: "LinkedIn Post",
+      },
+    },
     {
       id: "doodlemorph",
       title: "DoodleMorph",
@@ -361,7 +312,12 @@ export default function Portfolio() {
     <div className="min-h-screen">
       {/* Fixed Desktop Icon Navigation Sidebar */}
       <TooltipProvider>
-        <nav className="hidden sm:flex fixed left-4 top-1/2 -translate-y-1/2 z-40">
+        <nav 
+          className="hidden sm:flex fixed top-1/2 -translate-y-1/2 z-40"
+          style={{
+            left: 'max(1rem, calc((100vw - 64rem) / 2 - 80px))'
+          }}
+        >
           <div className="flex flex-col space-y-2 bg-white/95 backdrop-blur-sm rounded-full px-3 py-4 border border-gray-200/50 shadow-lg">
             {navItems.filter((item) => item.label !== "chat").map((item) => {
               const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -827,80 +783,76 @@ export default function Portfolio() {
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8 sm:mb-10">
             Projects
           </h2>
-          <Carousel
-            setApi={setApi}
-            opts={{
-              align: "start",
-              loop: false,
-            }}
-            className="w-full max-w-4xl mx-auto relative"
-          >
-            <CarouselContent>
-              {projects.map((project, index) => {
-                return (
-                  <CarouselItem
-                    key={project.id}
-                    className="basis-full carousel-slide"
-                  >
-                    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 w-full max-w-4xl mx-auto min-w-0 h-[750px] sm:h-[550px] flex flex-col overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                      {/* Icon and Title Section */}
-                      <div className="flex flex-col sm:flex-row items-start gap-5 mb-4">
-                        <div
-                          className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 flex items-center justify-center leading-none text-2xl sm:text-3xl shadow-sm select-none"
-                          aria-hidden="true"
-                        >
-                          <span className="flex items-center justify-center w-full h-full">
-                            {project.icon}
-                          </span>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5 sm:mb-2 break-words">
-                            {project.title}
-                          </h3>
-                          {project.date && (
-                            <p className="text-xs sm:text-sm text-gray-500 font-medium mb-1.5 break-words">
-                              {project.date}
-                            </p>
-                          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {projects.map((project, index) => {
+              return (
+                <div
+                  key={project.id}
+                  className="project-card bg-white border border-gray-200 rounded-xl p-6 sm:p-7 flex flex-col shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.01] group"
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                  }}
+                >
+                  {/* Icon and Title Section */}
+                  <div className="flex items-start gap-4 mb-5">
+                    <div
+                      className={`flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-xl ${project.iconBg} border border-gray-200 flex items-center justify-center leading-none text-2xl sm:text-3xl shadow-sm select-none group-hover:scale-110 transition-transform duration-300`}
+                      aria-hidden="true"
+                    >
+                      <span className="flex items-center justify-center w-full h-full">
+                        {project.icon}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 break-words">
+                        {project.title}
+                      </h3>
+                      <div className="flex flex-col gap-1">
+                        {project.date && (
                           <p className="text-sm text-gray-500 font-medium break-words">
-                            {project.status}
+                            {project.date}
                           </p>
-                        </div>
+                        )}
+                        <p className="text-sm text-gray-500 font-medium break-words">
+                          {project.status}
+                        </p>
                       </div>
+                    </div>
+                  </div>
 
-                      {/* Project Description - Bullet Points */}
-                      {project.description &&
-                      Array.isArray(project.description) ? (
-                        <div className="space-y-3 mb-4 flex-1 overflow-y-auto min-h-0">
-                          {project.description.map((point, idx) => (
-                            <div
-                              key={idx}
-                              className="flex items-start gap-3 text-gray-700"
-                            >
-                              <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-400 flex-shrink-0" />
-                              <p className="text-sm sm:text-base leading-relaxed break-words">
-                                {point}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="mb-4 flex-1 overflow-y-auto min-h-0">
-                          <p className="text-sm sm:text-base text-gray-700 leading-relaxed break-words">
-                            {project.description}
+                  {/* Project Description - Bullet Points */}
+                  {project.description &&
+                  Array.isArray(project.description) ? (
+                    <div className="space-y-3 mb-6 flex-1">
+                      {project.description.map((point, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-3 text-gray-700"
+                        >
+                          <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-400 flex-shrink-0" />
+                          <p className="text-sm sm:text-base leading-relaxed break-words">
+                            {point}
                           </p>
                         </div>
-                      )}
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="mb-6 flex-1">
+                      <p className="text-sm sm:text-base text-gray-700 leading-relaxed break-words">
+                        {project.description}
+                      </p>
+                    </div>
+                  )}
 
-                      {/* Tech Logos */}
-                      {project.tech && (
-                        <div className="flex items-center gap-1.5 sm:gap-2.5 mb-3 sm:mb-4 flex-wrap flex-shrink-0">
+                  {/* Tech Logos */}
+                  {project.tech && (
+                    <div className="flex items-center gap-2 mb-5 flex-wrap flex-shrink-0">
                           {/* Common Tools */}
                           {renderTechLogo(
                             project.tech.includes("Next.js"),
                             "https://nextjs.org/",
                             "Next.js",
-                            <SiNextdotjs className="w-4 h-4 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                        <SiNextdotjs className="w-5 h-5 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
                           )}
                           {(project.tech.includes("Vercel") ||
                             project.tech.includes("Vercel AI SDK")) &&
@@ -912,13 +864,13 @@ export default function Portfolio() {
                               project.tech.includes("Vercel AI SDK")
                                 ? "Vercel AI SDK"
                                 : "Vercel",
-                              <SiVercel className="w-4 h-4 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                          <SiVercel className="w-5 h-5 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
                             )}
                           {renderTechLogo(
                             project.tech.includes("TypeScript"),
                             "https://www.typescriptlang.org/",
                             "TypeScript",
-                            <SiTypescript className="w-4 h-4 sm:w-6 sm:h-6 text-blue-600 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                        <SiTypescript className="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform duration-300 ease-out" />
                           )}
                           {renderTechLogoImage(
                             project.tech.includes("Tailwind CSS"),
@@ -945,7 +897,7 @@ export default function Portfolio() {
                             project.tech.includes("LangChain"),
                             "https://www.langchain.com/",
                             "LangChain",
-                            <SiLangchain className="w-4 h-4 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                        <SiLangchain className="w-5 h-5 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
                           )}
                           {(project.tech.includes("AWS Elastic Beanstalk") ||
                             project.tech.includes("AWS Amplify") ||
@@ -958,11 +910,21 @@ export default function Portfolio() {
                               "https://aws.amazon.com/favicon.ico",
                               "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
                             )}
-                          {renderTechLogo(
-                            project.tech.includes("Perplexity Spaces"),
-                            "https://www.perplexity.ai/",
+                      {(project.tech.includes("Perplexity Spaces") ||
+                        project.tech.includes("Perplexity API")) &&
+                        renderTechLogo(
+                          true,
+                          project.tech.includes("Perplexity API")
+                            ? "https://docs.perplexity.ai/"
+                            : "https://www.perplexity.ai/",
                             "Perplexity",
-                            <SiPerplexity className="w-4 h-4 sm:w-6 sm:h-6 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                          <SiPerplexity className="w-5 h-5 text-gray-900 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                        )}
+                      {renderTechLogo(
+                        project.tech.includes("Supabase"),
+                        "https://supabase.com/",
+                        "Supabase",
+                        <SiSupabase className="w-5 h-5 text-green-600 group-hover:scale-110 transition-transform duration-300 ease-out" />
                           )}
                           {renderTechLogoImage(
                             project.tech.includes("Streamlit"),
@@ -1023,99 +985,61 @@ export default function Portfolio() {
                         </div>
                       )}
 
-                      {/* Project Links */}
-                      <div className="border-t border-gray-200 pt-4 mt-auto flex-shrink-0">
-                        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-5">
-                          <a
-                            href={project.links.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
-                          >
-                            <ExternalLink className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                            <span>Demo</span>
-                          </a>
-                          {project.links.marketing && (
-                            <a
-                              href={project.links.marketing}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
-                            >
-                              {project.links.marketingLabel ===
-                              "LinkedIn Post" ? (
-                                <FaLinkedin className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                              ) : (
-                                <Globe className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                              )}
-                              <span>
-                                {project.links.marketingLabel ?? "Website"}
-                              </span>
-                            </a>
+                  {/* Project Links */}
+                  <div className="border-t border-gray-200 pt-4 mt-auto flex-shrink-0">
+                    <div className="flex flex-col gap-3">
+                      <a
+                        href={project.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/link flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm transition-all duration-200"
+                      >
+                        <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
+                        <span>Demo</span>
+                      </a>
+                      {project.links.marketing && (
+                        <a
+                          href={project.links.marketing}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/link flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm transition-all duration-200"
+                        >
+                          {project.links.marketingLabel === "LinkedIn Post" ? (
+                            <FaLinkedin className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
+                          ) : (
+                            <Globe className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
                           )}
-                          {project.links.event && (
-                            <a
-                              href={project.links.event}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
-                            >
-                              <Calendar className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                              <span className="whitespace-nowrap">Event</span>
-                            </a>
-                          )}
-                          <a
-                            href={project.links.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-xs md:text-sm transition-all duration-200 py-1 sm:py-0"
-                          >
-                            <FaGithub className="w-4 h-4 sm:w-3 sm:h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                            <span>Source Code</span>
-                          </a>
-                        </div>
-                      </div>
+                          <span>
+                            {project.links.marketingLabel ?? "Website"}
+                          </span>
+                        </a>
+                      )}
+                      {project.links.event && (
+                        <a
+                          href={project.links.event}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/link flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm transition-all duration-200"
+                        >
+                          <Calendar className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
+                          <span className="whitespace-nowrap">Event</span>
+                        </a>
+                      )}
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/link flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm transition-all duration-200"
+                      >
+                        <FaGithub className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
+                        <span>Source Code</span>
+                      </a>
                     </div>
-                  </CarouselItem>
+                  </div>
+                    </div>
                 );
               })}
-            </CarouselContent>
-
-            {/* Custom Navigation Buttons with proper icons */}
-            <button
-              onClick={handleScrollPrev}
-              className="carousel-nav-button hidden md:flex absolute -left-12 lg:-left-16 top-1/2 -translate-y-1/2 h-11 w-11 lg:h-12 lg:w-12 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 z-10 backdrop-blur-sm flex items-center justify-center"
-              aria-label="Previous slide"
-            >
-              <ArrowLeft className="h-5 w-5 text-gray-700" />
-            </button>
-
-            <button
-              onClick={handleScrollNext}
-              className="carousel-nav-button hidden md:flex absolute -right-12 lg:-right-16 top-1/2 -translate-y-1/2 h-11 w-11 lg:h-12 lg:w-12 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 z-10 backdrop-blur-sm flex items-center justify-center"
-              aria-label="Next slide"
-            >
-              <ArrowRight className="h-5 w-5 text-gray-700" />
-            </button>
-
-            {/* Mobile and tablet navigation buttons */}
-            <div className="flex justify-center gap-4 mt-8 md:hidden">
-              <button
-                onClick={handleScrollPrev}
-                className="carousel-nav-button relative h-11 w-11 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
-                aria-label="Previous slide"
-              >
-                <ArrowLeft className="h-5 w-5 text-gray-700" />
-              </button>
-              <button
-                onClick={handleScrollNext}
-                className="carousel-nav-button relative h-11 w-11 rounded-full border-0 bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
-                aria-label="Next slide"
-              >
-                <ArrowRight className="h-5 w-5 text-gray-700" />
-              </button>
             </div>
-          </Carousel>
         </section>
 
         <section id="contact" className="mt-16 sm:mt-20">

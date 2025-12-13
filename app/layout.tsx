@@ -7,7 +7,7 @@ import ChatFab from "@/components/chat-fab";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Akilesh Jayakumar",
+  title: "Portfolio | Akilesh Jayakumar",
   description: "Portfolio Website of Akilesh Jayakumar",
 };
 

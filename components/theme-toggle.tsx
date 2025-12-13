@@ -16,7 +16,7 @@ export function ThemeToggle() {
     <button
       id="theme-toggle"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="w-8 h-8 -mr-2 flex items-center justify-center text-gray-900 dark:text-[#f2f1ec] transition-colors hover:opacity-70"
+      className="w-8 h-8 flex items-center justify-center text-gray-900 dark:text-[#f2f1ec] transition-colors hover:opacity-70"
       aria-label="Change color scheme"
     >
       <svg

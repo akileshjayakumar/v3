@@ -128,6 +128,7 @@ export default function Portfolio() {
     };
   }, []);
 
+
   const projects = [
     {
       id: "guesssg",
@@ -366,10 +367,105 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Theme Toggle - Upper Right Corner */}
-      <div className="fixed top-4 right-4 z-50 sm:top-6 sm:right-6">
+      {/* Theme Toggle - Upper Right Corner (Desktop/Tablet) */}
+      <div className="hidden sm:block fixed top-4 right-4 z-50 sm:top-6 sm:right-6">
         <ThemeToggle />
       </div>
+
+      {/* Mobile Controls - Fixed Top Right */}
+      {!menuOpen && (
+        <div 
+          className="sm:hidden flex flex-col items-center gap-1 p-4"
+          style={{
+            position: "fixed",
+            top: "0px",
+            right: "0px",
+            zIndex: 9999
+          }}
+        >
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Open menu"
+            onClick={handleOpenMenu}
+            className="h-12 w-12 hover:bg-gray-100 dark:hover:bg-[#242424]"
+          >
+            <Menu className="h-8 w-8 font-bold" strokeWidth={2.5} />
+          </Button>
+          <div
+            className="h-12 w-12 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-[#242424] rounded-md transition-colors cursor-pointer"
+            aria-label="Change color scheme"
+          >
+            <ThemeToggle />
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu Overlay */}
+      {(menuOpen || isClosing) && (
+        <div className="sm:hidden fixed inset-0 z-50 flex items-start justify-end">
+          <div
+            className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-200 ${
+              isClosing ? "opacity-0" : "opacity-100"
+            }`}
+            onClick={handleCloseMenu}
+          />
+
+          <div
+            className={`relative bg-white dark:bg-[#171717] w-80 max-w-[90vw] h-full shadow-xl transition-transform duration-300 ease-out ${
+              isClosing
+                ? "translate-x-full"
+                : isOpening
+                ? "translate-x-full"
+                : "translate-x-0"
+            }`}
+          >
+            <button
+              onClick={handleCloseMenu}
+              className="absolute right-4 top-4 z-50 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#242424] transition-colors duration-200 focus:outline-none bg-white dark:bg-[#171717] shadow-sm"
+              aria-label="Close menu"
+            >
+              <X className="h-6 w-6 text-red-500" />
+            </button>
+
+            <nav className="flex flex-col py-6 px-6 space-y-4 mt-16">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-xl font-medium text-gray-700 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors flex items-center gap-2 py-2"
+                  onClick={(e) => {
+                    if (item.href.startsWith("#")) {
+                      e.preventDefault();
+                      handleCloseMenu();
+                      const href = item.href;
+                      setTimeout(() => {
+                        const target = document.querySelector(href);
+                        if (target) {
+                          target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                          try {
+                            history.replaceState(null, "", href);
+                          } catch {}
+                        }
+                      }, 400);
+                    } else {
+                      handleCloseMenu();
+                    }
+                  }}
+                >
+                  {item.label === "chat" && (
+                    <MessageCircle className="h-4 w-4" />
+                  )}
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 sm:pl-14">
         <div className="mb-12 relative">
@@ -398,83 +494,6 @@ export default function Portfolio() {
                 </span>
               </AnimatedChatButton>
             </nav>
-
-            <div className="sm:hidden absolute top-0 right-0">
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Open menu"
-                onClick={handleOpenMenu}
-                className="h-12 w-12 hover:bg-gray-100 dark:hover:bg-[#242424]"
-              >
-                <Menu className="h-8 w-8 font-bold" strokeWidth={2.5} />
-              </Button>
-
-              {(menuOpen || isClosing) && (
-                <div className="fixed inset-0 z-50 flex items-start justify-end">
-                  <div
-                    className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-200 ${
-                      isClosing ? "opacity-0" : "opacity-100"
-                    }`}
-                    onClick={handleCloseMenu}
-                  />
-
-                  <div
-                    className={`relative bg-white dark:bg-[#171717] w-80 max-w-[90vw] h-full shadow-xl transition-transform duration-300 ease-out ${
-                      isClosing
-                        ? "translate-x-full"
-                        : isOpening
-                        ? "translate-x-full"
-                        : "translate-x-0"
-                    }`}
-                  >
-                    <button
-                      onClick={handleCloseMenu}
-                      className="absolute right-4 top-4 z-50 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#242424] transition-colors duration-200 focus:outline-none bg-white dark:bg-[#171717] shadow-sm"
-                      aria-label="Close menu"
-                    >
-                      <X className="h-6 w-6 text-red-500" />
-                    </button>
-
-                    <nav className="flex flex-col py-6 px-6 space-y-4 mt-16">
-                      {navItems.map((item) => (
-                        <a
-                          key={item.label}
-                          href={item.href}
-                          className="text-xl font-medium text-gray-700 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors flex items-center gap-2 py-2"
-                          onClick={(e) => {
-                            if (item.href.startsWith("#")) {
-                              e.preventDefault();
-                              handleCloseMenu();
-                              const href = item.href;
-                              setTimeout(() => {
-                                const target = document.querySelector(href);
-                                if (target) {
-                                  target.scrollIntoView({
-                                    behavior: "smooth",
-                                    block: "start",
-                                  });
-                                  try {
-                                    history.replaceState(null, "", href);
-                                  } catch {}
-                                }
-                              }, 400);
-                            } else {
-                              handleCloseMenu();
-                            }
-                          }}
-                        >
-                          {item.label === "chat" && (
-                            <MessageCircle className="h-4 w-4" />
-                          )}
-                          {item.label}
-                        </a>
-                      ))}
-                    </nav>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
           <div className="mt-6">
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-[#f2f1ec]">
@@ -488,7 +507,7 @@ export default function Portfolio() {
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 sm:h-11 sm:w-11"
+              className="h-10 w-10 sm:h-11 sm:w-11 hover:bg-transparent"
               asChild
             >
               <a
@@ -504,7 +523,7 @@ export default function Portfolio() {
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 sm:h-11 sm:w-11"
+              className="h-10 w-10 sm:h-11 sm:w-11 hover:bg-transparent"
               asChild
             >
               <a
@@ -520,7 +539,7 @@ export default function Portfolio() {
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 sm:h-11 sm:w-11"
+              className="h-10 w-10 sm:h-11 sm:w-11 hover:bg-transparent"
               asChild
             >
               <a

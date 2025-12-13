@@ -485,8 +485,20 @@ textarea {
     transform: translateY(-50%) !important;
   }
 
-  /* Simple carousel - one project at a time, no 3D effects */
-  .carousel-slide {
-    transition: opacity 0.3s ease-in-out;
+  /* Project Grid Card Animations */
+  @keyframes projectCardFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .project-card {
+    animation: projectCardFadeIn 0.6s ease-out forwards;
+    opacity: 0;
   }
 }

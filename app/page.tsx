@@ -390,7 +390,7 @@ export default function Portfolio() {
             onClick={handleOpenMenu}
             className="h-12 w-12 hover:bg-gray-100 dark:hover:bg-[#242424]"
           >
-            <Menu className="h-8 w-8 font-bold" strokeWidth={2.5} />
+            <Menu className="h-8 w-8 font-bold text-white dark:text-white" strokeWidth={2.5} />
           </Button>
           <div
             className="h-12 w-12 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-[#242424] rounded-md transition-colors cursor-pointer"
@@ -517,7 +517,7 @@ export default function Portfolio() {
                 aria-label="Twitter"
                 className="icon-link group"
               >
-                <FaXTwitter className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+                <FaXTwitter className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-white sm:text-gray-900 dark:text-white sm:dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
               </a>
             </Button>
             <Button
@@ -533,7 +533,7 @@ export default function Portfolio() {
                 aria-label="GitHub"
                 className="icon-link group"
               >
-                <FaGithub className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+                <FaGithub className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-white sm:text-gray-900 dark:text-white sm:dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
               </a>
             </Button>
             <Button
@@ -549,7 +549,7 @@ export default function Portfolio() {
                 aria-label="LinkedIn"
                 className="icon-link group"
               >
-                <FaLinkedin className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+                <FaLinkedin className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-white sm:text-gray-900 dark:text-white sm:dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
               </a>
             </Button>
           </div>

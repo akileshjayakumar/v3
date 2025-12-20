@@ -128,7 +128,6 @@ export default function Portfolio() {
     };
   }, []);
 
-
   const projects = [
     {
       id: "guesssg",
@@ -324,9 +323,7 @@ export default function Portfolio() {
           {navItems
             .filter((item) => item.label !== "chat")
             .map((item) => {
-              const handleClick = (
-                e: React.MouseEvent<HTMLAnchorElement>
-              ) => {
+              const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
                 if (!item.href.startsWith("#")) return;
                 e.preventDefault();
                 const target = document.querySelector(item.href);
@@ -372,31 +369,40 @@ export default function Portfolio() {
         <ThemeToggle />
       </div>
 
-      {/* Mobile Controls - Fixed Top Right */}
+      {/* Mobile Controls - Fixed Top with Backdrop Blur */}
       {!menuOpen && (
-        <div 
-          className="sm:hidden flex flex-col items-center gap-1 p-4"
+        <div
+          className="sm:hidden fixed top-0 left-0 right-0 z-[9999] flex items-center justify-between px-4 py-3 bg-white/80 dark:bg-[#171717]/80 backdrop-blur-md border-b border-gray-200/50 dark:border-[#f2f1ec]/10 transition-all duration-300 safe-top"
           style={{
-            position: "fixed",
-            top: "0px",
-            right: "0px",
-            zIndex: 9999
+            paddingTop: "max(0.75rem, env(safe-area-inset-top))",
           }}
         >
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Open menu"
-            onClick={handleOpenMenu}
-            className="h-12 w-12 hover:bg-gray-100 dark:hover:bg-[#242424]"
-          >
-            <Menu className="h-8 w-8 font-bold text-white dark:text-white" strokeWidth={2.5} />
-          </Button>
-          <div
-            className="h-12 w-12 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-[#242424] rounded-md transition-colors cursor-pointer"
-            aria-label="Change color scheme"
-          >
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 dark:bg-[#242424] border border-gray-200 dark:border-[#f2f1ec]/20">
+              <Image
+                src="/photo.jpg"
+                alt="Akilesh Jayakumar"
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="text-sm font-semibold text-gray-900 dark:text-[#f2f1ec]">
+              Akilesh
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1">
             <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Open menu"
+              onClick={handleOpenMenu}
+              className="h-10 w-10 hover:bg-gray-100 dark:hover:bg-[#242424] text-gray-900 dark:text-[#f2f1ec]"
+            >
+              <Menu className="h-6 w-6" strokeWidth={2} />
+            </Button>
           </div>
         </div>
       )}
@@ -467,11 +473,11 @@ export default function Portfolio() {
         </div>
       )}
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 sm:pl-14">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-24 pb-6 sm:py-8 sm:pl-14">
         <div className="mb-12 relative">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-4 sm:space-x-6">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden bg-gray-200 dark:bg-[#242424]">
+              <div className="hidden sm:block w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden bg-gray-200 dark:bg-[#242424]">
                 <Image
                   src="/photo.jpg"
                   alt="Akilesh Jayakumar"
@@ -496,7 +502,7 @@ export default function Portfolio() {
             </nav>
           </div>
           <div className="mt-6">
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-[#f2f1ec]">
+            <h1 className="hidden sm:block text-xl sm:text-2xl font-bold text-gray-900 dark:text-[#f2f1ec]">
               Akilesh Jayakumar
             </h1>
             <p className="text-gray-700 dark:text-[#f2f1ec]/80 leading-relaxed mt-2 mb-6 text-base sm:text-lg">
@@ -517,7 +523,7 @@ export default function Portfolio() {
                 aria-label="Twitter"
                 className="icon-link group"
               >
-                <FaXTwitter className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-white sm:text-gray-900 dark:text-white sm:dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+                <FaXTwitter className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
               </a>
             </Button>
             <Button
@@ -533,7 +539,7 @@ export default function Portfolio() {
                 aria-label="GitHub"
                 className="icon-link group"
               >
-                <FaGithub className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-white sm:text-gray-900 dark:text-white sm:dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+                <FaGithub className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
               </a>
             </Button>
             <Button
@@ -549,13 +555,13 @@ export default function Portfolio() {
                 aria-label="LinkedIn"
                 className="icon-link group"
               >
-                <FaLinkedin className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-white sm:text-gray-900 dark:text-white sm:dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+                <FaLinkedin className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
               </a>
             </Button>
           </div>
         </div>
 
-        <section id="education" className="mt-16 sm:mt-20">
+        <section id="education" className="mt-8 sm:mt-20">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-[#f2f1ec] mb-8">
             Education
           </h2>
@@ -787,7 +793,7 @@ export default function Portfolio() {
 
               {/* Article Links */}
               <div className="border-t border-gray-100 dark:border-[#f2f1ec]/20 pt-4 sm:pt-5">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:flex-nowrap gap-2.5 sm:gap-5 sm:gap-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:flex-nowrap gap-2.5 sm:gap-6">
                   <a
                     href="https://akileshjayakumar.medium.com/one-month-with-comet-the-ai-browser-that-changed-how-i-research-02933e08bf15"
                     target="_blank"
@@ -1107,7 +1113,9 @@ export default function Portfolio() {
                 className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
               >
                 <FaGithub className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span className="text-gray-700 dark:text-[#f2f1ec]/80">github</span>
+                <span className="text-gray-700 dark:text-[#f2f1ec]/80">
+                  github
+                </span>
               </a>
               <a
                 href="https://linkedin.com/in/akileshjayakumar"
@@ -1127,14 +1135,18 @@ export default function Portfolio() {
                 className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
               >
                 <FaMedium className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span className="text-gray-700 dark:text-[#f2f1ec]/80">medium</span>
+                <span className="text-gray-700 dark:text-[#f2f1ec]/80">
+                  medium
+                </span>
               </a>
               <a
                 href="/cv"
                 className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
               >
                 <FileText className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span className="text-gray-700 dark:text-[#f2f1ec]/80">resume</span>
+                <span className="text-gray-700 dark:text-[#f2f1ec]/80">
+                  resume
+                </span>
               </a>
             </div>
           </div>

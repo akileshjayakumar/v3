@@ -130,6 +130,32 @@ export default function Portfolio() {
 
   const projects = [
     {
+      id: "the-prompt-detective",
+      title: "The Prompt Detective",
+      icon: "🔍",
+      iconBg: "bg-yellow-100",
+      description: [
+        "An AI-powered game that teaches the CO-STAR framework through detective-style mystery cases. Inspired by GovTech Singapore's CO-STAR Framework.",
+        "Features unique AI-generated cases powered by Google Gemini 3 Flash.",
+      ],
+      date: "December 2025",
+      status: "Side Project",
+      tech: [
+        "Next.js",
+        "Vercel",
+        "Tailwind CSS",
+        "Google Gemini 3 Flash",
+        "Google Antigravity",
+      ],
+      links: {
+        demo: "https://thepromptdetective.vercel.app/",
+        marketing:
+          "https://www.linkedin.com/feed/update/urn:li:activity:7410956743163162624/",
+        github: "https://github.com/akileshjayakumar/the-prompt-detective",
+        marketingLabel: "LinkedIn Post",
+      },
+    },
+    {
       id: "guesssg",
       title: "GuessSG",
       icon: "🦁",
@@ -167,14 +193,7 @@ export default function Portfolio() {
       ],
       date: "October 2025",
       status: "Cursor Hackathon Singapore 2025",
-      tech: [
-        "Next.js",
-        "Vercel",
-        "TLDraw",
-        "Fal.AI",
-        "Google DeepMind",
-        "Groq",
-      ],
+      tech: ["Next.js", "Vercel", "TLDraw", "Fal.AI", "Google Gemini", "Groq"],
       links: {
         demo: "https://doodlemorph.vercel.app/",
         marketing:
@@ -1010,6 +1029,15 @@ export default function Portfolio() {
                           "Google DeepMind",
                           "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google",
                           "https://deepmind.google/favicon.ico"
+                        )}
+                      {(project.tech.includes("Google Gemini 3 Flash") ||
+                        project.tech.includes("Google Gemini")) &&
+                        renderTechLogoImage(
+                          true,
+                          "https://ai.google.dev/",
+                          "Google Gemini",
+                          "/gemini-icon.svg",
+                          "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google"
                         )}
                       {(project.tech.includes("Groq") ||
                         project.tech.includes("Groq AI Inference")) &&

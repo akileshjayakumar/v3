@@ -150,7 +150,7 @@ export default function Portfolio() {
       links: {
         demo: "https://thepromptdetective.vercel.app/",
         marketing:
-          "https://www.linkedin.com/feed/update/urn:li:activity:7410956743163162624/",
+          "https://www.linkedin.com/feed/update/urn:li:activity:7410968273112084480/",
         github: "https://github.com/akileshjayakumar/the-prompt-detective",
         marketingLabel: "LinkedIn Post",
       },

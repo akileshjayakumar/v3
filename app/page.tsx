@@ -805,7 +805,7 @@ export default function Portfolio() {
 
         <section id="writing" className="mt-16 sm:mt-20">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-[#f5f5f7] mb-8 sm:mb-10">
-            Writings
+            Writing
           </h2>
           <div className="space-y-6 sm:space-y-8">
             <div className="bg-white dark:bg-[#171717] border border-gray-200 dark:border-[#f2f1ec]/20 rounded-xl p-4 sm:p-7 max-w-4xl mx-auto shadow-sm">

@@ -10,8 +10,6 @@ import {
   MessageCircle,
   X,
   Calendar,
-  ChevronDown,
-  ChevronUp,
   GraduationCap,
   Briefcase,
   BookOpen,
@@ -60,7 +58,7 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white dark:bg-white/10 hover:bg-gray-50 dark:hover:bg-white/20 transition-all duration-300 ease-out group border border-gray-200 dark:border-[#f2f1ec]/20"
+        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white dark:bg-white/10 hover:bg-gray-50 dark:hover:bg-white/20 transition-all duration-300 ease-out group border border-gray-200 dark:border-[#f2f1ec]/20"
         aria-label={label}
       >
         {icon}
@@ -84,13 +82,13 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white dark:bg-white/10 hover:bg-gray-50 dark:hover:bg-white/20 transition-all duration-300 ease-out group border border-gray-200 dark:border-[#f2f1ec]/20"
+        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white dark:bg-white/10 hover:bg-gray-50 dark:hover:bg-white/20 transition-all duration-300 ease-out group border border-gray-200 dark:border-[#f2f1ec]/20"
         aria-label={label}
       >
         <img
           src={src}
           alt={label}
-          className="w-5 h-5 object-contain"
+          className="w-4 h-4 object-contain"
           style={style}
           onError={(e) => {
             if (fallbackSrc && e.currentTarget.src !== fallbackSrc) {
@@ -135,7 +133,7 @@ export default function Portfolio() {
       icon: "/avengers-logo.png",
       iconBg: "bg-white",
       description: [
-        "A countdown website for the upcoming Marvel cinematic event - Avengers: Doomsday.",
+        "A fun countdown clock for the upcoming marvel cinematic event - Avengers: Doomsday.",
         "Features a real-time countdown to the film's release date.",
       ],
       date: "January 2026",
@@ -152,9 +150,21 @@ export default function Portfolio() {
       id: "the-prompt-detective",
       title: "The Prompt Detective",
       icon: "🔍",
-      iconBg: "bg-yellow-100",
+      iconBg: "bg-white",
       description: [
-        "An AI-powered game that teaches the CO-STAR framework through detective-style mystery cases. Inspired by GovTech Singapore's CO-STAR Framework.",
+        <>
+          An AI-powered game that teaches the CO-STAR framework through
+          detective-style mystery cases. ~ Game inspired by{" "}
+          <a
+            href="https://www.tech.gov.sg/technews/mastering-the-art-of-prompt-engineering-with-empower/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-300"
+          >
+            GovTech Singapore CO-STAR Framework
+          </a>
+          .
+        </>,
         "Features unique AI-generated cases powered by Google Gemini 3 Flash.",
       ],
       date: "December 2025",
@@ -178,7 +188,7 @@ export default function Portfolio() {
       id: "guesssg",
       title: "GuessSG",
       icon: "🦁",
-      iconBg: "bg-red-100",
+      iconBg: "bg-white",
       description: [
         "A Wordle-style word guessing game that lets players guess words based on Singapore food, landmarks, and local slang.",
         "Features AI-powered hints using Perplexity API and real-time feedback on guesses.",
@@ -205,7 +215,7 @@ export default function Portfolio() {
       id: "doodlemorph",
       title: "DoodleMorph",
       icon: "🎨",
-      iconBg: "bg-orange-100",
+      iconBg: "bg-white",
       description: [
         "Built an app that transforms your doodles/sketches into creative images, character designs, and cinematic animations.",
         "Used fal for media generation and Groq for fast prompt enhancements.",
@@ -226,14 +236,14 @@ export default function Portfolio() {
       id: "hawker-helper",
       title: "Hawker Food Menu Helper",
       icon: "🍜",
-      iconBg: "bg-green-100",
+      iconBg: "bg-white",
       description: [
         "Upload a hawker centre menu photo to extract all dishes and prices.",
         "Get healthy and value picks, and chat to explore the menu.",
       ],
       date: "August 2025",
       status: "EMERGENCY GPT HACKATHON 2025",
-      tech: ["Next.js", "Tailwind CSS", "Groq", "Vercel AI SDK"],
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Groq", "Vercel AI SDK"],
       links: {
         demo: "https://emergency-gpt-hackathon-2025.vercel.app/",
         marketing:
@@ -248,7 +258,7 @@ export default function Portfolio() {
       id: "deeppurple",
       title: "DeepPurple",
       icon: "🧠",
-      iconBg: "bg-purple-100",
+      iconBg: "bg-white",
       description: [
         "Built a cloud-based multimodal GenAI platform to analyse customer emotions, sentiment, and key topics.",
         "Deployed on AWS with RESTful APIs for automated, scalable analysis tasks across uploaded files and chat data.",
@@ -276,7 +286,7 @@ export default function Portfolio() {
       id: "prompttacular",
       title: "PromptTacular",
       icon: "🔄",
-      iconBg: "bg-pink-100",
+      iconBg: "bg-white",
       description: [
         "A high-precision assistant that rewrites and generates prompts and prompt templates.",
         "Runs inside Perplexity Spaces and generates prompts from descriptions and produces prompt templates for devs using LangChain and LlamaIndex.",
@@ -296,7 +306,7 @@ export default function Portfolio() {
       id: "edux",
       title: "EduX",
       icon: "📚",
-      iconBg: "bg-blue-100",
+      iconBg: "bg-white",
       description: [
         "Interactive AI tutor application that processes PDFs, PowerPoint files, and images for multimodal learning.",
         "Features speech-to-text, text-to-speech capabilities, and support for accessibility.",
@@ -676,7 +686,7 @@ export default function Portfolio() {
                       </p>
                     </div>
                     <span className="text-sm text-gray-500 dark:text-[#f2f1ec]/60 mt-1 sm:mt-0 whitespace-nowrap">
-                      Jul 2025 – Present
+                      Jul 2025 – Dec 2025
                     </span>
                   </div>
                 </div>
@@ -860,20 +870,20 @@ export default function Portfolio() {
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-[#f5f5f7] mb-8 sm:mb-10">
             Projects
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-4 md:auto-rows-fr">
             {projects.map((project, index) => {
               return (
                 <div
                   key={project.id}
-                  className="project-card bg-white dark:bg-[#171717] border border-gray-200 dark:border-[#f2f1ec]/20 rounded-xl p-6 sm:p-7 flex flex-col shadow-sm group"
+                  className="project-card bg-white dark:bg-[#171717] h-full border border-gray-200 dark:border-[#f2f1ec]/20 rounded-xl p-5 sm:p-6 flex flex-col shadow-sm"
                   style={{
                     animationDelay: `${index * 100}ms`,
                   }}
                 >
-                  {/* Icon and Title Section */}
-                  <div className="flex items-start gap-4 mb-5">
+                  {/* Header: Icon + Title + Status Badge */}
+                  <div className="flex items-start gap-4 mb-4">
                     <div
-                      className={`flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-xl ${project.iconBg} border border-gray-200 dark:border-[#f2f1ec]/20 flex items-center justify-center leading-none text-2xl sm:text-3xl shadow-sm select-none`}
+                      className={`flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${project.iconBg} border border-gray-200 dark:border-[#f2f1ec]/20 flex items-center justify-center leading-none text-3xl sm:text-4xl shadow-sm select-none`}
                       aria-hidden="true"
                     >
                       <span className="flex items-center justify-center w-full h-full">
@@ -881,7 +891,7 @@ export default function Portfolio() {
                           <img
                             src={project.icon}
                             alt={`${project.title} logo`}
-                            className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                            className="w-11 h-11 sm:w-13 sm:h-13 object-contain"
                           />
                         ) : (
                           project.icon
@@ -889,230 +899,245 @@ export default function Portfolio() {
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-[#f2f1ec] mb-2 break-words hover:translate-y-0">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-[#f2f1ec] leading-tight">
                         {project.title}
                       </h3>
-                      <div className="flex flex-col gap-1">
-                        {project.date && (
-                          <p className="text-sm text-gray-500 dark:text-[#f2f1ec]/60 font-medium break-words hover:translate-y-0">
-                            {project.date}
-                          </p>
-                        )}
-                        <p className="text-sm text-gray-500 dark:text-[#f2f1ec]/60 font-medium break-words hover:translate-y-0">
+                      <div className="flex items-center gap-2 mt-2 flex-wrap">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-[#f2f1ec]/80 border border-gray-200 dark:border-[#f2f1ec]/10">
                           {project.status}
-                        </p>
+                        </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Project Description - Bullet Points */}
-                  {project.description && Array.isArray(project.description) ? (
-                    <div className="space-y-3 mb-6 flex-1">
-                      {project.description.map((point, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-start gap-3 text-gray-700 dark:text-[#f2f1ec]/80"
-                        >
-                          <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-400 dark:bg-gray-500 flex-shrink-0" />
-                          <p className="text-sm sm:text-base leading-relaxed break-words">
-                            {point}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="mb-6 flex-1">
-                      <p className="text-sm sm:text-base text-gray-700 dark:text-[#f2f1ec]/80 leading-relaxed break-words">
+                  {/* Description - Two bullet points */}
+                  <div className="flex-1 mb-6">
+                    {project.description &&
+                    Array.isArray(project.description) ? (
+                      <div className="space-y-2">
+                        {project.description.map((point, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-start gap-3 text-gray-600 dark:text-[#f2f1ec]/70"
+                          >
+                            <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-400 dark:bg-gray-500 flex-shrink-0" />
+                            <p className="text-sm sm:text-base leading-relaxed">
+                              {point}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm sm:text-base text-gray-600 dark:text-[#f2f1ec]/70 leading-relaxed">
                         {project.description}
                       </p>
-                    </div>
-                  )}
+                    )}
+                  </div>
 
-                  {/* Tech Logos */}
+                  {/* Tech Stack - Compact at bottom */}
                   {project.tech && (
-                    <div className="flex items-center gap-2 mb-5 flex-wrap flex-shrink-0">
-                      {/* Common Tools */}
-                      {renderTechLogo(
-                        project.tech.includes("Next.js"),
-                        "https://nextjs.org/",
-                        "Next.js",
-                        <SiNextdotjs className="w-5 h-5 text-gray-900 dark:text-white" />
-                      )}
-                      {(project.tech.includes("Vercel") ||
-                        project.tech.includes("Vercel AI SDK")) &&
-                        renderTechLogo(
-                          true,
-                          project.tech.includes("Vercel AI SDK")
-                            ? "https://sdk.vercel.ai/"
-                            : "https://vercel.com/",
-                          project.tech.includes("Vercel AI SDK")
-                            ? "Vercel AI SDK"
-                            : "Vercel",
-                          <SiVercel className="w-5 h-5 text-gray-900 dark:text-white" />
+                    <div className="mb-6 pt-1">
+                      <p className="text-xs font-medium text-gray-500 dark:text-[#f2f1ec]/50 uppercase tracking-wider mb-3">
+                        Built with
+                      </p>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {/* Common Tools */}
+                        {renderTechLogo(
+                          project.tech.includes("Next.js"),
+                          "https://nextjs.org/",
+                          "Next.js",
+                          <SiNextdotjs className="w-4 h-4 text-gray-900 dark:text-white" />
                         )}
-                      {renderTechLogo(
-                        project.tech.includes("TypeScript"),
-                        "https://www.typescriptlang.org/",
-                        "TypeScript",
-                        <SiTypescript className="w-5 h-5 text-blue-600" />
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Tailwind CSS"),
-                        "https://tailwindcss.com/",
-                        "Tailwind CSS",
-                        "https://tailwindcss.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com"
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("OpenAI"),
-                        "https://openai.com/",
-                        "OpenAI",
-                        "https://openai.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=openai.com"
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Docker"),
-                        "https://www.docker.com/",
-                        "Docker",
-                        "https://www.docker.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=docker.com"
-                      )}
-                      {renderTechLogo(
-                        project.tech.includes("LangChain"),
-                        "https://www.langchain.com/",
-                        "LangChain",
-                        <SiLangchain className="w-5 h-5 text-gray-900 dark:text-white" />
-                      )}
-                      {(project.tech.includes("AWS Elastic Beanstalk") ||
-                        project.tech.includes("AWS Amplify") ||
-                        project.tech.includes("AWS S3") ||
-                        project.tech.includes("AWS RDS")) &&
-                        renderTechLogoImage(
-                          true,
-                          "https://aws.amazon.com/",
-                          "AWS",
-                          "https://aws.amazon.com/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
+                        {(project.tech.includes("Vercel") ||
+                          project.tech.includes("Vercel AI SDK")) &&
+                          renderTechLogo(
+                            true,
+                            project.tech.includes("Vercel AI SDK")
+                              ? "https://sdk.vercel.ai/"
+                              : "https://vercel.com/",
+                            project.tech.includes("Vercel AI SDK")
+                              ? "Vercel AI SDK"
+                              : "Vercel",
+                            <SiVercel className="w-4 h-4 text-gray-900 dark:text-white" />
+                          )}
+                        {renderTechLogo(
+                          project.tech.includes("TypeScript"),
+                          "https://www.typescriptlang.org/",
+                          "TypeScript",
+                          <SiTypescript className="w-4 h-4 text-blue-600" />
                         )}
-                      {(project.tech.includes("Perplexity Spaces") ||
-                        project.tech.includes("Perplexity API")) &&
-                        renderTechLogo(
-                          true,
-                          project.tech.includes("Perplexity API")
-                            ? "https://docs.perplexity.ai/"
-                            : "https://www.perplexity.ai/",
-                          "Perplexity",
-                          <SiPerplexity className="w-5 h-5 text-gray-900 dark:text-white" />
+                        {renderTechLogoImage(
+                          project.tech.includes("Tailwind CSS"),
+                          "https://tailwindcss.com/",
+                          "Tailwind CSS",
+                          "https://tailwindcss.com/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=tailwindcss.com"
                         )}
-                      {renderTechLogo(
-                        project.tech.includes("Supabase"),
-                        "https://supabase.com/",
-                        "Supabase",
-                        <SiSupabase className="w-5 h-5 text-green-600" />
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Streamlit"),
-                        "https://docs.streamlit.io/",
-                        "Streamlit",
-                        "https://docs.streamlit.io/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io"
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("NVIDIA NIM"),
-                        "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
-                        "NVIDIA NIM",
-                        "https://www.nvidia.com/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com"
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("LlamaIndex"),
-                        "https://www.llamaindex.ai/",
-                        "LlamaIndex",
-                        "https://cdn.brandfetch.io/id6a4s3gXI/w/400/h/400/theme/dark/icon.png",
-                        "https://www.llamaindex.ai/favicon.ico"
-                      )}
+                        {renderTechLogoImage(
+                          project.tech.includes("OpenAI"),
+                          "https://openai.com/",
+                          "OpenAI",
+                          "https://openai.com/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=openai.com"
+                        )}
+                        {renderTechLogoImage(
+                          project.tech.includes("Docker"),
+                          "https://www.docker.com/",
+                          "Docker",
+                          "https://www.docker.com/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=docker.com"
+                        )}
+                        {renderTechLogo(
+                          project.tech.includes("LangChain"),
+                          "https://www.langchain.com/",
+                          "LangChain",
+                          <SiLangchain className="w-4 h-4 text-gray-900 dark:text-white" />
+                        )}
+                        {(project.tech.includes("AWS Elastic Beanstalk") ||
+                          project.tech.includes("AWS Amplify") ||
+                          project.tech.includes("AWS S3") ||
+                          project.tech.includes("AWS RDS")) &&
+                          renderTechLogoImage(
+                            true,
+                            "https://aws.amazon.com/",
+                            "AWS",
+                            "https://aws.amazon.com/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=aws.amazon.com"
+                          )}
+                        {(project.tech.includes("Perplexity Spaces") ||
+                          project.tech.includes("Perplexity API")) &&
+                          renderTechLogo(
+                            true,
+                            project.tech.includes("Perplexity API")
+                              ? "https://docs.perplexity.ai/"
+                              : "https://www.perplexity.ai/",
+                            "Perplexity",
+                            <SiPerplexity className="w-4 h-4 text-gray-900 dark:text-white" />
+                          )}
+                        {renderTechLogo(
+                          project.tech.includes("Supabase"),
+                          "https://supabase.com/",
+                          "Supabase",
+                          <SiSupabase className="w-4 h-4 text-green-600" />
+                        )}
+                        {renderTechLogoImage(
+                          project.tech.includes("Streamlit"),
+                          "https://docs.streamlit.io/",
+                          "Streamlit",
+                          "https://docs.streamlit.io/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=streamlit.io"
+                        )}
+                        {renderTechLogoImage(
+                          project.tech.includes("NVIDIA NIM"),
+                          "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",
+                          "NVIDIA NIM",
+                          "https://www.nvidia.com/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=nvidia.com"
+                        )}
+                        {renderTechLogoImage(
+                          project.tech.includes("LlamaIndex"),
+                          "https://www.llamaindex.ai/",
+                          "LlamaIndex",
+                          "https://cdn.brandfetch.io/id6a4s3gXI/w/400/h/400/theme/dark/icon.png",
+                          "https://www.llamaindex.ai/favicon.ico"
+                        )}
 
-                      {/* Project-Specific Tools */}
-                      {renderTechLogoImage(
-                        project.tech.includes("TLDraw"),
-                        "https://tldraw.dev/",
-                        "TLDraw",
-                        "https://tldraw.dev/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
-                        { filter: "brightness(0)" }
-                      )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Fal.AI"),
-                        "https://fal.ai/",
-                        "Fal.AI",
-                        "https://fal.ai/favicon.ico",
-                        "https://www.google.com/s2/favicons?sz=64&domain=fal.ai"
-                      )}
-                      {(project.tech.includes("Google DeepMind") ||
-                        project.tech.includes("Google Gemini & Veo 3.1")) &&
-                        renderTechLogoImage(
-                          true,
-                          "https://deepmind.google/",
-                          "Google DeepMind",
-                          "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google",
-                          "https://deepmind.google/favicon.ico"
+                        {/* Project-Specific Tools */}
+                        {renderTechLogoImage(
+                          project.tech.includes("TLDraw"),
+                          "https://tldraw.dev/",
+                          "TLDraw",
+                          "https://tldraw.dev/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
+                          { filter: "brightness(0)" }
                         )}
-                      {(project.tech.includes("Google Gemini 3 Flash") ||
-                        project.tech.includes("Google Gemini")) &&
-                        renderTechLogoImage(
-                          true,
-                          "https://ai.google.dev/",
-                          "Google Gemini",
-                          "/gemini-icon.svg",
-                          "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google"
+                        {renderTechLogoImage(
+                          project.tech.includes("Fal.AI"),
+                          "https://fal.ai/",
+                          "Fal.AI",
+                          "https://fal.ai/favicon.ico",
+                          "https://www.google.com/s2/favicons?sz=64&domain=fal.ai"
                         )}
-                      {(project.tech.includes("Groq") ||
-                        project.tech.includes("Groq AI Inference")) &&
-                        renderTechLogoImage(
-                          true,
-                          "https://groq.com/",
-                          "Groq",
-                          "https://groq.com/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
+                        {(project.tech.includes("Google DeepMind") ||
+                          project.tech.includes("Google Gemini & Veo 3.1")) &&
+                          renderTechLogoImage(
+                            true,
+                            "https://deepmind.google/",
+                            "Google DeepMind",
+                            "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google",
+                            "https://deepmind.google/favicon.ico"
+                          )}
+                        {(project.tech.includes("Google Gemini 3 Flash") ||
+                          project.tech.includes("Google Gemini")) &&
+                          renderTechLogoImage(
+                            true,
+                            "https://ai.google.dev/",
+                            "Google Gemini",
+                            "/gemini-icon.svg",
+                            "https://www.google.com/s2/favicons?sz=64&domain=deepmind.google"
+                          )}
+                        {(project.tech.includes("Groq") ||
+                          project.tech.includes("Groq AI Inference")) &&
+                          renderTechLogoImage(
+                            true,
+                            "https://groq.com/",
+                            "Groq",
+                            "https://groq.com/favicon.ico",
+                            "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
+                          )}
+                        {renderTechLogoImage(
+                          project.tech.includes("Google Antigravity"),
+                          "https://antigravity.google/",
+                          "Google Antigravity",
+                          "/antigravity-icon.png",
+                          "https://antigravity.google/"
                         )}
-                      {renderTechLogoImage(
-                        project.tech.includes("Google Antigravity"),
-                        "https://antigravity.google/",
-                        "Google Antigravity",
-                        "/antigravity-icon.png",
-                        "https://antigravity.google/"
-                      )}
+                      </div>
                     </div>
                   )}
 
-                  {/* Project Links */}
-                  <div className="border-t border-gray-200 dark:border-[#f2f1ec]/20 pt-4 mt-auto flex-shrink-0">
-                    <div className="flex flex-col gap-3">
+                  {/* Action Links - All styled as buttons */}
+                  <div className="border-t border-gray-200 dark:border-[#f2f1ec]/10 pt-5 mt-auto flex-shrink-0">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <a
                         href={project.links.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/link flex items-center gap-2 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-200"
                       >
-                        <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
-                        <span>Demo</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Try it</span>
+                      </a>
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-[#f2f1ec] text-sm font-medium hover:bg-gray-200 dark:hover:bg-white/20 transition-colors duration-200"
+                      >
+                        <FaGithub className="w-3.5 h-3.5" />
+                        <span>Code</span>
                       </a>
                       {project.links.marketing && (
                         <a
                           href={project.links.marketing}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group/link flex items-center gap-2 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-[#f2f1ec] text-sm font-medium hover:bg-gray-200 dark:hover:bg-white/20 transition-colors duration-200"
                         >
                           {project.links.marketingLabel === "LinkedIn Post" ? (
-                            <FaLinkedin className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
-                          ) : project.links.marketingLabel === "X Post" ? (
-                            <FaXTwitter className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
+                            <FaLinkedin className="w-3.5 h-3.5" />
+                          ) : project.links.marketingLabel === "X Post" ||
+                            project.links.marketingLabel ===
+                              "X/Twitter Post" ? (
+                            <FaXTwitter className="w-3.5 h-3.5" />
                           ) : (
-                            <Globe className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
+                            <Globe className="w-3.5 h-3.5" />
                           )}
                           <span>
-                            {project.links.marketingLabel ?? "Website"}
+                            {project.links.marketingLabel ===
+                            "Marketing Website"
+                              ? "Marketing Website"
+                              : "Post"}
                           </span>
                         </a>
                       )}
@@ -1121,22 +1146,18 @@ export default function Portfolio() {
                           href={project.links.event}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group/link flex items-center gap-2 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-[#f2f1ec] text-sm font-medium hover:bg-gray-200 dark:hover:bg-white/20 transition-colors duration-200"
                         >
-                          <Calendar className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
-                          <span className="whitespace-nowrap">Event</span>
+                          <Calendar className="w-3.5 h-3.5" />
+                          <span>Event</span>
                         </a>
                       )}
-                      <a
-                        href={project.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group/link flex items-center gap-2 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200"
-                      >
-                        <FaGithub className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
-                        <span>Source Code</span>
-                      </a>
                     </div>
+                    {project.date && (
+                      <p className="text-xs text-gray-500 dark:text-[#f2f1ec]/50 mt-3">
+                        {project.date}
+                      </p>
+                    )}
                   </div>
                 </div>
               );
@@ -1215,55 +1236,58 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-        <footer className="w-full mt-12 sm:mt-16 border-t border-gray-200 dark:border-[#f2f1ec]/20 bg-transparent py-8 sm:py-10">
+        <footer className="w-full mt-12 sm:mt-16 border-t border-gray-200 dark:border-[#f2f1ec]/20 bg-transparent py-10 sm:py-14">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="space-y-6">
-              {/* Top Row: Copyright and GitHub Link */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p className="text-sm text-gray-500 dark:text-[#f2f1ec]/60 text-center sm:text-left">
-                  &copy; 2025 akilesh jayakumar
+            {/* Two-column footer grid */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              {/* Left: Made by */}
+              <div className="text-center sm:text-left">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-[#f2f1ec]/50 mb-2">
+                  Made by
+                </h3>
+                <p className="text-sm font-medium text-gray-900 dark:text-[#f2f1ec]">
+                  Akilesh Jayakumar
                 </p>
-                <a
-                  href="https://github.com/akileshjayakumar?tab=repositories"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg bg-white dark:bg-[#171717] hover:bg-gray-50 dark:hover:bg-[#242424]"
-                >
-                  <FaGithub className="h-4 w-4" />
-                  <span>more projects on github</span>
-                </a>
+                <p className="text-xs text-gray-500 dark:text-[#f2f1ec]/60 mt-1">
+                  © 2026
+                </p>
               </div>
 
-              {/* Bottom Row: Built with section */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-gray-100 dark:border-[#f2f1ec]/20">
-                <span className="text-xs text-gray-500 dark:text-[#f2f1ec]/60 font-medium">
-                  built with
-                </span>
-                <div className="flex items-center gap-2">
+              {/* Right: Built with */}
+              <div className="text-center sm:text-right">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-[#f2f1ec]/50 mb-3">
+                  Built with
+                </h3>
+                <div className="flex items-center justify-center sm:justify-end gap-3">
                   <a
                     href="https://nextjs.org/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Next.js"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 dark:border-[#f2f1ec]/20 bg-white dark:bg-[#171717] shadow-sm hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
                   >
-                    <SiNextdotjs className="h-4 w-4 text-gray-900 dark:text-white" />
+                    <SiNextdotjs className="h-4 w-4" />
+                    <span className="hidden sm:inline">Next.js</span>
                   </a>
+                  <span className="text-gray-300 dark:text-[#f2f1ec]/20">
+                    ·
+                  </span>
                   <a
                     href="https://vercel.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Vercel"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 dark:border-[#f2f1ec]/20 bg-white dark:bg-[#171717] shadow-sm hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
                   >
-                    <SiVercel className="h-4 w-4 text-gray-900 dark:text-white" />
+                    <SiVercel className="h-4 w-4" />
+                    <span className="hidden sm:inline">Vercel</span>
                   </a>
+                  <span className="text-gray-300 dark:text-[#f2f1ec]/20">
+                    ·
+                  </span>
                   <a
                     href="https://groq.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Groq"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 dark:border-[#f2f1ec]/20 bg-white dark:bg-[#171717] shadow-sm hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
                   >
                     <img
                       src="https://groq.com/favicon.ico"
@@ -1274,6 +1298,7 @@ export default function Portfolio() {
                           "https://www.google.com/s2/favicons?sz=64&domain=groq.com";
                       }}
                     />
+                    <span className="hidden sm:inline">Groq</span>
                   </a>
                 </div>
               </div>

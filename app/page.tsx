@@ -130,6 +130,25 @@ export default function Portfolio() {
 
   const projects = [
     {
+      id: "itallleadstodoom",
+      title: "It All Leads to Doom",
+      icon: "/avengers-logo.png",
+      iconBg: "bg-white",
+      description: [
+        "A countdown website for the upcoming Marvel cinematic event - Avengers: Doomsday.",
+        "Features a real-time countdown to the film's release date.",
+      ],
+      date: "January 2026",
+      status: "Side Project",
+      tech: ["Next.js", "Vercel", "TypeScript", "Google Antigravity"],
+      links: {
+        demo: "https://itallleadstodoom.vercel.app/",
+        marketing: "https://x.com/sentrytoast/status/2006585828752183610",
+        github: "https://github.com/akileshjayakumar/itallleadstodoom",
+        marketingLabel: "X/Twitter Post",
+      },
+    },
+    {
       id: "the-prompt-detective",
       title: "The Prompt Detective",
       icon: "🔍",
@@ -858,7 +877,15 @@ export default function Portfolio() {
                       aria-hidden="true"
                     >
                       <span className="flex items-center justify-center w-full h-full">
-                        {project.icon}
+                        {project.icon.startsWith("/") ? (
+                          <img
+                            src={project.icon}
+                            alt={`${project.title} logo`}
+                            className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                          />
+                        ) : (
+                          project.icon
+                        )}
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -1048,6 +1075,13 @@ export default function Portfolio() {
                           "https://groq.com/favicon.ico",
                           "https://www.google.com/s2/favicons?sz=64&domain=groq.com"
                         )}
+                      {renderTechLogoImage(
+                        project.tech.includes("Google Antigravity"),
+                        "https://antigravity.google/",
+                        "Google Antigravity",
+                        "/antigravity-icon.png",
+                        "https://antigravity.google/"
+                      )}
                     </div>
                   )}
 
@@ -1072,6 +1106,8 @@ export default function Portfolio() {
                         >
                           {project.links.marketingLabel === "LinkedIn Post" ? (
                             <FaLinkedin className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
+                          ) : project.links.marketingLabel === "X Post" ? (
+                            <FaXTwitter className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
                           ) : (
                             <Globe className="w-4 h-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 flex-shrink-0" />
                           )}

@@ -58,7 +58,7 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white dark:bg-white/10 hover:bg-gray-50 dark:hover:bg-white/20 transition-all duration-300 ease-out group border border-gray-200 dark:border-[#f2f1ec]/20"
+        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200 dark:border-gray-300"
         aria-label={label}
       >
         {icon}
@@ -82,7 +82,7 @@ export default function Portfolio() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white dark:bg-white/10 hover:bg-gray-50 dark:hover:bg-white/20 transition-all duration-300 ease-out group border border-gray-200 dark:border-[#f2f1ec]/20"
+        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 ease-out group border border-gray-200 dark:border-gray-300"
         aria-label={label}
       >
         <img
@@ -620,7 +620,7 @@ export default function Portfolio() {
                   href="https://www.uow.edu.au"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-[#171717] border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-white border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="University of Wollongong website"
                 >
                   <img
@@ -663,7 +663,7 @@ export default function Portfolio() {
                   href="https://www.iras.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-[#171717] border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-white border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="IRAS website"
                 >
                   <img
@@ -699,7 +699,7 @@ export default function Portfolio() {
                   href="https://www.singstat.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-[#171717] border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-white border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="Singapore Department of Statistics website"
                 >
                   <img
@@ -735,7 +735,7 @@ export default function Portfolio() {
                   href="https://www.htx.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-[#171717] border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-white border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="HTX website"
                 >
                   <img
@@ -771,7 +771,7 @@ export default function Portfolio() {
                   href="https://www.cpf.gov.sg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-[#171717] border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-white border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="CPF Board website"
                 >
                   <img
@@ -946,7 +946,7 @@ export default function Portfolio() {
                           project.tech.includes("Next.js"),
                           "https://nextjs.org/",
                           "Next.js",
-                          <SiNextdotjs className="w-4 h-4 text-gray-900 dark:text-white" />
+                          <SiNextdotjs className="w-4 h-4 text-black" />
                         )}
                         {(project.tech.includes("Vercel") ||
                           project.tech.includes("Vercel AI SDK")) &&
@@ -958,7 +958,7 @@ export default function Portfolio() {
                             project.tech.includes("Vercel AI SDK")
                               ? "Vercel AI SDK"
                               : "Vercel",
-                            <SiVercel className="w-4 h-4 text-gray-900 dark:text-white" />
+                            <SiVercel className="w-4 h-4 text-black" />
                           )}
                         {renderTechLogo(
                           project.tech.includes("TypeScript"),
@@ -991,7 +991,7 @@ export default function Portfolio() {
                           project.tech.includes("LangChain"),
                           "https://www.langchain.com/",
                           "LangChain",
-                          <SiLangchain className="w-4 h-4 text-gray-900 dark:text-white" />
+                          <SiLangchain className="w-4 h-4 text-[#1C3C3C]" />
                         )}
                         {(project.tech.includes("AWS Elastic Beanstalk") ||
                           project.tech.includes("AWS Amplify") ||
@@ -1012,7 +1012,7 @@ export default function Portfolio() {
                               ? "https://docs.perplexity.ai/"
                               : "https://www.perplexity.ai/",
                             "Perplexity",
-                            <SiPerplexity className="w-4 h-4 text-gray-900 dark:text-white" />
+                            <SiPerplexity className="w-4 h-4 text-[#20808D]" />
                           )}
                         {renderTechLogo(
                           project.tech.includes("Supabase"),
@@ -1048,8 +1048,7 @@ export default function Portfolio() {
                           "https://tldraw.dev/",
                           "TLDraw",
                           "https://tldraw.dev/favicon.ico",
-                          "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev",
-                          { filter: "brightness(0)" }
+                          "https://www.google.com/s2/favicons?sz=64&domain=tldraw.dev"
                         )}
                         {renderTechLogoImage(
                           project.tech.includes("Fal.AI"),
@@ -1103,18 +1102,18 @@ export default function Portfolio() {
                         href={project.links.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-200"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-gray-900 dark:bg-[#f2f1ec] text-white dark:text-gray-900 text-xs font-medium hover:bg-gray-700 dark:hover:bg-white transition-colors duration-200"
                       >
-                        <ExternalLink className="w-3.5 h-3.5" />
+                        <ExternalLink className="w-3 h-3" />
                         <span>Try it</span>
                       </a>
                       <a
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-[#f2f1ec] text-sm font-medium hover:bg-gray-200 dark:hover:bg-white/20 transition-colors duration-200"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-gray-100 dark:bg-[#f2f1ec]/10 text-gray-700 dark:text-[#f2f1ec]/80 text-xs font-medium hover:bg-gray-200 dark:hover:bg-[#f2f1ec]/20 border border-gray-200 dark:border-[#f2f1ec]/20 transition-colors duration-200"
                       >
-                        <FaGithub className="w-3.5 h-3.5" />
+                        <FaGithub className="w-3 h-3" />
                         <span>Code</span>
                       </a>
                       {project.links.marketing && (
@@ -1122,7 +1121,7 @@ export default function Portfolio() {
                           href={project.links.marketing}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-[#f2f1ec] text-sm font-medium hover:bg-gray-200 dark:hover:bg-white/20 transition-colors duration-200"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-gray-100 dark:bg-[#f2f1ec]/10 text-gray-700 dark:text-[#f2f1ec]/80 text-xs font-medium hover:bg-gray-200 dark:hover:bg-[#f2f1ec]/20 border border-gray-200 dark:border-[#f2f1ec]/20 transition-colors duration-200"
                         >
                           {project.links.marketingLabel === "LinkedIn Post" ? (
                             <FaLinkedin className="w-3.5 h-3.5" />
@@ -1146,7 +1145,7 @@ export default function Portfolio() {
                           href={project.links.event}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-[#f2f1ec] text-sm font-medium hover:bg-gray-200 dark:hover:bg-white/20 transition-colors duration-200"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-gray-100 dark:bg-[#f2f1ec]/10 text-gray-700 dark:text-[#f2f1ec]/80 text-xs font-medium hover:bg-gray-200 dark:hover:bg-[#f2f1ec]/20 border border-gray-200 dark:border-[#f2f1ec]/20 transition-colors duration-200"
                         >
                           <Calendar className="w-3.5 h-3.5" />
                           <span>Event</span>
@@ -1154,7 +1153,7 @@ export default function Portfolio() {
                       )}
                     </div>
                     {project.date && (
-                      <p className="text-xs text-gray-500 dark:text-[#f2f1ec]/50 mt-3">
+                      <p className="text-xs text-gray-500 mt-4 sm:mt-3 pt-2 sm:pt-0">
                         {project.date}
                       </p>
                     )}
@@ -1240,25 +1239,20 @@ export default function Portfolio() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             {/* Two-column footer grid */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-              {/* Left: Made by */}
+              {/* Left: Copyright */}
               <div className="text-center sm:text-left">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-[#f2f1ec]/50 mb-2">
-                  Made by
-                </h3>
-                <p className="text-sm font-medium text-gray-900 dark:text-[#f2f1ec]">
-                  Akilesh Jayakumar
-                </p>
-                <p className="text-xs text-gray-500 dark:text-[#f2f1ec]/60 mt-1">
-                  © 2026
+                <p className="text-sm font-medium text-gray-600 dark:text-[#f2f1ec]/80">
+                  © 2026 Akilesh Jayakumar
                 </p>
               </div>
 
               {/* Right: Built with */}
               <div className="text-center sm:text-right">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-[#f2f1ec]/50 mb-3">
-                  Built with
+                <h3 className="text-xs font-medium tracking-wider text-gray-400 dark:text-[#f2f1ec]/50 mb-3">
+                  portfolio built with
                 </h3>
-                <div className="flex items-center justify-center sm:justify-end gap-3">
+                {/* Mobile: Show labels | Desktop: Icons with labels and dots */}
+                <div className="flex items-center justify-center sm:justify-end gap-4 sm:gap-3">
                   <a
                     href="https://nextjs.org/"
                     target="_blank"
@@ -1266,9 +1260,9 @@ export default function Portfolio() {
                     className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
                   >
                     <SiNextdotjs className="h-4 w-4" />
-                    <span className="hidden sm:inline">Next.js</span>
+                    <span>Next.js</span>
                   </a>
-                  <span className="text-gray-300 dark:text-[#f2f1ec]/20">
+                  <span className="hidden sm:inline text-gray-300 dark:text-[#f2f1ec]/20">
                     ·
                   </span>
                   <a
@@ -1278,9 +1272,9 @@ export default function Portfolio() {
                     className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
                   >
                     <SiVercel className="h-4 w-4" />
-                    <span className="hidden sm:inline">Vercel</span>
+                    <span>Vercel</span>
                   </a>
-                  <span className="text-gray-300 dark:text-[#f2f1ec]/20">
+                  <span className="hidden sm:inline text-gray-300 dark:text-[#f2f1ec]/20">
                     ·
                   </span>
                   <a
@@ -1298,7 +1292,7 @@ export default function Portfolio() {
                           "https://www.google.com/s2/favicons?sz=64&domain=groq.com";
                       }}
                     />
-                    <span className="hidden sm:inline">Groq</span>
+                    <span>Groq</span>
                   </a>
                 </div>
               </div>

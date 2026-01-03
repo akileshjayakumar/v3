@@ -138,13 +138,7 @@ export default function Portfolio() {
       ],
       date: "January 2026",
       status: "Side Project",
-      tech: [
-        "Next.js",
-        "Vercel",
-        "TypeScript",
-        "Tailwind CSS",
-        "Google Antigravity",
-      ],
+      tech: ["Next.js", "Vercel", "Google Antigravity"],
       links: {
         demo: "https://itallleadstodoom.vercel.app/",
         marketing: "https://x.com/sentrytoast/status/2006585828752183610",
@@ -178,7 +172,6 @@ export default function Portfolio() {
       tech: [
         "Next.js",
         "Vercel",
-        "Tailwind CSS",
         "Google Gemini 3 Flash",
         "Google Antigravity",
       ],
@@ -201,14 +194,7 @@ export default function Portfolio() {
       ],
       date: "December 2025",
       status: "Side Project",
-      tech: [
-        "Next.js",
-        "Vercel",
-        "TypeScript",
-        "Tailwind CSS",
-        "Supabase",
-        "Perplexity API",
-      ],
+      tech: ["Next.js", "Vercel", "Supabase", "Perplexity API"],
       links: {
         demo: "https://gusss-singapore.vercel.app/",
         marketing:
@@ -228,15 +214,7 @@ export default function Portfolio() {
       ],
       date: "October 2025",
       status: "Cursor Hackathon Singapore 2025",
-      tech: [
-        "Next.js",
-        "Vercel",
-        "TypeScript",
-        "Tailwind CSS",
-        "Fal.AI",
-        "Google Gemini",
-        "Groq",
-      ],
+      tech: ["Next.js", "Vercel", "Fal.AI", "Google Gemini", "Groq"],
       links: {
         demo: "https://doodlemorph.vercel.app/",
         marketing:
@@ -257,7 +235,7 @@ export default function Portfolio() {
       ],
       date: "August 2025",
       status: "EMERGENCY GPT HACKATHON 2025",
-      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Groq", "Vercel AI SDK"],
+      tech: ["Next.js", "Groq", "Vercel AI SDK"],
       links: {
         demo: "https://emergency-gpt-hackathon-2025.vercel.app/",
         marketing:
@@ -281,8 +259,6 @@ export default function Portfolio() {
       status: "UOW Final Year Capstone Project",
       tech: [
         "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
         "OpenAI",
         "Docker",
         "LangChain",

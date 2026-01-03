@@ -7,8 +7,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    formats: ["image/webp"],
+    deviceSizes: [640, 768, 1024],
+    imageSizes: [32, 48, 64, 96, 128, 160],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

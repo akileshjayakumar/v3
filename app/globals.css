@@ -102,6 +102,30 @@ html {
   }
 }
 
+/* Animated underline effect for project links */
+.link-underline {
+  position: relative;
+}
+
+.link-underline span {
+  position: relative;
+}
+
+.link-underline span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover span::after {
+  width: 100%;
+}
+
 /* CSS-only custom cursor option (bold, high-contrast). Enable with body[data-cursor-mode="css"] */
 body[data-cursor-mode="css"] {
   cursor: url("/placeholder.svg") 2 2, auto;
@@ -291,269 +315,36 @@ textarea {
   overflow-wrap: anywhere;
 }
 
-/* Chat button animations - desktop only */
+/* Chat button - keep simple without continuous animation */
 @media (min-width: 640px) {
-  @keyframes chat-attention-pulse {
-
-    0%,
-    100% {
-      transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
-    }
-
-    50% {
-      transform: scale(1.02);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-    }
-  }
-
-  @keyframes chat-attention-pulse-dark {
-
-    0%,
-    100% {
-      transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.5);
-    }
-
-    50% {
-      transform: scale(1.02);
-      box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.2);
-    }
-  }
-
-  @keyframes chat-bounce {
-    0%,
-    20%,
-    53%,
-    80%,
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
-
-    40%,
-    43% {
-      transform: translate3d(0, -8px, 0);
-    }
-
-    70% {
-      transform: translate3d(0, -4px, 0);
-    }
-
-    90% {
-      transform: translate3d(0, -2px, 0);
-    }
-  }
-
-  @keyframes chat-glow {
-    0%,
-    100% {
-      background: linear-gradient(45deg,
-          rgba(56, 189, 248, 0.1),
-          rgba(125, 211, 252, 0.1));
-    }
-
-    50% {
-      background: linear-gradient(45deg,
-          rgba(56, 189, 248, 0.2),
-          rgba(125, 211, 252, 0.2));
-    }
-  }
-
   .chat-button-animated {
-    animation: chat-attention-pulse 3s ease-in-out infinite;
     position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .dark .chat-button-animated {
-    animation: chat-attention-pulse-dark 3s ease-in-out infinite;
+    transition: all 0.2s ease;
   }
 
   .chat-button-animated:hover {
-    animation: none;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-  }
-
-  .dark .chat-button-animated:hover {
-    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.5);
-  }
-
-  .chat-button-animated::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    padding: 2px;
-    background: linear-gradient(45deg, #3b82f6, #60a5fa);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .dark .chat-button-animated::before {
-    background: linear-gradient(45deg, #60a5fa, #93c5fd);
-  }
-
-  .chat-button-animated:hover::before {
-    opacity: 1;
-  }
-
-  .chat-icon-bounce {
-    animation: chat-bounce 2s ease-in-out infinite;
-  }
-
-  .chat-glow-bg {
-    animation: chat-glow 4s ease-in-out infinite;
-  }
-
-  @keyframes chatPulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
-  }
-
-  @keyframes chatPing {
-    75%, 100% {
-      transform: scale(1.5);
-      opacity: 0;
-    }
-  }
-
-  .chat-button-pulse {
-    animation: chatPulse 2s ease-in-out infinite;
-  }
-
-  .chat-ring-ping {
-    animation: chatPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  @keyframes gradientFlow {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .chat-gradient-border {
-    background: linear-gradient(
-      45deg,
-      #3b82f6,
-      #8b5cf6,
-      #ec4899,
-      #f59e0b,
-      #10b981,
-      #3b82f6
-    );
-    background-size: 300% 300%;
-    animation: gradientFlow 3s ease infinite;
-    padding: 2px;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-
-  @keyframes chatGentlePulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.02);
-    }
-  }
-
-  @keyframes iconBounceSubtle {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-2px);
-    }
-  }
-
-  .chat-button-clean {
-    animation: chatGentlePulse 3s ease-in-out infinite;
-  }
-
-  .chat-button-clean:hover {
-    animation: none;
-    transform: translateY(-2px);
-  }
-
-  .chat-icon-bounce-subtle {
-    animation: iconBounceSubtle 2s ease-in-out infinite;
-  }
-
-  .chat-button-clean:hover .chat-icon-bounce-subtle {
-    animation: none;
-  }
-
-  @keyframes projectReveal {
-    0% {
-      opacity: 0;
-      transform: translateY(30px) scale(0.96);
-    }
-    60% {
-      opacity: 0.8;
-      transform: translateY(-5px) scale(1.01);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  .project-reveal {
-    animation: projectReveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    opacity: 0;
-  }
-
-  /* 3D Carousel Perspective */
-  .carousel-3d-container {
-    perspective: 1200px;
-    transform-style: preserve-3d;
   }
 
   /* Fix carousel button hover - prevent translate-y movement */
   .carousel-nav-button:hover {
     transform: translateY(0) !important;
   }
-  
+
   /* Preserve centering transform for positioned buttons */
   .carousel-nav-button.absolute:hover {
     transform: translateY(-50%) !important;
   }
 
-  /* Project Grid Card Animations */
-  @keyframes projectCardFadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
+  /* Project card - no animation, just static styling */
   .project-card {
-    animation: projectCardFadeIn 0.6s ease-out forwards;
-    opacity: 0;
+    opacity: 1;
   }
 
   /* Prevent global hover translate effects on project card content */
   .project-card h3:hover,
   .project-card p:hover,
-  .project-card > *:not(a):not(button):hover {
+  .project-card>*:not(a):not(button):hover {
     transform: translateY(0) !important;
   }
 }

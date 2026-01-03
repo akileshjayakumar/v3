@@ -138,7 +138,13 @@ export default function Portfolio() {
       ],
       date: "January 2026",
       status: "Side Project",
-      tech: ["Next.js", "Vercel", "TypeScript", "Google Antigravity"],
+      tech: [
+        "Next.js",
+        "Vercel",
+        "TypeScript",
+        "Tailwind CSS",
+        "Google Antigravity",
+      ],
       links: {
         demo: "https://itallleadstodoom.vercel.app/",
         marketing: "https://x.com/sentrytoast/status/2006585828752183610",
@@ -181,7 +187,7 @@ export default function Portfolio() {
         marketing:
           "https://www.linkedin.com/feed/update/urn:li:activity:7410968273112084480/",
         github: "https://github.com/akileshjayakumar/the-prompt-detective",
-        marketingLabel: "LinkedIn Post",
+        marketingLabel: "Social Post",
       },
     },
     {
@@ -222,7 +228,15 @@ export default function Portfolio() {
       ],
       date: "October 2025",
       status: "Cursor Hackathon Singapore 2025",
-      tech: ["Next.js", "Vercel", "TLDraw", "Fal.AI", "Google Gemini", "Groq"],
+      tech: [
+        "Next.js",
+        "Vercel",
+        "TypeScript",
+        "Tailwind CSS",
+        "Fal.AI",
+        "Google Gemini",
+        "Groq",
+      ],
       links: {
         demo: "https://doodlemorph.vercel.app/",
         marketing:
@@ -266,8 +280,10 @@ export default function Portfolio() {
       date: "April 2025 - September 2025",
       status: "UOW Final Year Capstone Project",
       tech: [
-        "OpenAI",
         "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "OpenAI",
         "Docker",
         "LangChain",
         "AWS Elastic Beanstalk",
@@ -331,7 +347,7 @@ export default function Portfolio() {
     { label: "resume", href: "/cv" },
   ];
 
-  const chatItem = { label: "chat", href: "/chat" };
+  const chatItem = { label: "chat with me", href: "/chat" };
 
   // Helper function to get icon component for nav items
   const getNavIcon = (label: string) => {
@@ -428,7 +444,7 @@ export default function Portfolio() {
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 dark:bg-[#242424] border border-gray-200 dark:border-[#f2f1ec]/20">
               <Image
-                src="/photo.jpg"
+                src="/photo.png"
                 alt="Akilesh Jayakumar"
                 width={32}
                 height={32}
@@ -527,7 +543,7 @@ export default function Portfolio() {
             <div className="flex items-center space-x-4 sm:space-x-6">
               <div className="hidden sm:block w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden bg-gray-200 dark:bg-[#242424]">
                 <Image
-                  src="/photo.jpg"
+                  src="/photo.png"
                   alt="Akilesh Jayakumar"
                   width={80}
                   height={80}
@@ -543,7 +559,7 @@ export default function Portfolio() {
                 className="text-base font-medium text-gray-500 dark:text-[#f2f1ec]/70 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors chat-button-animated px-3 py-2 rounded-md flex items-center"
               >
                 <span className="flex items-center gap-1">
-                  <MessageCircle className="h-4 w-4 chat-icon-bounce" />
+                  <MessageCircle className="h-4 w-4" />
                   {chatItem.label}
                 </span>
               </AnimatedChatButton>
@@ -846,7 +862,7 @@ export default function Portfolio() {
                     href="https://akileshjayakumar.medium.com/one-month-with-comet-the-ai-browser-that-changed-how-i-research-02933e08bf15"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0 -mx-1 px-1 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] sm:hover:bg-transparent"
+                    className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
                   >
                     <FaMedium className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                     <span>Read on Medium</span>
@@ -855,10 +871,10 @@ export default function Portfolio() {
                     href="https://www.linkedin.com/feed/update/urn:li:activity:7379780468411461632/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0 -mx-1 px-1 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] sm:hover:bg-transparent"
+                    className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
                   >
                     <FaLinkedin className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
-                    <span>LinkedIn Post</span>
+                    <span>Social Post</span>
                   </a>
                 </div>
               </div>
@@ -876,9 +892,6 @@ export default function Portfolio() {
                 <div
                   key={project.id}
                   className="project-card bg-white dark:bg-[#171717] h-full border border-gray-200 dark:border-[#f2f1ec]/20 rounded-xl p-5 sm:p-6 flex flex-col shadow-sm"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                  }}
                 >
                   {/* Header: Icon + Title + Status Badge */}
                   <div className="flex items-start gap-4 mb-4">
@@ -910,7 +923,7 @@ export default function Portfolio() {
                     </div>
                   </div>
 
-                  {/* Description - Two bullet points */}
+                  {/* Description */}
                   <div className="flex-1 mb-6">
                     {project.description &&
                     Array.isArray(project.description) ? (
@@ -936,7 +949,7 @@ export default function Portfolio() {
 
                   {/* Tech Stack - Compact at bottom */}
                   {project.tech && (
-                    <div className="mb-6 pt-1">
+                    <div className="mb-5">
                       <p className="text-xs font-medium text-gray-500 dark:text-[#f2f1ec]/50 uppercase tracking-wider mb-3">
                         Built with
                       </p>
@@ -1095,25 +1108,25 @@ export default function Portfolio() {
                     </div>
                   )}
 
-                  {/* Action Links - All styled as buttons */}
-                  <div className="border-t border-gray-200 dark:border-[#f2f1ec]/10 pt-5 mt-auto flex-shrink-0">
-                    <div className="flex items-center gap-2 flex-wrap">
+                  {/* Project Links - Minimalistic style matching Writing section */}
+                  <div className="border-t border-gray-100 dark:border-[#f2f1ec]/20 pt-4 sm:pt-5 mt-auto flex-shrink-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:flex-wrap gap-2.5 sm:gap-5">
                       <a
                         href={project.links.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-gray-900 dark:bg-[#f2f1ec] text-white dark:text-gray-900 text-xs font-medium hover:bg-gray-700 dark:hover:bg-white transition-colors duration-200"
+                        className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
                       >
-                        <ExternalLink className="w-3 h-3" />
+                        <ExternalLink className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                         <span>Try it</span>
                       </a>
                       <a
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-gray-100 dark:bg-[#f2f1ec]/10 text-gray-700 dark:text-[#f2f1ec]/80 text-xs font-medium hover:bg-gray-200 dark:hover:bg-[#f2f1ec]/20 border border-gray-200 dark:border-[#f2f1ec]/20 transition-colors duration-200"
+                        className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
                       >
-                        <FaGithub className="w-3 h-3" />
+                        <FaGithub className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                         <span>Code</span>
                       </a>
                       {project.links.marketing && (
@@ -1121,22 +1134,21 @@ export default function Portfolio() {
                           href={project.links.marketing}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-gray-100 dark:bg-[#f2f1ec]/10 text-gray-700 dark:text-[#f2f1ec]/80 text-xs font-medium hover:bg-gray-200 dark:hover:bg-[#f2f1ec]/20 border border-gray-200 dark:border-[#f2f1ec]/20 transition-colors duration-200"
+                          className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
                         >
-                          {project.links.marketingLabel === "LinkedIn Post" ? (
-                            <FaLinkedin className="w-3.5 h-3.5" />
-                          ) : project.links.marketingLabel === "X Post" ||
-                            project.links.marketingLabel ===
-                              "X/Twitter Post" ? (
-                            <FaXTwitter className="w-3.5 h-3.5" />
+                          {project.links.marketing.includes("linkedin.com") ? (
+                            <FaLinkedin className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                          ) : project.links.marketing.includes("x.com") ||
+                            project.links.marketing.includes("twitter.com") ? (
+                            <FaXTwitter className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                           ) : (
-                            <Globe className="w-3.5 h-3.5" />
+                            <Globe className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                           )}
                           <span>
                             {project.links.marketingLabel ===
                             "Marketing Website"
                               ? "Marketing Website"
-                              : "Post"}
+                              : "Social Post"}
                           </span>
                         </a>
                       )}
@@ -1145,15 +1157,15 @@ export default function Portfolio() {
                           href={project.links.event}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-gray-100 dark:bg-[#f2f1ec]/10 text-gray-700 dark:text-[#f2f1ec]/80 text-xs font-medium hover:bg-gray-200 dark:hover:bg-[#f2f1ec]/20 border border-gray-200 dark:border-[#f2f1ec]/20 transition-colors duration-200"
+                          className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
                         >
-                          <Calendar className="w-3.5 h-3.5" />
+                          <Calendar className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
                           <span>Event</span>
                         </a>
                       )}
                     </div>
                     {project.date && (
-                      <p className="text-xs text-gray-500 mt-4 sm:mt-3 pt-2 sm:pt-0">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">
                         {project.date}
                       </p>
                     )}
@@ -1259,7 +1271,7 @@ export default function Portfolio() {
                     rel="noopener noreferrer"
                     className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
                   >
-                    <SiNextdotjs className="h-4 w-4" />
+                    <SiNextdotjs className="h-4 w-4 text-black dark:text-white" />
                     <span>Next.js</span>
                   </a>
                   <span className="hidden sm:inline text-gray-300 dark:text-[#f2f1ec]/20">
@@ -1271,7 +1283,7 @@ export default function Portfolio() {
                     rel="noopener noreferrer"
                     className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
                   >
-                    <SiVercel className="h-4 w-4" />
+                    <SiVercel className="h-4 w-4 text-black dark:text-white" />
                     <span>Vercel</span>
                   </a>
                   <span className="hidden sm:inline text-gray-300 dark:text-[#f2f1ec]/20">

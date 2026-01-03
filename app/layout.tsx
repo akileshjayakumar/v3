@@ -20,6 +20,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link rel="dns-prefetch" href="https://groq.com" />
+        <link rel="dns-prefetch" href="https://tailwindcss.com" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
       </head>
       <body className={inter.className}>
         <ThemeProvider

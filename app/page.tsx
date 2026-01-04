@@ -133,8 +133,8 @@ export default function Portfolio() {
       icon: "/avengers-logo.png",
       iconBg: "bg-white",
       description: [
-        "A fun countdown clock for the upcoming marvel cinematic event - Avengers: Doomsday.",
-        "Features a real-time countdown to the film's release date.",
+        "A fun countdown clock for the upcoming marvel studios cinematic event - Avengers: Doomsday.",
+        "Features a real-time countdown to the film's release date: 18 December 2026.",
       ],
       date: "January 2026",
       status: "Side Project",

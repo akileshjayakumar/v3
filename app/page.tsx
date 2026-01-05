@@ -383,13 +383,13 @@ export default function Portfolio() {
                   <a
                     href={item.href}
                     onClick={handleClick}
-                    className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-[#242424] transition-colors duration-200"
+                    className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-[#242424] transition-all duration-300 ease-out"
                     aria-label={item.label}
                   >
                     {getNavIcon(item.label)}
                   </a>
                   {/* Custom hover label */}
-                  <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 whitespace-nowrap z-50">
+                  <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 ease-out whitespace-nowrap z-50">
                     <div className="px-3 py-1.5 rounded-md bg-gray-900 dark:bg-[#242424] border border-gray-700 dark:border-[#f2f1ec]/30 shadow-lg backdrop-blur-sm">
                       <p className="text-sm font-medium text-white dark:text-[#f2f1ec] capitalize">
                         {item.label}
@@ -439,7 +439,7 @@ export default function Portfolio() {
               size="icon"
               aria-label="Open menu"
               onClick={handleOpenMenu}
-              className="h-10 w-10 hover:bg-gray-100 dark:hover:bg-[#242424] text-gray-900 dark:text-[#f2f1ec]"
+              className="h-10 w-10 hover:bg-gray-100 dark:hover:bg-[#242424] text-gray-900 dark:text-[#f2f1ec] transition-all duration-300 ease-out"
             >
               <Menu className="h-6 w-6" strokeWidth={2} />
             </Button>
@@ -451,7 +451,7 @@ export default function Portfolio() {
       {(menuOpen || isClosing) && (
         <div className="sm:hidden fixed inset-0 z-50 flex items-start justify-end">
           <div
-            className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-200 ${
+            className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ease-out ${
               isClosing ? "opacity-0" : "opacity-100"
             }`}
             onClick={handleCloseMenu}
@@ -468,7 +468,7 @@ export default function Portfolio() {
           >
             <button
               onClick={handleCloseMenu}
-              className="absolute right-4 top-4 z-50 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#242424] transition-colors duration-200 focus:outline-none bg-white dark:bg-[#171717] shadow-sm"
+              className="absolute right-4 top-4 z-50 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#242424] transition-all duration-300 ease-out focus:outline-none bg-white dark:bg-[#171717] shadow-sm"
               aria-label="Close menu"
             >
               <X className="h-6 w-6 text-red-500" />
@@ -479,7 +479,7 @@ export default function Portfolio() {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-xl font-medium text-gray-700 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors flex items-center gap-2 py-2"
+                  className="text-xl font-medium text-gray-700 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-all duration-300 ease-out flex items-center gap-2 py-2"
                   onClick={(e) => {
                     if (item.href.startsWith("#")) {
                       e.preventDefault();
@@ -532,7 +532,7 @@ export default function Portfolio() {
             <nav className="hidden sm:flex items-center">
               <AnimatedChatButton
                 href={chatItem.href}
-                className="text-base font-medium text-gray-500 dark:text-[#f2f1ec]/70 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors chat-button-animated px-3 py-2 rounded-md flex items-center"
+                className="text-base font-medium text-gray-500 dark:text-[#f2f1ec]/70 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-all duration-300 ease-out chat-button-animated px-3 py-2 rounded-md flex items-center"
               >
                 <span className="flex items-center gap-1">
                   <MessageCircle className="h-4 w-4" />
@@ -546,7 +546,7 @@ export default function Portfolio() {
               Akilesh Jayakumar
             </h1>
             <p className="text-gray-700 dark:text-[#f2f1ec]/80 leading-relaxed mt-2 mb-6 text-base sm:text-lg">
-              exploring / experimenting with GenAI & LLMs
+              building / exploring / experimenting with AI, GenAI & LLMs
             </p>
           </div>
           <div className="flex items-center space-x-4 sm:space-x-5 mt-2">
@@ -563,23 +563,7 @@ export default function Portfolio() {
                 aria-label="Twitter"
                 className="icon-link group"
               >
-                <FaXTwitter className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
-              </a>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-10 w-10 sm:h-11 sm:w-11 hover:bg-transparent"
-              asChild
-            >
-              <a
-                href="https://github.com/akileshjayakumar"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="icon-link group"
-              >
-                <FaGithub className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+                <FaXTwitter className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-300 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
               </a>
             </Button>
             <Button
@@ -595,7 +579,23 @@ export default function Portfolio() {
                 aria-label="LinkedIn"
                 className="icon-link group"
               >
-                <FaLinkedin className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-200 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+                <FaLinkedin className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-300 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
+              </a>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 sm:h-11 sm:w-11 hover:bg-transparent"
+              asChild
+            >
+              <a
+                href="https://github.com/akileshjayakumar"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="icon-link group"
+              >
+                <FaGithub className="!h-[18px] !w-[18px] sm:!h-[22px] sm:!w-[22px] transition-all duration-300 ease-out group-hover:scale-105 text-gray-900 dark:text-[#f2f1ec] hover:text-gray-900 dark:hover:text-[#f2f1ec]" />
               </a>
             </Button>
           </div>
@@ -612,13 +612,13 @@ export default function Portfolio() {
                   href="https://www.uow.edu.au"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-white border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
+                  className="group w-12 h-12 sm:w-14 sm:h-14 border border-gray-200 dark:border-[#f2f1ec]/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 ease-out hover:shadow-md"
                   aria-label="University of Wollongong website"
                 >
                   <img
                     src="/logos/uow.png"
                     alt="University of Wollongong logo"
-                    className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder-logo.png";
                     }}
@@ -838,18 +838,18 @@ export default function Portfolio() {
                     href="https://akileshjayakumar.medium.com/one-month-with-comet-the-ai-browser-that-changed-how-i-research-02933e08bf15"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
+                    className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-300 ease-out py-2 sm:py-0"
                   >
-                    <FaMedium className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                    <FaMedium className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 flex-shrink-0" />
                     <span>Read on Medium</span>
                   </a>
                   <a
                     href="https://www.linkedin.com/feed/update/urn:li:activity:7379780468411461632/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
+                    className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-300 ease-out py-2 sm:py-0"
                   >
-                    <FaLinkedin className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                    <FaLinkedin className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 flex-shrink-0" />
                     <span>Social Post</span>
                   </a>
                 </div>
@@ -1091,18 +1091,18 @@ export default function Portfolio() {
                         href={project.links.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
+                        className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-300 ease-out py-2 sm:py-0"
                       >
-                        <ExternalLink className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                        <ExternalLink className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 flex-shrink-0" />
                         <span>Try it</span>
                       </a>
                       <a
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
+                        className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-300 ease-out py-2 sm:py-0"
                       >
-                        <FaGithub className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                        <FaGithub className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 flex-shrink-0" />
                         <span>Code</span>
                       </a>
                       {project.links.marketing && (
@@ -1110,15 +1110,15 @@ export default function Portfolio() {
                           href={project.links.marketing}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
+                          className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-300 ease-out py-2 sm:py-0"
                         >
                           {project.links.marketing.includes("linkedin.com") ? (
-                            <FaLinkedin className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                            <FaLinkedin className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 flex-shrink-0" />
                           ) : project.links.marketing.includes("x.com") ||
                             project.links.marketing.includes("twitter.com") ? (
-                            <FaXTwitter className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                            <FaXTwitter className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 flex-shrink-0" />
                           ) : (
-                            <Globe className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                            <Globe className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 flex-shrink-0" />
                           )}
                           <span>
                             {project.links.marketingLabel ===
@@ -1133,9 +1133,9 @@ export default function Portfolio() {
                           href={project.links.event}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-200 py-2 sm:py-0"
+                          className="link-underline group flex items-center gap-2 sm:gap-1.5 text-gray-700 dark:text-[#f2f1ec]/80 hover:text-gray-900 dark:hover:text-[#f2f1ec] font-medium text-sm transition-all duration-300 ease-out py-2 sm:py-0"
                         >
-                          <Calendar className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 flex-shrink-0" />
+                          <Calendar className="w-4 h-4 sm:w-3.5 sm:h-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 flex-shrink-0" />
                           <span>Event</span>
                         </a>
                       )}
@@ -1160,9 +1160,9 @@ export default function Portfolio() {
             <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2">
               <a
                 href="mailto:akilesh.work@icloud.com"
-                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-all duration-300 ease-out"
               >
-                <Mail className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <Mail className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-300 ease-out group-hover:-translate-y-0.5" />
                 <span className="text-gray-700 dark:text-[#f2f1ec]/80">
                   akilesh.work@icloud.com
                 </span>
@@ -1171,9 +1171,9 @@ export default function Portfolio() {
                 href="https://x.com/sentrytoast"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-all duration-300 ease-out"
               >
-                <FaXTwitter className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <FaXTwitter className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-300 ease-out group-hover:-translate-y-0.5" />
                 <span className="text-gray-700 dark:text-[#f2f1ec]/80">
                   x/twitter
                 </span>
@@ -1182,9 +1182,9 @@ export default function Portfolio() {
                 href="https://github.com/akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-all duration-300 ease-out"
               >
-                <FaGithub className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <FaGithub className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-300 ease-out group-hover:-translate-y-0.5" />
                 <span className="text-gray-700 dark:text-[#f2f1ec]/80">
                   github
                 </span>
@@ -1193,9 +1193,9 @@ export default function Portfolio() {
                 href="https://linkedin.com/in/akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-all duration-300 ease-out"
               >
-                <FaLinkedin className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <FaLinkedin className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-300 ease-out group-hover:-translate-y-0.5" />
                 <span className="text-gray-700 dark:text-[#f2f1ec]/80">
                   linkedin
                 </span>
@@ -1204,18 +1204,18 @@ export default function Portfolio() {
                 href="https://medium.com/@akileshjayakumar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-all duration-300 ease-out"
               >
-                <FaMedium className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <FaMedium className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-300 ease-out group-hover:-translate-y-0.5" />
                 <span className="text-gray-700 dark:text-[#f2f1ec]/80">
                   medium
                 </span>
               </a>
               <a
                 href="/cv"
-                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+                className="group flex items-center space-x-3 p-3 rounded-md hover:bg-gray-50 dark:hover:bg-[#242424] transition-all duration-300 ease-out"
               >
-                <FileText className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <FileText className="h-5 w-5 text-gray-600 dark:text-[#f2f1ec]/70 transition-transform duration-300 ease-out group-hover:-translate-y-0.5" />
                 <span className="text-gray-700 dark:text-[#f2f1ec]/80">
                   resume
                 </span>
@@ -1245,7 +1245,7 @@ export default function Portfolio() {
                     href="https://nextjs.org/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
+                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-all duration-300 ease-out"
                   >
                     <SiNextdotjs className="h-4 w-4 text-black dark:text-white" />
                     <span>Next.js</span>
@@ -1257,7 +1257,7 @@ export default function Portfolio() {
                     href="https://vercel.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
+                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-all duration-300 ease-out"
                   >
                     <SiVercel className="h-4 w-4 text-black dark:text-white" />
                     <span>Vercel</span>
@@ -1269,7 +1269,7 @@ export default function Portfolio() {
                     href="https://groq.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-colors"
+                    className="group flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#f2f1ec]/60 hover:text-gray-900 dark:hover:text-[#f2f1ec] transition-all duration-300 ease-out"
                   >
                     <img
                       src="https://groq.com/favicon.ico"

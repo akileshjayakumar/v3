@@ -128,6 +128,32 @@ export default function Portfolio() {
 
   const projects = [
     {
+      id: "frameforge",
+      title: "FrameForge",
+      icon: "🎬",
+      iconBg: "bg-white",
+      description: [
+        "A collaborative storytelling platform where users and AI take turns creating sci-fi stories, then generates visual comic panels and videos.",
+        "Built with Gemini 3 Flash for story generation, Nano Banana Pro for images, and Veo 3.1 for video creation using Google's Antigravity platform.",
+      ],
+      date: "January 2026",
+      status: "Gemini 3 Hackathon Singapore 2025",
+      tech: [
+        "Next.js",
+        "Vercel",
+        "Google Gemini 3 Flash",
+        "Google Antigravity",
+      ],
+      links: {
+        demo: "https://frameforge-g3-2026.vercel.app/",
+        marketing:
+          "https://www.linkedin.com/feed/update/urn:li:activity:7416166564892168192/",
+        github: "https://github.com/akileshjayakumar/frameforge",
+        marketingLabel: "Social Post",
+        event: "https://luma.com/gemini3sgp?tk=whm5Bg",
+      },
+    },
+    {
       id: "itallleadstodoom",
       title: "It All Leads to Doom",
       icon: "/avengers-logo.png",

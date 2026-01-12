@@ -137,7 +137,7 @@ export default function Portfolio() {
         "Built with Gemini 3 Flash for story generation, Nano Banana Pro for images, and Veo 3.1 for video creation using Google's Antigravity platform.",
       ],
       date: "January 2026",
-      status: "Gemini 3 Hackathon Singapore 2025",
+      status: "Gemini 3 Hackathon Singapore 2026",
       tech: [
         "Next.js",
         "Vercel",

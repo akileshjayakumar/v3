@@ -134,7 +134,7 @@ export default function Portfolio() {
       iconBg: "bg-white",
       description: [
         "A collaborative storytelling platform where users and AI take turns creating sci-fi stories, then generates visual comic panels and videos.",
-        "Built with Gemini 3 Flash for story generation, Nano Banana Pro for images, and Veo 3.1 for video creation using Google's Antigravity platform.",
+        "Built with Gemini 3 Flash for story generation, Nano Banana Pro for images, and Veo 3.1 for video generation.",
       ],
       date: "January 2026",
       status: "Gemini 3 Hackathon Singapore 2026",

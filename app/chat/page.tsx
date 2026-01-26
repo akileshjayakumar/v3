@@ -14,6 +14,8 @@ import {
   ArrowUp,
   Bot,
   User,
+  RefreshCw,
+  AlertCircle,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -63,6 +65,9 @@ export default function ChatPage() {
   const [pendingMessageId, setPendingMessageId] = useState<string | null>(null);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null);
+  const [lastFailedMessage, setLastFailedMessage] = useState<string | null>(
+    null
+  );
 
   const getFavicon = (url: string): string => {
     try {
@@ -93,6 +98,7 @@ export default function ChatPage() {
   const handleSend = async (override?: string) => {
     const trimmed = (override ?? input).trim();
     if (!trimmed || isSubmitting) return;
+    setLastFailedMessage(null); // Clear any previous failed message
     const userMsg: Message = {
       id: crypto.randomUUID(),
       role: "user",
@@ -180,17 +186,27 @@ export default function ChatPage() {
                 )
               );
             }
-          } catch {}
+          } catch (parseErr) {
+            console.error("Failed to parse SSE event:", parseErr);
+          }
         }
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
+      console.error("Chat error:", err);
+      setLastFailedMessage(trimmed);
+
+      const isNetworkError =
+        err instanceof TypeError && err.message.includes("fetch");
+      const errorMessage = isNetworkError
+        ? "Unable to connect. Please check your internet connection and try again."
+        : "Sorry, I ran into an issue answering that. Please try again.";
+
       setMessages((prev) => [
         ...prev,
         {
           id: crypto.randomUUID(),
           role: "assistant",
-          content:
-            "Sorry, I ran into an issue answering that. Please try again.",
+          content: errorMessage,
         },
       ]);
     } finally {
@@ -252,7 +268,9 @@ export default function ChatPage() {
       await navigator.clipboard.writeText(text);
       setCopiedMessageId(id);
       setTimeout(() => setCopiedMessageId(null), 1500);
-    } catch {}
+    } catch (err) {
+      console.error("Failed to copy to clipboard:", err);
+    }
   };
 
   return (
@@ -512,8 +530,26 @@ export default function ChatPage() {
                 </div>
               ))}
 
+              {/* Retry button - show when last message failed */}
+              {lastFailedMessage && !isSubmitting && (
+                <div className="pt-4 flex justify-center">
+                  <button
+                    onClick={() => {
+                      setLastFailedMessage(null);
+                      handleSend(lastFailedMessage);
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-lg border border-red-200 dark:border-red-900/30
+                             bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400
+                             hover:bg-red-100 dark:hover:bg-red-900/30 transition-all"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                    Retry last message
+                  </button>
+                </div>
+              )}
+
               {/* Suggested Questions - show after conversation starts */}
-              {suggestions.length > 0 && !isSubmitting && (
+              {suggestions.length > 0 && !isSubmitting && !lastFailedMessage && (
                 <div className="pt-4">
                   <p className="text-xs text-gray-500 dark:text-[#f2f1ec]/50 mb-2 text-center">
                     Try asking:
@@ -564,6 +600,7 @@ export default function ChatPage() {
             <button
               type="submit"
               disabled={isSubmitting || !input.trim()}
+              aria-label="Send message"
               className={cn(
                 "absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center",
                 "bg-gray-900 dark:bg-[#f2f1ec] text-white dark:text-[#171717]",

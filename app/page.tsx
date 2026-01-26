@@ -126,6 +126,23 @@ export default function Portfolio() {
     };
   }, []);
 
+  // Handle Escape key to close mobile menu
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && menuOpen) {
+        handleCloseMenu();
+      }
+    };
+
+    if (menuOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
   const projects = [
     {
       id: "frameforge",
@@ -463,7 +480,9 @@ export default function Portfolio() {
             <Button
               variant="ghost"
               size="icon"
-              aria-label="Open menu"
+              aria-label="Open navigation menu"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
               onClick={handleOpenMenu}
               className="h-10 w-10 hover:bg-gray-100 dark:hover:bg-[#242424] text-gray-900 dark:text-[#f2f1ec] transition-all duration-300 ease-out"
             >
@@ -475,12 +494,19 @@ export default function Portfolio() {
 
       {/* Mobile Menu Overlay */}
       {(menuOpen || isClosing) && (
-        <div className="sm:hidden fixed inset-0 z-50 flex items-start justify-end">
+        <div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          className="sm:hidden fixed inset-0 z-50 flex items-start justify-end"
+        >
           <div
             className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ease-out ${
               isClosing ? "opacity-0" : "opacity-100"
             }`}
             onClick={handleCloseMenu}
+            aria-hidden="true"
           />
 
           <div

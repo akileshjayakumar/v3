@@ -1,7 +1,18 @@
 import { NextResponse } from "next/server";
 import { personalKnowledge } from "@/lib/personal-knowledge";
+import { z } from "zod";
 
-type InMessage = { role: "user" | "assistant" | "system"; content: string };
+const MessageSchema = z.object({
+  role: z.enum(["user", "assistant", "system"]),
+  content: z.string().min(1).max(10000),
+});
+
+const ChatRequestSchema = z.object({
+  messages: z.array(MessageSchema).min(1).max(50),
+  stream: z.boolean().optional().default(false),
+});
+
+type InMessage = z.infer<typeof MessageSchema>;
 
 const CACHE = new Map<
   string,
@@ -64,13 +75,18 @@ CONTENT SAFETY:
 
 export async function POST(req: Request) {
   try {
-    const {
-      messages,
-      stream = false,
-    }: { messages: InMessage[]; stream?: boolean } = await req.json();
-    if (!Array.isArray(messages) || messages.length === 0) {
-      return NextResponse.json({ error: "Missing messages" }, { status: 400 });
+    const body = await req.json();
+
+    // Validate request body with Zod
+    const parseResult = ChatRequestSchema.safeParse(body);
+    if (!parseResult.success) {
+      return NextResponse.json(
+        { error: "Invalid request", details: parseResult.error.flatten() },
+        { status: 400 }
+      );
     }
+
+    const { messages, stream } = parseResult.data;
 
     const userContent = messages[messages.length - 1]?.content ?? "";
 
@@ -187,7 +203,9 @@ export async function POST(req: Request) {
                       }
                     }
                   }
-                } catch {}
+                } catch (parseErr) {
+                  // Skip malformed JSON chunks - this can happen during streaming
+                }
               }
             }
             controller.close();

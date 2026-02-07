@@ -1,16 +1,57 @@
 # Portfolio Website V3
 
-Here is the link to the live site: [https://akileshjayakumar.com](https://akileshjayakumar.com)
+Personal portfolio built with Next.js, featuring projects, experience, and an AI chat page that answers questions as me.
 
-## Tech Stack
+Live site: [https://akileshjayakumar.com](https://akileshjayakumar.com)
 
-- [Vercel](https://vercel.com/): For deployment
-- [Next.js](https://nextjs.org/): For frontend
+## Quick Start
 
-## Contact Information
+```bash
+npm install
+# create .env.local and set GROQ_API_KEY
+npm run dev
+```
 
-For more information, please reach out to me at:
+Open [http://localhost:3000](http://localhost:3000).
 
-- **Email**: [akilesh.work@icloud.com](mailto:akilesh.work@icloud.com)
-- **LinkedIn**: [Akilesh Jayakumar on LinkedIn](https://www.linkedin.com/in/akileshjayakumar/)
-- **GitHub**: [Akilesh Jayakumar on GitHub](https://github.com/akileshjayakumar)
+## Core Features
+
+- Responsive portfolio homepage with project highlights and contact links
+- Dedicated `/cv` page
+- Dedicated `/chat` page with streaming AI responses
+- Light and dark theme toggle
+
+## Configuration
+
+Required environment variable:
+
+```bash
+GROQ_API_KEY=your_groq_api_key
+```
+
+The chat API route (`/api/chat`) returns an error if this value is missing.
+
+## Usage
+
+- Visit `/` for the portfolio
+- Visit `/cv` for resume content
+- Visit `/chat` to ask questions and get streaming responses with citations when available
+
+## Development
+
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+```
+
+## Contributing
+
+1. Create a feature branch.
+2. Make changes and run `npm run lint`.
+3. Open a pull request with a short summary and test notes.
+
+## License
+
+[MIT](LICENSE)
